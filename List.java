@@ -2,9 +2,6 @@
 /**
 * List.java
 * Defines a doubly-linked list class
-* @author Adam Ho
-* @author Calvin Vu
-* CIS 22C, Lab 6
 */
 
 import java.util.NoSuchElementException;

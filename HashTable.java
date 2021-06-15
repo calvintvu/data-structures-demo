@@ -1,9 +1,6 @@
 
 /**
  * HashTable.java
- * @author Calvin Vu
- * @author Adam Ho
- * CIS 22C, Lab 6
  */
 import java.util.ArrayList;
 
