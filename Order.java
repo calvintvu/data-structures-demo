@@ -4,7 +4,7 @@ public class Order {
 
     private Customer customer;
     private String date;
-    private List<Book> orderContents;
+    private List<TechProduct> orderContents;
     private int shippingSpeed;
     private int priority;
 

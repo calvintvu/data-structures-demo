@@ -6,12 +6,12 @@
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
-public class Customer {
+public class Customer extends User{
 
-    private String first_name;
-    private String last_name;
-    private String login;
-    private String password;
+    // private String first_name;
+    // private String last_name;
+    // private String login;
+    // private String password;
     private String address;
     private String city;
     private String state;
@@ -37,7 +37,7 @@ public class Customer {
     }
 
     public Customer(String first_name, String last_name, String login, String password, String address,
-        String city, String state, String zip, List<Order> orders) {
+        String city, String state, String zip, List<Order> o) {
         
         this.first_name = first_name;
         this.last_name = last_name;
@@ -47,25 +47,30 @@ public class Customer {
         this.city = city;
         this.state = state;
         this.zip = zip;
+        o.placeIterator();
+        for(int i = 0; i < o.getLength(); i++){
+            this.orders.addLast(o.getIterator());
+            o.advanceIterator();
+        }
     }
 
     /** ACCESSORS */
 
-    public String getFirstName() {
-        return first_name;
-    }
+    // public String getFirstName() {
+    //     return first_name;
+    // }
 
-    public String getLastName() {
-        return last_name;
-    }
+    // public String getLastName() {
+    //     return last_name;
+    // }
 
-    public String getLogin() {
-        return login;
-    }
+    // public String getLogin() {
+    //     return login;
+    // }
 
-    public String getPassword() {
-        return password;
-    }
+    // public String getPassword() {
+    //     return password;
+    // }
 
     public String getAddress() {
         return address;
@@ -88,22 +93,22 @@ public class Customer {
     }
 
     /** MUTATORS */
-    public void setFirstName(String firstName) {
-        this.first_name = firstName;
-    }
+    // public void setFirstName(String firstName) {
+    //     this.first_name = firstName;
+    // }
 
-    public void setLastName(String lastName) {
-        this.last_name = lastName;
-    }
+    // public void setLastName(String lastName) {
+    //     this.last_name = lastName;
+    // }
 
     
-    public void setLogin(String login) {
-        this.login = login;
-    }
+    // public void setLogin(String login) {
+    //     this.login = login;
+    // }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    // public void setPassword(String password) {
+    //     this.password = password;
+    // }
 
 
     /** ADDITIONAL OPERATIONS */
