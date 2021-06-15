@@ -1,7 +1,7 @@
 public class TechProduct{
     private String deviceType; //primary key
     private String brand; //secondary key
-    private String modelNumber;
+    private String deviceName;
     private double msrp;
     private int yearReleased;
     private String productDescription;
@@ -9,7 +9,7 @@ public class TechProduct{
     TechProduct( String type, String brand, String modelnum, double msrp, int year, String desc){
         this.deviceType = type;
         this.brand = brand;
-        this.modelNumber = modelnum;
+        this.deviceName = modelnum;
         this.msrp = msrp;
         this.yearReleased = year;
         this.productDescription = desc;
@@ -22,7 +22,7 @@ public class TechProduct{
         return brand;
     }
     String getModelNumber(){
-        return modelNumber;
+        return deviceName;
     }
     double getMSRP(){
         return msrp;
