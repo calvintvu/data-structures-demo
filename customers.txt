@@ -1,0 +1,58 @@
+// private String first_name;
+    // private String last_name;
+    // private String login;
+    // private String password;
+    private String address;
+    private String city;
+    private String state;
+    private String zip; // or int
+shipped list order data
+unshipped list order data
+customer info
+shipped list order data
+unshipped list order data
+customer info
+shipped list order data
+unshipped list order data
+
+Tim
+Cook
+timcook@apple.com
+applerox123
+1 Apple Park Way
+Cupertino
+CA
+95014
+Sundar
+Pichai
+sundarpichai@google.com
+alphabet
+1600 Amphitheatre Pkwy
+Mountain View
+CA
+94043
+Mark
+Zuckerberg
+markzucc@facebook.com
+noprivacy
+1 Hacker Way
+Menlo Park
+CA
+94025
+Lisa 
+Su
+lisasu@amd.com
+intelsux
+1 AMD Pl
+Sunnyvale
+CA 
+94085
+Jensen
+Huang
+jensenhuang@nvidia.com
+RTXrules
+2788 San Tomas Expy
+Santa Clara
+CA
+95051
+
