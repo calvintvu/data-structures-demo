@@ -1,5 +1,10 @@
 public class Employee extends User{
 
+	public Employee() {
+		this.login = "";
+		this.password = "";
+	}
+	
 	public Employee(String login, String password) {
         this.login = login;
         this.password = password;

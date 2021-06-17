@@ -25,12 +25,20 @@ public class UserInterface {
 		return employees;
 	}
 	
-	/*
-	 * Prompts the user for type of customer login
+	public Customer createCustomerAccount() {
+		Customer customer = new Customer();
+		// prompt customer for info and create a new customer object with parameters
+		return customer;
+	}
+	
+	/**
+	 * Prompts the customer for the way they would like to log in
+	 * Calls the respective method for login depending on customer choice
+	 * 
+	 * @return customer the customer who logged in
 	 */
 	public Customer customerLogin() {
 		Scanner input = new Scanner(System.in);
-		String login, password;
 		
 		System.out.println("\nWould you like to login as a guest, create an account, or sign into an existing account?");
 		System.out.print("Enter \'G\' to login as a guest, \'C\' to create an account, or \'S\' to sign in: ");
@@ -38,27 +46,61 @@ public class UserInterface {
 		String choice = input.next();
 		do {
 			if(choice.equalsIgnoreCase("G")) {
+				input.close();
 				return guestLogin();
 			} else if(choice.equalsIgnoreCase("C")) {
+				input.close();
 				return createCustomerAccount();
 			} else if(choice.equalsIgnoreCase("S")) {
-				// prompt the user for login info
-				System.out.print("Please enter your login: ");
-				login = input.next();
-				System.out.print("Please enter your password: ");
-				password = input.next();
-				// create a dummy customer account
-				Customer customer = new Customer(login, password);
-				// check customers for dummy customer account
-				if(!customers.contains(customer)) {
-					System.out.println("It seems that we can't find your account... ");
-					System.out.println("Would you like to make a new account or try to log in again?");
-					
-				}
+				input.close();
+				return existingLogin();
 			} else {
 				System.out.println("Invalid input. Please enter \'G\', \'C\', or \'S\'");
 			}
 		} while(choice != "G" && choice != "g" && choice != "C" && choice != "c" && choice != "S" && choice != "s");
+		
+		input.close();
+		return null;
+	}
+	
+	public Employee employeeLogin() {
+		return null;
+	}
+	
+	/**
+	 * Prompts user for login info and checks for existing account
+	 * 
+	 * @return customer the customer that logs in
+	 */
+	public Customer existingLogin() {
+		String login, password, choice;
+		Scanner input = new Scanner(System.in);
+		System.out.print("Please enter your login: ");
+		login = input.next();
+		System.out.print("Please enter your password: ");
+		password = input.next();
+		Customer customer = new Customer(login, password);
+		
+		if(!customers.contains(customer)) {
+			System.out.println("It seems that we can't find your account... ");
+			System.out.println("Would you like to make a new account or try to log in again?");
+			System.out.print("Enter \'N\' to make a new account or \'L\' to log in again: ");
+			choice = input.next();
+			if(choice.equalsIgnoreCase("L")) {
+				input.close();
+				return existingLogin();
+			} else if(choice.equalsIgnoreCase("N")) {
+				input.close();
+				return createCustomerAccount();
+			} else {
+				System.out.println("Invalid input.");
+			}
+		}
+		
+		System.out.println("Welcome " + customer.getFirstName() + " " + customer.getLastName());
+		
+		input.close();
+		
 		return null;
 	}
 	
@@ -69,17 +111,25 @@ public class UserInterface {
 		return customer;
 	}
 	
-	public void employeeLogin() {
+	/**
+	 * To read in customerFile
+	 */
+	private void loadCustomers() {
+
+	}
+	
+	/**
+	 * To read in employeeFile
+	 */
+	private void loadEmployees() {
 		
 	}
 	
-	public Customer createCustomerAccount() {
-		Customer customer = new Customer();
-		return customer;
-	}
-	
-	private void loadCustomers() {
-		 
+	/**
+	 * To read in productFile()
+	 */
+	private void loadProducts() {
+		
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -168,6 +218,7 @@ public class UserInterface {
 		
 		Scanner input = new Scanner(System.in);
 		Customer customer = new Customer();
+		Employee employee = new Employee();
 		
 		System.out.println("Are you a customer or employee?");
 		System.out.print("Enter \'C\' for Customer or \'E\' for Employee: ");
@@ -177,8 +228,10 @@ public class UserInterface {
 			customer = ui.customerLogin();
 		}
 		else if(userType.equals("E")) {
-			ui.employeeLogin();
+			employee = ui.employeeLogin();
 		}
+		
+		input.close();
 		
 		// CustomerInteface ci = new CustomerInterface(customer);
 		
