@@ -21,7 +21,11 @@ public class Heap<T> {
      * of heap based on priority
      */
     public Heap(ArrayList<T> data, Comparator<T> comparator){
-        
+        heap = data;
+        heapSize = data.size() -1;
+        this.comparator = comparator;
+        buildHeap();
+
     }
     
     /**Mutators*/
@@ -32,7 +36,10 @@ public class Heap<T> {
      * Calls helper method heapify
      */
     public void buildHeap(){
-        
+        int size = heapSize;
+        for(int i = (int) Math.floor(size/2); i >= 1; i--){
+            heapify(i);
+        }
     } 
     
     /** 
@@ -41,7 +48,22 @@ public class Heap<T> {
      * @param index an index in the heap
      */
     private void heapify(int index) {
+        int maxIndex = index;
+        int left = get_left(index);
+        int right = get_right(index);
 
+        if(left < getHeapSize() && comparator.compare(getElement(1), getElement(index)) > 0){
+            maxIndex = left;
+        }
+        if(right < getHeapSize() && comparator.compare(getElement(right), getElement(maxIndex)) > 0){
+            maxIndex = right;
+        }
+        if(index != maxIndex){
+            T temp = heap.get(maxIndex);
+            heap.set(maxIndex, getElement(index));
+            heap.set(index, temp);
+            heapify(maxIndex);
+        }
     }
 
 
@@ -51,7 +73,9 @@ public class Heap<T> {
      * @param key the data to insert
      */
     public void insert(T key){
+        heapSize++;
         
+        heapIncreaseKey(heapSize, key);
     } 
     
     /**
@@ -144,7 +168,11 @@ public class Heap<T> {
      * Creates a String of all elements in the heap
      */
     @Override public String toString(){
-        return "";
+        String res = "";
+        for(int i = 0; i < heapSize; i++){
+            res += heap.get(i);
+        }
+        return res;
     }  
 
     /**
@@ -155,7 +183,18 @@ public class Heap<T> {
      * @postcondition heap remains a valid heap
      */
     public ArrayList<T> sort() {
-        return new ArrayList<T>();
+
+        int size = heapSize;
+        ArrayList<T> tempHeap = new ArrayList<>(heap);
+
+        for(int i = size; i>=2; i--){
+            T temp = tempHeap.get(1);
+            tempHeap.set(1, tempHeap.get(i));
+            tempHeap.set(i, temp);
+            heapify(1);
+        }
+
+        return tempHeap;
     }
    
 }

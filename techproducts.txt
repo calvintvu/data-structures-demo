@@ -1,30 +1,18 @@
-Smartphone
-Apple
 iPhone 12
+Apple
+APL123
 999.99
 2020
-A12X Chip
-Laptop
-Apple
+Smartphone
 Macbook Pro 13
+Apple
+MBJ313
 1299.99
-2020
-M1 Chip
-Tablet
-Apple
-iPad Pro
-899.99
 2021
-M1 Chip
-Audio
+Laptop
+iPad Pro
 Apple
-Airpods Pro
-249.99
-2019
-Active Noise Cancellation
-TV
-LG
-75" Class
-599.99
-2020
-4K UHD MiniLED
+IP1231
+799.99
+2021
+Tablet
