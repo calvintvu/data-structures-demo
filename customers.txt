@@ -1,20 +1,3 @@
-// private String first_name;
-    // private String last_name;
-    // private String login;
-    // private String password;
-    private String address;
-    private String city;
-    private String state;
-    private String zip; // or int
-shipped list order data
-unshipped list order data
-customer info
-shipped list order data
-unshipped list order data
-customer info
-shipped list order data
-unshipped list order data
-
 Tim
 Cook
 timcook@apple.com
@@ -55,4 +38,3 @@ RTXrules
 Santa Clara
 CA
 95051
-

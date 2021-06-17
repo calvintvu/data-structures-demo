@@ -20,7 +20,7 @@ public class Customer extends User{
 
     /** CONSTRUCTORS */
 
-    /*
+    /**
      * Creates a new Customer when nothing is known about the Customer
      * 
      * @param login the user name of the Customer
@@ -38,7 +38,7 @@ public class Customer extends User{
        this.orders = new List<>();
     }
     
-    /*
+    /**
      * Creates a new Customer when only login and password are known
      * 
      * @param login the user name of the Customer
@@ -56,7 +56,7 @@ public class Customer extends User{
         this.orders = new List<>();
     }
 
-    /*
+    /**
      * Creates a new Customer when name, login, and password are known
      * 
      * @param first_name the Customer's first name
@@ -76,7 +76,7 @@ public class Customer extends User{
         this.orders = new List<>();
     }
 
-    /*
+    /**
      * Creates a new Customer when everything is known
      * 
      * @param first_name the Customer's first name
@@ -162,6 +162,22 @@ public class Customer extends User{
     // public void setPassword(String password) {
     //     this.password = password;
     // }
+    
+    public void setAddress(String address) {
+    	this.address = address;
+    }
+    
+    public void setCity(String city) {
+    	this.city = city;
+    }
+    
+    public void setState(String state) {
+    	this.state = state;
+    }
+    
+    public void setZip(String zip) {
+    	this.zip = zip;
+    }
 
 
     /** ADDITIONAL OPERATIONS */
