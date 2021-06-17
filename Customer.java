@@ -20,11 +20,50 @@ public class Customer extends User{
 
     /** CONSTRUCTORS */
 
+    /*
+     * Creates a new Customer when nothing is known about the Customer
+     * 
+     * @param login the user name of the Customer
+     * @param password the password of the Customer
+     */
+    public Customer() {
+       this.first_name = "";
+       this.last_name = "";
+       this.login = "";
+       this.password = "";
+       this.address = "";
+       this.city = "";
+       this.state = "";
+       this.zip = "";
+       this.orders = new List<>();
+    }
+    
+    /*
+     * Creates a new Customer when only login and password are known
+     * 
+     * @param login the user name of the Customer
+     * @param password the password of the Customer
+     */
     public Customer(String login, String password) {
+    	this.first_name = "";
+    	this.last_name = "";
         this.login = login;
         this.password = password;
+        this.address = "";
+        this.city = "";
+        this.state = "";
+        this.zip = "";
+        this.orders = new List<>();
     }
 
+    /*
+     * Creates a new Customer when name, login, and password are known
+     * 
+     * @param first_name the Customer's first name
+     * @param last_name the Customer's last name
+     * @param login the user name of the Customer
+     * @param password the password of the Customer
+     */
     public Customer(String first_name, String last_name, String login, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
@@ -34,8 +73,22 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
+        this.orders = new List<>();
     }
 
+    /*
+     * Creates a new Customer when everything is known
+     * 
+     * @param first_name the Customer's first name
+     * @param last_name the Customer's last name
+     * @param login the user name of the Customer
+     * @param password the password of the Customer
+     * @param address the Customer's address
+     * @param city the city of the Customer's address
+     * @param state the state of the Customer's address
+     * @param zip the zip code of the Customer's address
+     * @param o the list of the Customer's orders
+     */
     public Customer(String first_name, String last_name, String login, String password, String address,
         String city, String state, String zip, List<Order> o) {
         
@@ -131,14 +184,14 @@ public class Customer extends User{
         }
     }
 
-    @Override
-    public int hashCode() {
-        String key = login + password;
-        int sum = 0;
-        for (int i = 0; i < key.length(); i++) {
-            sum += (int) key.charAt(i);
-        }
-        return sum;
-    }
+//    @Override
+//    public int hashCode() {
+//        String key = login + password;
+//        int sum = 0;
+//        for (int i = 0; i < key.length(); i++) {
+//            sum += (int) key.charAt(i);
+//        }
+//        return sum;
+//    }
 
 }

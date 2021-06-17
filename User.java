@@ -30,6 +30,18 @@ abstract class User{
     void setPassword(String n){
         this.password = n;
     }
+    
+    boolean passwordMatch(String n) {
+    	return this.password == n;
+    }
 
-
+    @Override
+    public int hashCode() {
+        String key = login + password;
+        int sum = 0;
+        for (int i = 0; i < key.length(); i++) {
+            sum += (int) key.charAt(i);
+        }
+        return sum;
+    }
 }
