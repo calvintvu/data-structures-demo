@@ -1,7 +1,5 @@
 import java.util.Comparator;
 
-import jdk.jfr.Description;
-
 public class TechProduct{
     private String deviceName; //primary key
     private String brand; 
@@ -17,6 +15,15 @@ public class TechProduct{
         this.msrp = msrp;
         this.yearReleased = year;
         this.productDescription = desc;
+    }
+
+    TechProduct(String name){
+        this.deviceName = name;
+        this.brand = "";
+        this.modelNumber = "";
+        this.msrp = -1;
+        this.yearReleased = 0;
+        this.productDescription = "";
     }
 
     String getDeviceName(){
