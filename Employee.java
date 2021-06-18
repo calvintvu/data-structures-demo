@@ -16,4 +16,24 @@ public class Employee extends User{
         this.login = login;
         this.password = password;
     }
+	
+	/** ADDITIONAL OPERATIONS */
+
+    @Override
+    public String toString() {
+        String result = "";
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Employee)) {
+            return false;
+        } else {
+            Employee temp = (Employee) o;
+            return (this.getLogin().equals(temp.getLogin()) && this.passwordMatch(temp.password));
+        }
+    }
 }

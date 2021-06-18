@@ -25,7 +25,6 @@ public class Heap<T> {
         heapSize = data.size() -1;
         this.comparator = comparator;
         buildHeap();
-
     }
     
     /**Mutators*/
