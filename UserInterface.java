@@ -9,10 +9,10 @@ public class UserInterface {
 	
 	final int NUM_EMPLOYEES = 8;
 	final int NUM_CUSTOMERS = 12;
-	private HashTable<Customer> customers;
-	private HashTable<Employee> employees;
-	private BST<TechProduct> techProductByName;
-	private BST<TechProduct> techProductByModelNum;
+	protected HashTable<Customer> customers;
+	protected HashTable<Employee> employees;
+	protected BST<TechProduct> techProductByName;
+	protected BST<TechProduct> techProductByModelNum;
 	private Scanner userInput;
 	
 	UserInterface() {
@@ -182,6 +182,18 @@ public class UserInterface {
 				city = fileInput.nextLine();
 				state = fileInput.nextLine();
 				zip = fileInput.nextLine();
+				int numShipped = Integer.parseInt(fileInput.nextLine());
+				if(numShipped > 0){
+					for(int i = 0; i < numShipped; i++){
+						String orderdata = fileInput.nextLine();
+					}
+				}
+				int numUnshipped = Integer.parseInt(fileInput.nextLine());
+				if(numUnshipped > 0){
+					for(int i = 0; i < numShipped; i++){
+						String orderdata = fileInput.nextLine();
+					}
+				}
 				// TODO: add loop to read in orders
 				// customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip));
 			}

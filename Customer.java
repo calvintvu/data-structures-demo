@@ -1,10 +1,6 @@
-
 /**
 * Customer.java
 */
-
-import java.util.ArrayList;
-import java.text.DecimalFormat;
 
 public class Customer extends User{
 
@@ -16,54 +12,40 @@ public class Customer extends User{
     private String city;
     private String state;
     private String zip; // or int
-    private List<Order> orders;
+    private List<Order> shippedOrders;
+    private List<Order> unshippedOrders;
+    private int numOfShippedOrders;
+    private int numOfUnshippedOrders;
 
     /** CONSTRUCTORS */
 
-    /**
-     * Creates a new Customer when nothing is known about the Customer
-     * 
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     */
-    public Customer() {
-       this.first_name = "";
-       this.last_name = "";
-       this.login = "";
-       this.password = "";
-       this.address = "";
-       this.city = "";
-       this.state = "";
-       this.zip = "";
-       this.orders = new List<>();
-    }
-    
-    /**
-     * Creates a new Customer when only login and password are known
-     * 
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     */
-    public Customer(String login, String password) {
-    	this.first_name = "";
-    	this.last_name = "";
-        this.login = login;
-        this.password = password;
+    // public Customer(String login, String password) {
+    //     this.login = login;
+    //     this.password = password;
+    // }
+
+    public Customer(){
+        this.first_name = "";
+        this.last_name = "";
+        this.login = "";
+        this.password = "";
         this.address = "";
         this.city = "";
         this.state = "";
         this.zip = "";
-        this.orders = new List<>();
     }
 
-    /**
-     * Creates a new Customer when name, login, and password are known
-     * 
-     * @param first_name the Customer's first name
-     * @param last_name the Customer's last name
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     */
+    public Customer(String firstname, String lastname){
+        this.first_name = firstname;
+        this.last_name = lastname;
+        this.login = "";
+        this.password = "";
+        this.address = "";
+        this.city = "";
+        this.state = "";
+        this.zip = "";
+    }
+
     public Customer(String first_name, String last_name, String login, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
@@ -73,24 +55,10 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
-        this.orders = new List<>();
     }
 
-    /**
-     * Creates a new Customer when everything is known
-     * 
-     * @param first_name the Customer's first name
-     * @param last_name the Customer's last name
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     * @param address the Customer's address
-     * @param city the city of the Customer's address
-     * @param state the state of the Customer's address
-     * @param zip the zip code of the Customer's address
-     * @param o the list of the Customer's orders
-     */
     public Customer(String first_name, String last_name, String login, String password, String address,
-        String city, String state, String zip, List<Order> o) {
+        String city, String state, String zip, List<Order> shipped, List<Order> unshipped, int shippedNum, int unshippedNum) {
         
         this.first_name = first_name;
         this.last_name = last_name;
@@ -100,11 +68,10 @@ public class Customer extends User{
         this.city = city;
         this.state = state;
         this.zip = zip;
-        o.placeIterator();
-        for(int i = 0; i < o.getLength(); i++){
-            this.orders.addLast(o.getIterator());
-            o.advanceIterator();
-        }
+        this.unshippedOrders = unshipped;
+        this.shippedOrders = shipped;
+        this.numOfShippedOrders = shippedNum;
+        this.numOfUnshippedOrders = unshippedNum;
     }
 
     /** ACCESSORS */
@@ -162,21 +129,18 @@ public class Customer extends User{
     // public void setPassword(String password) {
     //     this.password = password;
     // }
-    
-    public void setAddress(String address) {
-    	this.address = address;
+
+    public void incrementNumShippedOrders(){
+        this.numOfShippedOrders =  this.numOfShippedOrders++;
     }
-    
-    public void setCity(String city) {
-    	this.city = city;
+    public void decrementNumShippedOrders(){
+        this.numOfShippedOrders =  this.numOfShippedOrders--;
     }
-    
-    public void setState(String state) {
-    	this.state = state;
+    public void incrementNumUnshippedOrders(){
+        this.numOfUnshippedOrders =  this.numOfUnshippedOrders++;
     }
-    
-    public void setZip(String zip) {
-    	this.zip = zip;
+    public void decrementNumUnshippedOrders(){
+        this.numOfUnshippedOrders =  this.numOfUnshippedOrders--;
     }
 
 
@@ -185,6 +149,15 @@ public class Customer extends User{
     @Override
     public String toString() {
         String result = "";
+        result += first_name + "\n";
+        result += last_name + "\n";
+        result += address + "\n";
+        result += city + "\n";
+        result += state + "\n";
+        result += zip + "\n";
+        result += shippedOrders + "\n";
+        result += unshippedOrders + "\n";
+        result += "\n";
         return result;
     }
 
@@ -196,18 +169,18 @@ public class Customer extends User{
             return false;
         } else {
             Customer temp = (Customer) o;
-            return (this.getLogin().equals(temp.getLogin()) && this.passwordMatch(temp.password));
+            return (this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name));
         }
     }
 
-//    @Override
-//    public int hashCode() {
-//        String key = login + password;
-//        int sum = 0;
-//        for (int i = 0; i < key.length(); i++) {
-//            sum += (int) key.charAt(i);
-//        }
-//        return sum;
-//    }
+    @Override
+    public int hashCode() {
+        String key = login + password;
+        int sum = 0;
+        for (int i = 0; i < key.length(); i++) {
+            sum += (int) key.charAt(i);
+        }
+        return sum;
+    }
 
 }
