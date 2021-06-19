@@ -9,10 +9,10 @@ public class UserInterface {
 	
 	final int NUM_EMPLOYEES = 8;
 	final int NUM_CUSTOMERS = 12;
-	private HashTable<Customer> customers;
-	private HashTable<Employee> employees;
-	private BST<TechProduct> techProductByName;
-	private BST<TechProduct> techProductByModelNum;
+	protected HashTable<Customer> customers;
+	protected HashTable<Employee> employees;
+	protected BST<TechProduct> techProductByName;
+	protected BST<TechProduct> techProductByModelNum;
 	private Scanner userInput;
 	
 	UserInterface() {
@@ -111,8 +111,6 @@ public class UserInterface {
 		System.out.println("Welcome " + employee.getFirstName() + "!");
 		
 		return employee;
-		
-		//TODO: it's possible to get stuck in an infinite loop here, so i should give the employee the option to quit
 	}
 	
 	/**
@@ -144,7 +142,7 @@ public class UserInterface {
 				} else {
 					System.out.println("\nInvalid input.\n");
 				}
-			} while (choice != "N" || choice != "n" || choice != "L" || choice != "l");
+			} while (choice != "N" || choice != "n" || choice != "L" || choice != "l" || choice != "Q" || choice != "q");
 		}
 		
 		customer = customers.get(customer);
@@ -279,13 +277,15 @@ public class UserInterface {
 		if(userType.equalsIgnoreCase("C")) {
 			customer = ui.customerLogin();
 			if(customer != null) {
-				// CustomerInteface ci = new CustomerInterface(customer);
+				CustomerInterface ci = new CustomerInterface(customer);
+				ci.viewOrders();
+				ci.closeUserInput();
 			}
 		}
 		else if(userType.equalsIgnoreCase("E")) {
 			employee = ui.employeeLogin();
 			if(employee != null) {
-				// EmployeeInterface ei = new EmployeeInterface(employee);
+				EmployeeInterface ei = new EmployeeInterface(employee);
 			}
 		}
 		

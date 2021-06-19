@@ -146,6 +146,11 @@ public class Customer extends User{
     }
 
     /** MUTATORS */
+    
+    public void addOrder(Order order) {
+    	orders.addLast(order);
+    }
+    
     // public void setFirstName(String firstName) {
     //     this.first_name = firstName;
     // }
@@ -179,7 +184,6 @@ public class Customer extends User{
     	this.zip = zip;
     }
 
-
     /** ADDITIONAL OPERATIONS */
 
     @Override
@@ -200,6 +204,14 @@ public class Customer extends User{
         }
     }
 
+    public void printOrders() {
+    	orders.placeIterator();
+    	for(int i = 1; i < orders.getLength(); i++) {
+    		System.out.println(i + ". " + orders.getIterator());
+    		orders.advanceIterator();
+    	}
+    }
+    
 //    @Override
 //    public int hashCode() {
 //        String key = login + password;

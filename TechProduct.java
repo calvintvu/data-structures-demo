@@ -8,6 +8,24 @@ public class TechProduct{
     private int yearReleased;
     private String productDescription;
 
+    TechProduct(String name) {
+        this.deviceName = name;
+        this.brand = "";
+        this.modelNumber = "";
+        this.msrp = -1;
+        this.yearReleased = 0;
+        this.productDescription = "";
+    }
+    
+    TechProduct(String name, String modelNumber) {
+    	this.deviceName = name;
+    	this.brand = "";
+    	this.modelNumber = modelNumber;
+    	this.msrp = -1;
+    	this.yearReleased = 0;
+    	this.productDescription = "";
+    }
+    
     TechProduct(String name, String brand, String modelnum, double msrp, int year, String desc){
         this.deviceName = name;
         this.brand = brand;
@@ -15,15 +33,6 @@ public class TechProduct{
         this.msrp = msrp;
         this.yearReleased = year;
         this.productDescription = desc;
-    }
-
-    TechProduct(String name){
-        this.deviceName = name;
-        this.brand = "";
-        this.modelNumber = "";
-        this.msrp = -1;
-        this.yearReleased = 0;
-        this.productDescription = "";
     }
 
     String getDeviceName(){

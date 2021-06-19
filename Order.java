@@ -10,9 +10,19 @@ public class Order {
 
     
 
-//getters, setters, constructors go here
-
- 
+    //getters, setters, constructors go here
+    Order(Customer customer, String date, List<TechProduct> orderContents, int shippingSpeed, int priority) {
+    	this.customer = customer;
+    	this.date = date;
+    	this.orderContents = new List<>(orderContents);
+    	this.shippingSpeed = shippingSpeed;
+    	this.priority = priority;
+    }
+    
+    public String toString() {
+    	String result = "";
+    	return result;
+    }
 
 }
 
