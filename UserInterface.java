@@ -183,24 +183,28 @@ public class UserInterface {
 				state = fileInput.nextLine();
 				zip = fileInput.nextLine();
 				int numShipped = Integer.parseInt(fileInput.nextLine());
+				List<Order> shippedOrders = new List<Order>();
 				if(numShipped > 0){
 					for(int i = 0; i < numShipped; i++){
 						String orderdata = fileInput.nextLine();
 					}
 				}
 				int numUnshipped = Integer.parseInt(fileInput.nextLine());
+				List<Order> unshippedOrders = new List<Order>();
 				if(numUnshipped > 0){
 					for(int i = 0; i < numShipped; i++){
 						String orderdata = fileInput.nextLine();
 					}
 				}
 				// TODO: add loop to read in orders
-				// customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip));
+				customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip, shippedOrders, unshippedOrders, numShipped, numUnshipped));
 			}
 			fileInput.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+
+		//System.out.println(customers.toString());
 	}
 	
 	/**
@@ -222,6 +226,7 @@ public class UserInterface {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	
 	/**
 	 * To read in productFile()
@@ -236,7 +241,6 @@ public class UserInterface {
 		try {
 			Scanner fileInput = new Scanner(file);
 			while (fileInput.hasNextLine()) {
-				//System.out.println("test");
 				deviceName = fileInput.nextLine();
 				brand = fileInput.nextLine();
 				modelNum = fileInput.nextLine();
@@ -244,25 +248,16 @@ public class UserInterface {
 				year = Integer.parseInt(fileInput.nextLine());
 				desc = fileInput.nextLine();
 				TechProduct product = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
-				// System.out.println(product.getBrand());
-				// System.out.println(product.getDescription());
-				// System.out.println(product.getDeviceName());
-				// System.out.println(product.getMSRP());
-				// System.out.println(product.getModelNumber());
-				// System.out.println(product.getYearReleased());
 				techProductByName.insert(product, nc);
 				techProductByModelNum.insert(product, mc);
-				// System.out.println(techProductByModelNum.search(product, mc).getBrand());
 			}
 			fileInput.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		// System.out.println(techProductByModelNum.getSize());
-		// System.out.println(techProductByModelNum.search(data, c));
-		techProductByModelNum.inOrderPrint();
-		techProductByName.inOrderPrint();
+		// techProductByModelNum.inOrderPrint();
+		// techProductByName.inOrderPrint();
 	}
 	
 	public static void main(String[] args) throws IOException {

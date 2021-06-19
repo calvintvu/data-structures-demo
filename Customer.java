@@ -59,7 +59,6 @@ public class Customer extends User{
 
     public Customer(String first_name, String last_name, String login, String password, String address,
         String city, String state, String zip, List<Order> shipped, List<Order> unshipped, int shippedNum, int unshippedNum) {
-        
         this.first_name = first_name;
         this.last_name = last_name;
         this.login = login;

@@ -6,6 +6,8 @@ applerox123
 Cupertino
 CA
 95014
+0
+0
 Sundar
 Pichai
 sundarpichai@google.com
@@ -14,6 +16,8 @@ alphabet
 Mountain View
 CA
 94043
+0
+0
 Mark
 Zuckerberg
 markzucc@facebook.com
@@ -22,6 +26,8 @@ noprivacy
 Menlo Park
 CA
 94025
+0
+0
 Lisa 
 Su
 lisasu@amd.com
@@ -30,6 +36,8 @@ intelsux
 Sunnyvale
 CA 
 94085
+0
+0
 Jensen
 Huang
 jensenhuang@nvidia.com
@@ -38,3 +46,5 @@ RTXrules
 Santa Clara
 CA
 95051
+0
+0
