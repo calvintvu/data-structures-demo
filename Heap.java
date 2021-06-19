@@ -73,7 +73,6 @@ public class Heap<T> {
      */
     public void insert(T key){
         heapSize++;
-        
         heapIncreaseKey(heapSize, key);
     } 
     

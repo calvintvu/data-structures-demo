@@ -57,6 +57,17 @@ public class Customer extends User{
         this.zip = "";
     }
 
+    public Customer(String first_name, String last_name, String login, String password, String addy, String city, String state, String zip) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.login = login;
+        this.password = password;
+        this.address = addy;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+    }
+
     public Customer(String first_name, String last_name, String login, String password, String address,
         String city, String state, String zip, List<Order> shipped, List<Order> unshipped, int shippedNum, int unshippedNum) {
         this.first_name = first_name;
@@ -142,6 +153,18 @@ public class Customer extends User{
         this.numOfUnshippedOrders =  this.numOfUnshippedOrders--;
     }
 
+    public void addOrder(Order order) {
+    	unshippedOrders.addLast(order);
+    }
+
+    public void setNumShippedOrders(int x){
+        this.numOfShippedOrders = x;
+    }
+
+    public void setNumUnShippedOrders(int x){
+        this.numOfUnshippedOrders = x;
+    }
+
 
     /** ADDITIONAL OPERATIONS */
 
@@ -154,8 +177,8 @@ public class Customer extends User{
         result += city + "\n";
         result += state + "\n";
         result += zip + "\n";
-        result += shippedOrders + "\n";
-        result += unshippedOrders + "\n";
+        // result += shippedOrders + "\n";
+        // result += unshippedOrders + "\n";
         result += "\n";
         return result;
     }

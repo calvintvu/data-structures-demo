@@ -26,6 +26,15 @@ public class TechProduct{
         this.productDescription = "";
     }
 
+    TechProduct(String name, String modelNumber) {
+    	this.deviceName = name;
+    	this.brand = "";
+    	this.modelNumber = modelNumber;
+    	this.msrp = -1;
+    	this.yearReleased = 0;
+    	this.productDescription = "";
+    }
+
     String getDeviceName(){
         return deviceName;
     }
