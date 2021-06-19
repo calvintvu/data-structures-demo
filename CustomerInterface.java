@@ -127,7 +127,18 @@ public class CustomerInterface extends UserInterface {
 	 * Displays all orders for a Customer
 	 */
 	public void viewOrders() {
-		System.out.println("\nHere is a list of all your orders: \n");
-		customer.printOrders();
+		String choice;
+
+		System.out.println("\nHere are your options to view purchases: \n");
+		System.out.println("\n1. Shipped\n2. Unshipped\n");
+		System.out.print("Enter your choice (1 or 2): ");
+		choice = userInput.nextLine();
+		if(choice.equals("1")) {
+			customer.printShippedOrders();
+		} else if(choice.equals("2")) {
+			customer.printUnshippedOrders();
+		} else {
+			System.out.println("Invalid viewing option.");
+		}
 	}
 }

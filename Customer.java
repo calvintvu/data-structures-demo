@@ -8,15 +8,14 @@ import java.text.DecimalFormat;
 
 public class Customer extends User{
 
-    // private String first_name;
-    // private String last_name;
-    // private String login;
-    // private String password;
     private String address;
     private String city;
     private String state;
-    private String zip; // or int
-    private List<Order> orders;
+    private String zip;
+    private List<Order> shippedOrders;
+    private List<Order> unshippedOrders;
+    private int numOfShippedOrders;
+    private int numOfUnshippedOrders;
 
     /** CONSTRUCTORS */
 
@@ -35,7 +34,8 @@ public class Customer extends User{
        this.city = "";
        this.state = "";
        this.zip = "";
-       this.orders = new List<>();
+       this.shippedOrders = new List<>();
+       this.unshippedOrders = new List<>();
     }
     
     /**
@@ -53,7 +53,8 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
-        this.orders = new List<>();
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
     }
 
     /**
@@ -73,7 +74,8 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
-        this.orders = new List<>();
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
     }
 
     /**
@@ -90,7 +92,7 @@ public class Customer extends User{
      * @param o the list of the Customer's orders
      */
     public Customer(String first_name, String last_name, String login, String password, String address,
-        String city, String state, String zip, List<Order> o) {
+        String city, String state, String zip, List<Order> shipped, List<Order> unshipped) {
         
         this.first_name = first_name;
         this.last_name = last_name;
@@ -100,30 +102,19 @@ public class Customer extends User{
         this.city = city;
         this.state = state;
         this.zip = zip;
-        o.placeIterator();
-        for(int i = 0; i < o.getLength(); i++){
-            this.orders.addLast(o.getIterator());
-            o.advanceIterator();
+        shipped.placeIterator();
+        for(int i = 0; i < shipped.getLength(); i++){
+            this.shippedOrders.addLast(shipped.getIterator());
+            shipped.advanceIterator();
+        }
+        unshipped.placeIterator();
+        for(int i = 0; i < unshipped.getLength(); i++){
+            this.shippedOrders.addLast(unshipped.getIterator());
+            unshipped.advanceIterator();
         }
     }
 
     /** ACCESSORS */
-
-    // public String getFirstName() {
-    //     return first_name;
-    // }
-
-    // public String getLastName() {
-    //     return last_name;
-    // }
-
-    // public String getLogin() {
-    //     return login;
-    // }
-
-    // public String getPassword() {
-    //     return password;
-    // }
 
     public String getAddress() {
         return address;
@@ -148,25 +139,8 @@ public class Customer extends User{
     /** MUTATORS */
     
     public void addOrder(Order order) {
-    	orders.addLast(order);
+    	unshippedOrders.addLast(order);
     }
-    
-    // public void setFirstName(String firstName) {
-    //     this.first_name = firstName;
-    // }
-
-    // public void setLastName(String lastName) {
-    //     this.last_name = lastName;
-    // }
-
-    
-    // public void setLogin(String login) {
-    //     this.login = login;
-    // }
-
-    // public void setPassword(String password) {
-    //     this.password = password;
-    // }
     
     public void setAddress(String address) {
     	this.address = address;
@@ -204,22 +178,19 @@ public class Customer extends User{
         }
     }
 
-    public void printOrders() {
-    	orders.placeIterator();
-    	for(int i = 1; i < orders.getLength(); i++) {
-    		System.out.println(i + ". " + orders.getIterator());
-    		orders.advanceIterator();
+    public void printShippedOrders() {
+    	shippedOrders.placeIterator();
+    	for(int i = 1; i < numOfShippedOrders; i++) {
+    		System.out.println(i + ". " + shippedOrders.getIterator());
+    		shippedOrders.advanceIterator();
     	}
     }
     
-//    @Override
-//    public int hashCode() {
-//        String key = login + password;
-//        int sum = 0;
-//        for (int i = 0; i < key.length(); i++) {
-//            sum += (int) key.charAt(i);
-//        }
-//        return sum;
-//    }
-
+    public void printUnshippedOrders() {
+    	unshippedOrders.placeIterator();
+    	for(int i = 1; i < numOfUnshippedOrders; i++) {
+    		System.out.println(i + ". " + unshippedOrders.getIterator());
+    		unshippedOrders.advanceIterator();
+    	}
+    }
 }

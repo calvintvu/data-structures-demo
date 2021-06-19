@@ -230,23 +230,13 @@ public class UserInterface {
 				year = Integer.parseInt(fileInput.nextLine());
 				desc = fileInput.nextLine();
 				TechProduct product = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
-				// System.out.println(product.getBrand());
-				// System.out.println(product.getDescription());
-				// System.out.println(product.getDeviceName());
-				// System.out.println(product.getMSRP());
-				// System.out.println(product.getModelNumber());
-				// System.out.println(product.getYearReleased());
 				techProductByName.insert(product, nc);
 				techProductByModelNum.insert(product, mc);
-				// System.out.println(techProductByModelNum.search(product, mc).getBrand());
 			}
 			fileInput.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
-		// System.out.println(techProductByModelNum.getSize());
-		// System.out.println(techProductByModelNum.search(data, c));
 		techProductByModelNum.inOrderPrint();
 		techProductByName.inOrderPrint();
 	}
@@ -257,8 +247,6 @@ public class UserInterface {
 		UserInterface ui = new UserInterface();
 		String userType;
 
-		// will shipped orders and unshipped orders be stored in 2 separate heaps?
-		// there needs to be a way to display shipped orders after removing them from the heap
 		File customerFile = new File("customers.txt");
 		File employeeFile = new File("employees.txt");
 		File productFile = new File("techproducts.txt");
@@ -278,7 +266,6 @@ public class UserInterface {
 			customer = ui.customerLogin();
 			if(customer != null) {
 				CustomerInterface ci = new CustomerInterface(customer);
-				ci.viewOrders();
 				ci.closeUserInput();
 			}
 		}
