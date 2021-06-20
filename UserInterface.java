@@ -244,7 +244,7 @@ public class UserInterface {
 						String date = fileInput.nextLine();
 						// fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
-						int priority = Integer.parseInt(fileInput.nextLine());
+						long priority = Long.parseLong(fileInput.nextLine());
 						Order shippedOrder = new Order(
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
 								shippedProductsInOrder, shippingSpeed, priority);
@@ -286,7 +286,7 @@ public class UserInterface {
 						}
 						String date = fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
-						int priority = Integer.parseInt(fileInput.nextLine());
+						long priority = Long.parseLong(fileInput.nextLine());
 						Order unshippedOrder = new Order(
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
 								unshippedOrders, shippingSpeed, priority);
@@ -465,7 +465,7 @@ public class UserInterface {
 		}
 	}
 
-	public void quit(File cFile, File pFile, UserInterface ui){
+	public void quit(File cFile, File pFile, UserInterface ui){ //Takes care of writing to files
 		// Creates a FileOutputStream
 		try{
 			FileOutputStream file = new FileOutputStream(pFile);
@@ -487,12 +487,13 @@ public class UserInterface {
 	}
 
 	public static void main(String[] args) throws IOException {
-		System.out.println("Welcome to Tech Inc.!\n");
+		// System.out.println("Welcome to Tech Inc.!\n");
+		System.out.println("Welcome to the 22C Tech Store!\n");
 
 		UserInterface ui = new UserInterface();
 		String userType;
 
-		// will shipped orders and unshipped orders be stored in 2 separate heaps?
+		// will shipped orders and unshipped orders be stored in 2 separate heaps?, no there should only be one heap for unshipped orders
 		// there needs to be a way to display shipped orders after removing them from the heap
 		File customerFile = new File("customers.txt");
 		File employeeFile = new File("employees.txt");
@@ -524,9 +525,7 @@ public class UserInterface {
 				// EmployeeInterface ei = new EmployeeInterface(employee);
 			}
 		}
-		
 		ui.getUserInput().close();
-		
-		System.out.println("\nGoodbye!");
+		System.out.println("\nGoodbye! Thank you for visiting!");
 	}
 }

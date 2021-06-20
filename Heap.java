@@ -231,5 +231,4 @@ public class Heap<T extends Comparable<T>> {
     	heap.set(index1, heap.get(index2));
     	heap.set(index2, temp);
     }
-   
 }
