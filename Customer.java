@@ -258,13 +258,5 @@ public class Customer extends User{
         return sum;
     }
 
-    public int hashCodeName() {
-        String key = first_name + last_name;
-        int sum = 0;
-        for (int i = 0; i < key.length(); i++) {
-            sum += (int) key.charAt(i);
-        }
-        return sum;
-    }
 
 }

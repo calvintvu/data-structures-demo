@@ -50,7 +50,7 @@ public class UserInterface {
 	 * @return customer the new Customer account
 	 */
 	public Customer createCustomerAccount() {
-		String firstName, lastName, login, password;
+		String firstName, lastName, login, password, address, city, state, zip;
 		Customer customer;
 
 		System.out.print("\nPlease enter your first name: ");
@@ -61,6 +61,7 @@ public class UserInterface {
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
+		//add address city state zip
 
 		customer = new Customer(firstName, lastName, login, password);
 

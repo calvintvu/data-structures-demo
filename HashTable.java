@@ -38,11 +38,6 @@ public class HashTable<T> {
 		return code % Table.size();
 	}
 
-	private int hashName(T t) {
-		Customer temp = (Customer) t;
-		int code = temp.hashCodeName();
-		return code % Table.size();
-	}
 
 	/**
 	 * counts the number of elements at this index
@@ -214,11 +209,7 @@ public class HashTable<T> {
 	 * @param bucket the index in the Table
 	 */
 	public void printBucket(int bucket) {
-//        List<T> L = Table.get(bucket);
-//        L
 		System.out.println("Printing Bucket #" + bucket + ":\n");
-
-//        Table.get(bucket).printNumberedList();
 		System.out.println(Table.get(bucket).toString());
 	}
 
@@ -229,18 +220,14 @@ public class HashTable<T> {
 	 * empty." followed by two blank lines
 	 */
 	public void printTable() {
-
 		for (int i = 0; i < this.Table.size(); i++) {
-
 			System.out.println("Bucket: " + i);
-
 			if (Table.get(i).getLength() == 0) {
 				System.out.println("This bucket is empty.\n\n");
 			} else {
 				System.out.println(Table.get(i).getFirst());
 				System.out.println("+" + (countBucket(i) - 1) + " More at this bucket.\n\n");
 			}
-
 		}
 	}
 
@@ -251,7 +238,6 @@ public class HashTable<T> {
 	@Override
 	public String toString() {
 		String result = "";
-
 		for (int i = 0; i < this.Table.size(); i++) {
 			result += Table.get(i).toString();
 			// if (!(Table.get(i).isEmpty())) {
@@ -260,18 +246,22 @@ public class HashTable<T> {
 			// }
 			// result += "\n";
 		}
-
 		return result;
 	}
 
 	public void write(PrintStream ps){
 		for (int i = 0; i < this.Table.size(); i++) {
-			if (!(Table.get(i).isEmpty())) {
-				Customer temp = (Customer) Table.get(i).getFirst();
-				ps.print(temp.fileToString());
+			if (Table.get(i).getLength() != 0) {
+				Table.get(i).placeIterator();
+				for(int j = 0; j < Table.get(i).getLength(); j++){
+					Customer temp = (Customer) Table.get(i).getIterator();
+					ps.print(temp.fileToString());
+					Table.get(i).advanceIterator();
+				}
+				// Customer temp = (Customer) Table.get(i).getFirst();
+				// ps.print(temp.fileToString());
+				//System.out.println(temp.fileToString());
 			}
-
 		}
 	}
-
 }
