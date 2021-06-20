@@ -8,6 +8,8 @@ public class TechProduct{
     private int yearReleased;
     private String productDescription;
 
+    /*** CONSTRUCTORS ***/
+    
     TechProduct(String name) {
         this.deviceName = name;
         this.brand = "";
@@ -35,6 +37,8 @@ public class TechProduct{
         this.productDescription = desc;
     }
 
+    /*** ACCESSORS ***/
+    
     String getDeviceName(){
         return deviceName;
     }
@@ -53,6 +57,8 @@ public class TechProduct{
     String getDescription(){
         return productDescription;
     }
+    
+    /*** MUTATORS ***/
 
     void setDeviceName(String n){
         this.deviceName = n;
@@ -73,7 +79,7 @@ public class TechProduct{
         this.productDescription = n;
     }
 
-    	/** ADDITIONAL OPERATIONS */
+	/** ADDITIONAL OPERATIONS */
 
 	@Override
 	public String toString() {

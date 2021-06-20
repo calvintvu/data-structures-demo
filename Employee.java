@@ -1,5 +1,7 @@
 public class Employee extends User{
 
+	/** CONSTRUCTORS */
+	
 	public Employee() {
 		this.login = "";
 		this.password = "";

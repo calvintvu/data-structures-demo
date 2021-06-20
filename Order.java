@@ -8,9 +8,8 @@ public class Order {
     private int shippingSpeed;
     private int priority;
 
+    /*** CONSTRUCTORS ***/
     
-
-    //getters, setters, constructors go here
     Order(Customer customer, String date, List<TechProduct> orderContents, int shippingSpeed, int priority) {
     	this.customer = customer;
     	this.date = date;
@@ -19,9 +18,15 @@ public class Order {
     	this.priority = priority;
     }
     
+    /*** ACCESSORS ***/
+    
     public int getPriority() {
     	return priority;
     }
+    
+    /*** MUTATORS ***/
+    
+    /** ADDITIONAL OPERATIONS */
     
     public String toString() {
     	String result = "";
@@ -30,4 +35,9 @@ public class Order {
 
 }
 
-// orderComparator
+class OrderComparator implements Comparator<Order> {
+    @Override
+    public int compare(Order o1, Order o2) {
+        return Integer.compare(o1.getPriority(), o2.getPriority());
+    }
+}

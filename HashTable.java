@@ -9,6 +9,8 @@ public class HashTable<T> {
 	private int numElements;
 	private ArrayList<List<T>> Table;
 
+	/*** CONSTRUCTORS ***/
+	
 	/**
 	 * Constructor for the hash table. Initializes the Table to be sized according
 	 * to value passed in as a parameter Inserts size empty Lists into the table.
@@ -24,7 +26,7 @@ public class HashTable<T> {
 		numElements = 0;
 	}
 
-	/** Accessors */
+	/*** ACCESSORS ***/
 
 	/**
 	 * returns the hash value in the Table for a given Object
@@ -123,7 +125,7 @@ public class HashTable<T> {
 //        //return false; //something != null
 	}
 
-	/** Mutators */
+	/*** MUTATORS ***/
 
 	/**
 	 * Inserts a new element in the Table at the end of the chain in the bucket
@@ -182,7 +184,7 @@ public class HashTable<T> {
 
 	}
 
-	/** Additional Methods */
+	/** ADDITIONAL OPERATIONS */
 
 	/**
 	 * Prints all the keys at a specified bucket in the Table. Tach key displayed on

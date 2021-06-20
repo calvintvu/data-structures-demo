@@ -12,7 +12,7 @@ public class Heap<T extends Comparable<T>> {
     private Comparator<T> comparator;
 
 
-    /**Constructors/
+    /*** CONSTRUCTORS ***/
 
     /**
      * Constructor for the Heap class
@@ -27,7 +27,83 @@ public class Heap<T extends Comparable<T>> {
         buildHeap();
     }
     
-    /**Mutators*/
+    /*** ACCESSORS ***/
+
+    /**
+     * returns the root (highest priority)
+     * @return the max value
+     */
+    public T peek(){
+        return heap.get(1);
+    }
+   
+    /**
+     * returns the location (index) of the 
+     * parent of the element stored at index
+     * @param index the current index
+     * @return the index of the parent
+     * @precondition 0 < i <= heap_size
+     * @throws IndexOutOfBoundsException
+     */
+    public int getParent(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return (int) Math.floor(index/2);
+    }
+
+    /**
+     * returns the location (index) of the 
+     * left child of the element stored at index
+     * @param index the current index
+     * @return the index of the left child
+     * @precondition 0 < i <= heap_size
+     * @throws IndexOutOfBoundsException
+     */
+    public int get_left(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return index * 2;
+    }
+
+    /**
+     * returns the location (index) of the 
+     * right child of the element stored at index
+     * @param index the current index
+     * @return the index of the right child
+     * @precondition 0 < i <= heap_size
+     * @throws IndexOutOfBoundsException
+     */
+    public int get_right(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return index * 2 + 1;
+    } 
+ 
+    /**
+     * returns the heap size (current number of elements)
+     * @return the size of the heap
+     */
+    public int getHeapSize() {
+        return heapSize;
+    }
+
+    /**
+     * 
+     * @param index
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
+    public T getElement(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("getElement: index out of bounds");
+    	}
+        return heap.get(index);
+    }
+    
+    /*** MUTATORS ***/
 
     /**
      * Converts an ArrayList into a valid
@@ -109,84 +185,8 @@ public class Heap<T extends Comparable<T>> {
     	
         return root;
     }   
-   
-    /**Accessors*/
 
-    /**
-     * returns the root (highest priority)
-     * @return the max value
-     */
-    public T peek(){
-        return heap.get(1);
-    }
-   
-    /**
-     * returns the location (index) of the 
-     * parent of the element stored at index
-     * @param index the current index
-     * @return the index of the parent
-     * @precondition 0 < i <= heap_size
-     * @throws IndexOutOfBoundsException
-     */
-    public int getParent(int index) throws IndexOutOfBoundsException {
-    	if(index < 1 || index > heapSize) {
-    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
-    	}
-        return (int) Math.floor(index/2);
-    }
-
-    /**
-     * returns the location (index) of the 
-     * left child of the element stored at index
-     * @param index the current index
-     * @return the index of the left child
-     * @precondition 0 < i <= heap_size
-     * @throws IndexOutOfBoundsException
-     */
-    public int get_left(int index) throws IndexOutOfBoundsException {
-    	if(index < 1 || index > heapSize) {
-    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
-    	}
-        return index * 2;
-    }
-
-    /**
-     * returns the location (index) of the 
-     * right child of the element stored at index
-     * @param index the current index
-     * @return the index of the right child
-     * @precondition 0 < i <= heap_size
-     * @throws IndexOutOfBoundsException
-     */
-    public int get_right(int index) throws IndexOutOfBoundsException {
-    	if(index < 1 || index > heapSize) {
-    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
-    	}
-        return index * 2 + 1;
-    } 
- 
-    /**
-     * returns the heap size (current number of elements)
-     * @return the size of the heap
-     */
-    public int getHeapSize() {
-        return heapSize;
-    }
-
-    /**
-     * 
-     * @param index
-     * @return
-     * @throws IndexOutOfBoundsException
-     */
-    public T getElement(int index) throws IndexOutOfBoundsException {
-    	if(index < 1 || index > heapSize) {
-    		throw new IndexOutOfBoundsException("getElement: index out of bounds");
-    	}
-        return heap.get(index);
-    }
-
-    /**Additional Operations*/
+    /** ADDITIONAL OPERATIONS */
 
     /**
      * Creates a String of all elements in the heap

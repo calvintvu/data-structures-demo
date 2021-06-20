@@ -5,6 +5,8 @@ abstract class User{
     protected String login;
     protected String password;
 
+    /*** ACCESSORS ***/
+    
     String getFirstName(){
         return first_name;
     }
@@ -18,6 +20,8 @@ abstract class User{
         return password;
     }
 
+    /*** MUTATORS ***/
+    
     void setFirstName(String n){
         this.first_name = n;
     }
@@ -30,6 +34,8 @@ abstract class User{
     void setPassword(String n){
         this.password = n;
     }
+    
+    /** ADDITIONAL OPERATIONS */
     
     boolean passwordMatch(String n) {
     	return this.password == n;
