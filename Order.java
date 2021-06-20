@@ -26,6 +26,15 @@ Order( String date, List<TechProduct> orderContents, int shippingSpeed, int prio
     this.priority = priority;
 }
 
+public List<TechProduct> getOrderContents(){
+    return orderContents;
+}
+
+public Customer getCustomer(){
+    return customer;
+}
+
+
 public String toString() {
     String result = "";
     // result += customer;
@@ -33,17 +42,54 @@ public String toString() {
     // result += orderContents + "\n";
     // result += shippingSpeed + "\n";
     // result += priority + "\n";
-    result += shippingSpeed + "\n";
-    result += priority + "\n";
-    result += orderContents.getLength() + "\n";
+
+    // result += shippingSpeed + "\n";
+    // result += priority + "\n";
+    result += "Number of Items: " + orderContents.getLength() + "\n";
     orderContents.placeIterator();
     for(int i = 0; i < orderContents.getLength(); i++){
         result += orderContents.getIterator().getDeviceName() + "\n";
         orderContents.advanceIterator();
     }
+    result += date + "\n";
+    result += shippingSpeed + "\n";
+    result += priority;
     return result;
 }
- 
+
+public String fileToString(){
+    String result = "";
+
+    result += orderContents.getLength() + "\n";
+    orderContents.placeIterator();
+    for(int i = 0; i < orderContents.getLength(); i++){
+        result += orderContents.getIterator().getDeviceName() + "\n";
+        result += orderContents.getIterator().getBrand() + "\n";
+        result += orderContents.getIterator().getModelNumber() + "\n";
+        result += orderContents.getIterator().getMSRP() + "\n";
+        result += orderContents.getIterator().getYearReleased() + "\n";
+        result += orderContents.getIterator().getDescription() + "\n";
+        orderContents.advanceIterator();
+    }
+    result += date + "\n";
+    result += shippingSpeed + "\n";
+    result += priority+"\n";
+
+    // result += orderContents.getLength() + "\n";
+    // for(int i = 0; i < orderContents.getLength(); i++){
+    //     result += orderContents.getIterator().getDeviceName() + "\n";
+    //     result += orderContents.getIterator().getBrand() + "\n";
+    //     result += orderContents.getIterator().getModelNumber() + "\n";
+    //     result += orderContents.getIterator().getMSRP() + "\n";
+    //     result += orderContents.getIterator().getYearReleased() + "\n";
+    //     result += orderContents.getIterator().getDescription() + "\n";
+    //     orderContents.advanceIterator();
+    // }
+    // result += date + "\n";
+    // result += shippingSpeed + "\n";
+    // result += priority;
+    return result;
+}
 
 }
 

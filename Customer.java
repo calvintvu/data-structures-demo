@@ -102,6 +102,16 @@ public class Customer extends User{
     //     return password;
     // }
 
+
+
+    public List<Order> getShippedOrders(){
+        return shippedOrders;
+    }
+
+    public List<Order> getUnshippedOrders(){
+        return unshippedOrders;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -177,10 +187,44 @@ public class Customer extends User{
         result += city + "\n";
         result += state + "\n";
         result += zip + "\n";
-        // result += shippedOrders + "\n";
-        // result += unshippedOrders + "\n";
-        result += "\n";
+        if(shippedOrders.getLength() > 0 || unshippedOrders.getLength() > 0){
+            result += "\n" + first_name + " " + last_name + "'s Order History: \n";
+        }
+        if(shippedOrders.getLength() > 0){
+            result += "\nShipped Orders: \n";
+            result += shippedOrders + "\n";
+        }
+        if(unshippedOrders.getLength() > 0){
+            result += "Unshipped Orders: \n";
+            result += unshippedOrders + "\n";
+        }
+        //result += "\n";
         return result;
+    }
+
+    public String fileToString(){
+        String result = "";
+        result += first_name + "\n";
+        result += last_name + "\n";
+        result += address + "\n";
+        result += city + "\n";
+        result += state + "\n";
+        result += zip + "\n";
+        result += numOfShippedOrders + "\n";
+        shippedOrders.placeIterator();
+        for(int i = 0; i < shippedOrders.getLength(); i++){
+            result += shippedOrders.getIterator().fileToString();
+            shippedOrders.advanceIterator();
+        }
+        //result += shippedOrders;
+        result += numOfUnshippedOrders + "\n";
+        // unshippedOrders.placeIterator();
+        // for(int i = 0; i < unshippedOrders.getLength(); i++){
+        //     unshippedOrders.getIterator().fileToString();
+        //     unshippedOrders.advanceIterator();
+        // }
+        return result;
+
     }
 
     @Override

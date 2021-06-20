@@ -5,6 +5,7 @@
 
 import java.util.NoSuchElementException;
 import java.util.Comparator;
+import java.io.*;
 
 public class BST<T> {
 	private class Node {
@@ -17,6 +18,7 @@ public class BST<T> {
 			left = null;
 			right = null;
 		}
+
 	}
 
 	private Node root;
@@ -293,25 +295,21 @@ public class BST<T> {
 	 * @return an updated reference variable
 	 */
 	private Node remove(T data, Node node, Comparator<T> c) {
-		if(node == null) {return node;}
-		else if(c.compare(data, node.data) <= -1) {
+		if (node == null) {
+			return node;
+		} else if (c.compare(data, node.data) <= -1) {
 			node.left = remove(data, node.left, c);
-		}
-		else if(c.compare(data, node.data) >= 1) {
+		} else if (c.compare(data, node.data) >= 1) {
 			node.right = remove(data, node.right, c);
-		}
-		else {
-			if(node.left == null && node.right == null) { //EZ case
+		} else {
+			if (node.left == null && node.right == null) { // EZ case
 				node = null;
-			}
-			else if (node.left != null && node.right == null) { //Medium case 1
+			} else if (node.left != null && node.right == null) { // Medium case 1
 				node = node.left;
-			}
-			else if (node.left == null && node.right != null) { //Medium case 2
+			} else if (node.left == null && node.right != null) { // Medium case 2
 				node = node.right;
-			}
-			else { //Hard case
-//				T minVal = findMin(node.right);
+			} else { // Hard case
+				// T minVal = findMin(node.right);
 				node.data = findMin(node.right);
 				node.right = remove(node.data, node.right, c);
 			}
@@ -320,6 +318,24 @@ public class BST<T> {
 	}
 
 	/*** ADDITONAL OPERATIONS ***/
+
+	public void write(PrintStream ps) {
+		write(root, ps);
+	}
+
+	private void write(Node node, PrintStream ps) {
+		if (node == null) {
+			return;
+		} else {
+			//System.out.print(node.data + " ");
+
+			TechProduct temp = (TechProduct) node.data;
+			ps.print(temp.toString2());
+			write(node.left, ps);
+			write(node.right, ps);
+		}
+	}
+
 
 	/**
 	 * Prints the data in pre order to the console followed by a new line

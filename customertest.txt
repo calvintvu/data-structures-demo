@@ -1,0 +1,58 @@
+Lisa 
+Su
+1 AMD Pl
+Sunnyvale
+CA 
+94085
+0
+0
+Tim
+Cook
+1 Apple Park Way
+Cupertino
+CA
+95014
+2
+2
+iPhone 12
+Apple
+A2342
+999.99
+2020
+Smartphone
+Macbook Pro 13
+Apple
+MC373
+1299.99
+2021
+Laptop
+10000
+10000
+10000
+1
+Macbook Air
+Apple
+MGN63
+999.99
+2020
+Laptop
+10000
+10000
+10000
+1
+Mark
+Zuckerberg
+1 Hacker Way
+Menlo Park
+CA
+94025
+0
+0
+Jensen
+Huang
+2788 San Tomas Expy
+Santa Clara
+CA
+95051
+0
+0

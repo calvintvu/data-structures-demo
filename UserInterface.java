@@ -1,3 +1,4 @@
+
 /**
 * UserInterface.java
 */
@@ -6,7 +7,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class UserInterface {
-	
+
 	final int NUM_EMPLOYEES = 8;
 	final int NUM_CUSTOMERS = 12;
 	protected HashTable<Customer> customers;
@@ -14,7 +15,7 @@ public class UserInterface {
 	protected BST<TechProduct> techProductByName;
 	protected BST<TechProduct> techProductByModelNum;
 	private Scanner userInput;
-	
+
 	UserInterface() {
 		customers = new HashTable<>(NUM_CUSTOMERS);
 		employees = new HashTable<>(NUM_EMPLOYEES);
@@ -22,15 +23,23 @@ public class UserInterface {
 		techProductByModelNum = new BST<>();
 		userInput = new Scanner(System.in);
 	}
-	
+
 	public void closeUserInput() {
 		userInput.close();
 	}
-	
+
 	public Scanner getUserInput() {
 		return this.userInput;
 	}
-	
+
+	public BST<TechProduct> getProductBST() {
+		return techProductByName;
+	}
+
+	public HashTable<Customer> getCustomerTable(){
+		return customers;
+	}
+
 	/**
 	 * Creates a new account for the user
 	 * 
@@ -39,7 +48,7 @@ public class UserInterface {
 	public Customer createCustomerAccount() {
 		String firstName, lastName, login, password;
 		Customer customer;
-		
+
 		System.out.print("\nPlease enter your first name: ");
 		firstName = userInput.nextLine();
 		System.out.print("Please enter your last name: ");
@@ -48,73 +57,75 @@ public class UserInterface {
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
-		
+
 		customer = new Customer(firstName, lastName, login, password);
-		
+
 		System.out.println("\nWelcome " + customer.getFirstName() + "!");
 		return customer;
 	}
-	
+
 	/**
-	 * Prompts the customer for the way they would like to log in
-	 * Calls the respective method for login depending on customer choice
+	 * Prompts the customer for the way they would like to log in Calls the
+	 * respective method for login depending on customer choice
 	 * 
 	 * @return customer the customer account
 	 */
 	public Customer customerLogin() {
-		System.out.println("\nWould you like to login as a guest, create an account, or sign into an existing account?");
+		System.out
+				.println("\nWould you like to login as a guest, create an account, or sign into an existing account?");
 		System.out.print("Enter \'G\' to login as a guest, \'C\' to create an account, or \'S\' to sign in: ");
-		
+
 		String choice = userInput.nextLine();
 		do {
-			if(choice.equalsIgnoreCase("G")) {
+			if (choice.equalsIgnoreCase("G")) {
 				return guestLogin();
-			} else if(choice.equalsIgnoreCase("C")) {
+			} else if (choice.equalsIgnoreCase("C")) {
 				return createCustomerAccount();
-			} else if(choice.equalsIgnoreCase("S")) {
+			} else if (choice.equalsIgnoreCase("S")) {
 				return existingLogin();
 			} else {
 				System.out.println("Invalid input. Please enter \'G\', \'C\', or \'S\'");
 			}
-		} while(choice != "G" && choice != "g" && choice != "C" && choice != "c" && choice != "S" && choice != "s");
+		} while (choice != "G" && choice != "g" && choice != "C" && choice != "c" && choice != "S" && choice != "s");
 
 		return null;
 	}
-	
+
 	public Employee employeeLogin() {
 		String login, password, choice = "";
 		Employee employee;
-		
+
 		System.out.print("\nPlease enter your login: ");
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
 		employee = new Employee(login, password);
-		
-		if(!employees.contains(employee)) {
+
+		if (!employees.contains(employee)) {
 			System.out.println("\nIt seems that we can't find your account... ");
 			System.out.println("Would you like to try again or quit?");
 			do {
 				System.out.print("Enter \'T\' to try again or \'Q\' to quit: ");
 				choice = userInput.nextLine();
-				if(choice.equalsIgnoreCase("T")) {
+				if (choice.equalsIgnoreCase("T")) {
 					return employeeLogin();
-				} else if(choice.equalsIgnoreCase("Q")) {
+				} else if (choice.equalsIgnoreCase("Q")) {
 					return null;
 				} else {
 					System.out.println("\nInvalid input.\n");
 				}
 			} while (choice != "T" || choice != "t" || choice != "Q" || choice != "q");
 		}
-		
+
 		employee = employees.get(employee);
 		System.out.println("Welcome " + employee.getFirstName() + "!");
-		
+
 		return employee;
-		
-		//TODO: it's possible to get stuck in an infinite loop here, so i should give the employee the option to quit
+
+		// TODO: it's possible to get stuck in an infinite loop here, so i should give
+		// the employee the option to quit
 	}
-	
+
 	/**
 	 * Prompts user for login info and checks for existing account
 	 * 
@@ -128,31 +139,31 @@ public class UserInterface {
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
 		Customer customer = new Customer(login, password);
-		
-		if(!customers.contains(customer)) {
+
+		if (!customers.contains(customer)) {
 			System.out.println("\nIt seems that we can't find your account... ");
 			System.out.println("Would you like to make a new account, try to log in again, or quit?");
 			do {
 				System.out.print("Enter \'N\' to make a new account, \'L\' to log in again, or \'Q\' to quit: ");
 				choice = userInput.nextLine();
-				if(choice.equalsIgnoreCase("L")) {
+				if (choice.equalsIgnoreCase("L")) {
 					return existingLogin();
-				} else if(choice.equalsIgnoreCase("N")) {
+				} else if (choice.equalsIgnoreCase("N")) {
 					return createCustomerAccount();
-				} else if(choice.equalsIgnoreCase("Q")) {
+				} else if (choice.equalsIgnoreCase("Q")) {
 					return null;
 				} else {
 					System.out.println("\nInvalid input.\n");
 				}
 			} while (choice != "N" || choice != "n" || choice != "L" || choice != "l");
 		}
-		
+
 		customer = customers.get(customer);
 		System.out.println("\nWelcome " + customer.getFirstName() + "!");
-		
+
 		return customer;
 	}
-	
+
 	/**
 	 * Logs in customer as a guest
 	 * 
@@ -165,7 +176,7 @@ public class UserInterface {
 		System.out.println("\nWelcome Guest!");
 		return customer;
 	}
-	
+
 	/**
 	 * To read in customerFile
 	 */
@@ -175,6 +186,10 @@ public class UserInterface {
 			Scanner fileInput = new Scanner(file);
 			while (fileInput.hasNextLine()) {
 				firstName = fileInput.nextLine();
+				if(firstName.equals("")){
+					fileInput.close();
+					return;
+				}
 				lastName = fileInput.nextLine();
 				login = fileInput.nextLine();
 				password = fileInput.nextLine();
@@ -182,25 +197,26 @@ public class UserInterface {
 				city = fileInput.nextLine();
 				state = fileInput.nextLine();
 				zip = fileInput.nextLine();
-				//System.out.println(new Customer(firstName, lastName, login, password, address, city, state, zip));
+				// System.out.println(new Customer(firstName, lastName, login, password,
+				// address, city, state, zip));
 				int numShipped = Integer.parseInt(fileInput.nextLine());
 				List<TechProduct> shippedProductsInOrder = new List<>();
 				List<Order> orderShipped = new List<>();
-				//System.out.println(numShipped);
+				// System.out.println(numShipped);
 
-				if(numShipped == 0){
+				if (numShipped == 0) {
 					numShipped = 0;
 					orderShipped = new List<>();
 					shippedProductsInOrder = new List<>();
 				}
 
-				if(numShipped > 0){
+				if (numShipped > 0) {
 					// int numOfItems = fileInput.nextInt();
-					for(int i = 0; i < numShipped; i++){
-						
+					for (int i = 0; i < numShipped; i++) {
+
 						int numOfItems = Integer.parseInt(fileInput.nextLine());
-						//fileInput.nextLine();
-						for(int j = 0; j < numOfItems; j++){
+						// fileInput.nextLine();
+						for (int j = 0; j < numOfItems; j++) {
 							String deviceName = fileInput.nextLine();
 							String brand = fileInput.nextLine();
 							String modelNum = fileInput.nextLine();
@@ -210,40 +226,39 @@ public class UserInterface {
 							TechProduct orderedProduct = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
 							shippedProductsInOrder.addLast(orderedProduct);
 						}
-						//System.out.println(shippedProductsInOrder);
+						// System.out.println(shippedProductsInOrder);
 						String date = fileInput.nextLine();
-						//fileInput.nextLine();
+						// fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
 						int priority = Integer.parseInt(fileInput.nextLine());
-						// Order shippedOrder = new Order(new Customer(firstName, lastName, login, password, address, city, state, zip), 
-						// date, shippedProductsInOrder, shippingSpeed, priority);
-						Order shippedOrder = new Order(date, shippedProductsInOrder, shippingSpeed, priority);
+						Order shippedOrder = new Order(
+								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
+								shippedProductsInOrder, shippingSpeed, priority);
 						orderShipped.addLast(shippedOrder);
 						shippedProductsInOrder = new List<>();
-						//System.out.println(shippedOrder);
+						// System.out.println(shippedOrder);
 					}
-					
+
 				}
 
-				
 				int numUnshipped = Integer.parseInt(fileInput.nextLine());
 
 				List<TechProduct> unshippedOrders = new List<>();
 				List<Order> orderunShipped = new List<>();
-				
-				if(numUnshipped == 0){
+
+				if (numUnshipped == 0) {
 					numUnshipped = 0;
 					orderunShipped = new List<>();
 					unshippedOrders = new List<>();
 				}
-				
-				if(numUnshipped > 0){
-					//int numOfItems = fileInput.nextInt();
-					for(int i = 0; i < numUnshipped; i++){
+
+				if (numUnshipped > 0) {
+					// int numOfItems = fileInput.nextInt();
+					for (int i = 0; i < numUnshipped; i++) {
 						int numOfItems = Integer.parseInt(fileInput.nextLine());
-						//fileInput.nextLine();
-						//System.out.println(numOfItems);
-						for(int j = 0; j < numOfItems; j++){
+						// fileInput.nextLine();
+						// System.out.println(numOfItems);
+						for (int j = 0; j < numOfItems; j++) {
 							String deviceName = fileInput.nextLine();
 							String brand = fileInput.nextLine();
 							String modelNum = fileInput.nextLine();
@@ -252,42 +267,44 @@ public class UserInterface {
 							String desc = fileInput.nextLine();
 							TechProduct orderedProduct = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
 							unshippedOrders.addLast(orderedProduct);
-							//System.out.println(orderedProduct);
-							//System.out.println(unshippedOrders);
+							// System.out.println(orderedProduct);
+							// System.out.println(unshippedOrders);
 						}
 						String date = fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
 						int priority = Integer.parseInt(fileInput.nextLine());
-						// Order unshippedOrder = new Order(new Customer(firstName, lastName, login, password, address, city, state, zip), date, unshippedOrders, shippingSpeed, priority);
-						Order unshippedOrder = new Order(date, unshippedOrders, shippingSpeed, priority);
+						Order unshippedOrder = new Order(
+								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
+								unshippedOrders, shippingSpeed, priority);
 						orderunShipped.addLast(unshippedOrder);
-						//System.out.println(orderunShipped);
-						//System.out.println("check 1");
+						// System.out.println(orderunShipped);
+						// System.out.println("check 1");
 					}
-					//TODO make insert work when there are 0 orders
-					//System.out.println(unshippedOrders);
+					// TODO make insert work when there are 0 orders
+					// System.out.println(unshippedOrders);
 				}
 
 				// else{
-				// 	orderunShipped = new List<Order>();
-				// 	numUnshipped = 0;
+				// orderunShipped = new List<Order>();
+				// numUnshipped = 0;
 				// }
-				//System.out.println("check 2");
-				customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip, orderShipped, orderunShipped, numShipped, numUnshipped));
-				//System.out.println("check");
-				//System.out.println(new Customer(firstName, lastName, login, password, address, city, state, zip, orderShipped, orderunShipped, numShipped, numUnshipped));
-				//System.out.println(customers);
-				// customers.printTable();
+				// System.out.println("check 2");
+				customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip,
+						orderShipped, orderunShipped, numShipped, numUnshipped));
+				// System.out.println("check");
+				// System.out.println(new Customer(firstName, lastName, login, password,
+				// address, city, state, zip, orderShipped, orderunShipped, numShipped,
+				// numUnshipped));
+
 			}
 			fileInput.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-
-		//System.out.println(customers.toString());
 		System.out.println(customers);
+		// System.out.println(customers.toString());
 	}
-	
+
 	/**
 	 * To read in employeeFile
 	 */
@@ -308,7 +325,6 @@ public class UserInterface {
 		}
 	}
 
-	
 	/**
 	 * To read in productFile()
 	 */
@@ -318,11 +334,15 @@ public class UserInterface {
 		int year;
 		NameComparator nc = new NameComparator();
 		modelNumComparator mc = new modelNumComparator();
-		
+
 		try {
 			Scanner fileInput = new Scanner(file);
 			while (fileInput.hasNextLine()) {
 				deviceName = fileInput.nextLine();
+				if(deviceName.equals("")){
+					fileInput.close();
+					return;
+				}
 				brand = fileInput.nextLine();
 				modelNum = fileInput.nextLine();
 				msrp = Double.parseDouble(fileInput.nextLine());
@@ -336,11 +356,12 @@ public class UserInterface {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		// techProductByModelNum.inOrderPrint();
-		// techProductByName.inOrderPrint();
+		// //techProductByName.inOrderPrint();
+		// System.out.println(techProductByName.getSize());
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		System.out.println("Welcome to Tech Inc.!\n");
 
@@ -352,6 +373,7 @@ public class UserInterface {
 		File customerFile = new File("customers.txt");
 		File employeeFile = new File("employees.txt");
 		File productFile = new File("techproducts.txt");
+		//File productFile1 = new File("techproductTEST.txt");
 		
 		ui.loadCustomers(customerFile);
 		ui.loadEmployees(employeeFile);
@@ -359,6 +381,20 @@ public class UserInterface {
 		
 		Customer customer = new Customer();
 		Employee employee = new Employee();
+
+		// Creates a FileOutputStream
+		FileOutputStream file = new FileOutputStream(productFile);
+		// Creates a PrintStream
+		PrintStream output = new PrintStream(file);
+		ui.getProductBST().write(output);
+
+		// Creates a FileOutputStream
+		FileOutputStream file1 = new FileOutputStream("customertest.txt");
+		// Creates a PrintStream
+		PrintStream output1 = new PrintStream(file1);
+		ui.getCustomerTable().write(output1);
+
+
 		
 		System.out.println("Are you a customer or employee?");
 		System.out.print("Enter \'C\' for Customer or \'E\' for Employee: ");

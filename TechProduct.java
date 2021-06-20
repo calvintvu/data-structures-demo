@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class TechProduct{
+public class TechProduct extends BST<TechProduct>{
     private String deviceName; //primary key
     private String brand; 
     private String modelNumber; //secondary key
@@ -75,14 +75,26 @@ public class TechProduct{
 
     	/** ADDITIONAL OPERATIONS */
 
-	@Override
+	public String toString2() {
+		String result = "";
+		result += deviceName + "\n";
+		result += brand + "\n";
+        result += modelNumber + "\n";
+        result += msrp + "\n";
+        result += yearReleased + "\n";
+        result += productDescription+ "\n";
+        //result += "\n";
+		return result;
+	}
+
+    @Override
 	public String toString() {
 		String result = "";
 		result += "Name: " + deviceName + "\n";
 		result += "Brand: " + brand + "\n";
         result += "Model Number: " + modelNumber + "\n";
-        result += "Price: $" + msrp + "\n";
-        result += "Release Date: " + yearReleased + "\n";
+        result += "Price: " + msrp + "\n";
+        result += "Year Released: " + yearReleased + "\n";
         result += "Description: " + productDescription+ "\n";
         result += "\n";
 		return result;

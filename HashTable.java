@@ -2,6 +2,7 @@
 /**
  * HashTable.java
  */
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class HashTable<T> {
@@ -233,14 +234,24 @@ public class HashTable<T> {
 
 		for (int i = 0; i < this.Table.size(); i++) {
 			result += Table.get(i).toString();
-			if (!(Table.get(i).isEmpty())) {
-				// Only print new line if there is data in the index
-				result += "\n";
-			}
+			// if (!(Table.get(i).isEmpty())) {
+			// 	// Only print new line if there is data in the index
+			// 	result += "\n";
+			// }
 			// result += "\n";
 		}
 
 		return result;
+	}
+
+	public void write(PrintStream ps){
+		for (int i = 0; i < this.Table.size(); i++) {
+			if (!(Table.get(i).isEmpty())) {
+				Customer temp = (Customer) Table.get(i).getFirst();
+				ps.print(temp.fileToString());
+			}
+
+		}
 	}
 
 }

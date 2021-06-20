@@ -16,18 +16,6 @@ MGN63
 999.99
 2020
 Laptop
-iPad Pro
-Apple
-A2378
-799.99
-2021
-Tablet
-Macbook Pro 16
-Apple
-MVVJ2
-2399.99
-2020
-Laptop
 AirPods Pro
 Apple
 A2084
@@ -52,18 +40,42 @@ A2291
 399.99
 2021
 Wearables
-iMac 24"
-Apple
-MGPC3
-1299.99
-2021
-Desktop
 Galaxy Watch
 Samsung
 SM-R500NZDAXAR
 139.99
 2020
 Wearables
+ENVY Desktop
+HP
+TE01-1154
+949.99
+2019
+Desktop
+Galaxy S21 
+Samsung
+SM-G998UZKAXAA
+1199.99
+2021
+Smartphone
+iPad Pro
+Apple
+A2378
+799.99
+2021
+Tablet
+Macbook Pro 16
+Apple
+MVVJ2
+2399.99
+2020
+Laptop
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
 Q60A Series 75" Class TV
 Samsung
 QN75Q60AAFXZA
@@ -82,21 +94,9 @@ QWV-00007
 1329.99
 2021
 Laptop
-ENVY Desktop
-HP
-TE01-1154
-949.99
-2019
-Desktop
 iPhone SE
 Apple
 A2275
 399.99
 2020
-Smartphone
-Galaxy S21 
-Samsung
-SM-G998UZKAXAA
-1199.99
-2021
 Smartphone
