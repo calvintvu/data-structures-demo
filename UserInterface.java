@@ -32,8 +32,12 @@ public class UserInterface {
 		return this.userInput;
 	}
 	
-	public BST<TechProduct> getProductBST() {
+	public BST<TechProduct> getProductBST_Name() {
 		return techProductByName;
+	}
+	
+	public BST<TechProduct> getProductBST_ModelNum() {
+		return techProductByModelNum;
 	}
 
 	public HashTable<Customer> getCustomerTable(){
@@ -46,7 +50,7 @@ public class UserInterface {
 	 * @return customer the new Customer account
 	 */
 	public Customer createCustomerAccount() {
-		String firstName, lastName, login, password;
+		String firstName, lastName, login, password, address, city, state, zip;
 		Customer customer;
 		
 		System.out.print("\nPlease enter your first name: ");
@@ -57,8 +61,17 @@ public class UserInterface {
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
+		//add address city state zip
+		System.out.print("Please enter your address: ");
+		address = userInput.nextLine();
+		System.out.print("Please enter your city: ");
+		city = userInput.nextLine();
+		System.out.print("Please enter your state: ");
+		state = userInput.nextLine();
+		System.out.print("Please enter your zip: ");
+		zip = userInput.nextLine();
 		
-		customer = new Customer(firstName, lastName, login, password);
+		customer = new Customer(firstName, lastName, login, password, address, city, state, zip);
 		
 		System.out.println("\nWelcome " + customer.getFirstName() + "!");
 		return customer;
@@ -134,7 +147,7 @@ public class UserInterface {
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
-		Customer customer = new Customer(login, password);
+		Customer customer = new Customer("", "", login, password);
 		
 		if(!customers.contains(customer)) {
 			System.out.println("\nIt seems that we can't find your account... ");
@@ -209,7 +222,6 @@ public class UserInterface {
 				if (numShipped > 0) {
 					// int numOfItems = fileInput.nextInt();
 					for (int i = 0; i < numShipped; i++) {
-
 						int numOfItems = Integer.parseInt(fileInput.nextLine());
 						// fileInput.nextLine();
 						for (int j = 0; j < numOfItems; j++) {
@@ -226,7 +238,7 @@ public class UserInterface {
 						String date = fileInput.nextLine();
 						// fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
-						int priority = Integer.parseInt(fileInput.nextLine());
+						long priority = Long.parseLong(fileInput.nextLine());
 						Order shippedOrder = new Order(
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
 								shippedProductsInOrder, shippingSpeed, priority);
@@ -276,7 +288,6 @@ public class UserInterface {
 						// System.out.println(orderunShipped);
 						// System.out.println("check 1");
 					}
-					// TODO make insert work when there are 0 orders
 					// System.out.println(unshippedOrders);
 				}
 
@@ -331,8 +342,11 @@ public class UserInterface {
 		try {
 			Scanner fileInput = new Scanner(file);
 			while (fileInput.hasNextLine()) {
-				//System.out.println("test");
 				deviceName = fileInput.nextLine();
+				if(deviceName.equals("")) {
+					fileInput.close();
+					return;
+				}
 				brand = fileInput.nextLine();
 				modelNum = fileInput.nextLine();
 				msrp = Double.parseDouble(fileInput.nextLine());
@@ -346,8 +360,117 @@ public class UserInterface {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		techProductByModelNum.inOrderPrint();
-		techProductByName.inOrderPrint();
+//		techProductByModelNum.inOrderPrint();
+//		techProductByName.inOrderPrint();
+	}
+	
+	public void renderCustomerMenu(Customer customer, BST<TechProduct> name, BST<TechProduct> modelNum, File pFile, File cFile, UserInterface ui){
+		boolean done = false;
+		CustomerInterface ci = new CustomerInterface(customer);
+		while(done != true){
+			ci.customerPrompt();
+			String userChoice = userInput.nextLine();
+			switch(userChoice){
+				case "A":
+				case "a":
+					ci.searchProduct(name, modelNum);
+					break;
+				case "B":
+				case "b":
+					ci.listProducts(name, modelNum);
+					break;
+				case "C":
+				case "c":
+					ci.placeOrder();
+					break;
+				case "D":
+				case "d":
+					ci.viewOrders();
+					break;
+				case "E":
+				case "e":
+					//quit method
+					if(!(customer.getFirstName().equals("Guest"))){
+						ci.quit(cFile, pFile, ui);
+						done = true;
+					}
+					else{
+						done = true;
+					}
+					break;
+				default:
+				System.out.println("Invalid Choice");
+					break;
+	
+			}
+		}
+	}
+
+	public void renderEmployeeMenu(Employee e, BST<TechProduct> name, BST<TechProduct> modelNum, HashTable<Customer> c, File pFile, File cFile, UserInterface ui){
+		boolean done = false;
+		EmployeeInterface ei = new EmployeeInterface(e);
+		while(done != true){
+			ei.employeePrompt();
+			String userChoice = userInput.nextLine();
+			switch(userChoice){
+				case "A":
+				case "a":
+					ei.searchCustomer(c);
+					break;
+				case "B":
+				case "b":
+					ei.displayCustomers(c);
+					break;
+				case "C":
+				case "c":
+					break;
+				case "D":
+				case "d":
+					break;
+				case "E":
+				case "e":
+					ei.listProducts(name, modelNum);
+					break;
+				case "F":
+				case "f":
+					ei.addProduct(name, modelNum);
+					break;
+				case "G":
+				case "g":
+					ei.removeProduct(name, modelNum);
+					break;
+				case "H":
+				case "h":
+					//quit
+					ei.quit(cFile, pFile, ui);
+					done = true;
+					break;
+				default:
+				System.out.println("Invalid Choice");
+					break;
+			}
+		}
+	}
+
+	public void quit(File cFile, File pFile, UserInterface ui){ //Takes care of writing to files
+		// Creates a FileOutputStream
+		try{
+			FileOutputStream file = new FileOutputStream(pFile);
+			// Creates a PrintStream
+			PrintStream output = new PrintStream(file);
+			ui.getProductBST_Name().write(output);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		try{
+		// Creates a FileOutputStream
+			FileOutputStream file1 = new FileOutputStream(cFile);
+			// Creates a PrintStream
+			PrintStream output1 = new PrintStream(file1);
+			ui.getCustomerTable().write(output1);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -374,14 +497,13 @@ public class UserInterface {
 		if(userType.equalsIgnoreCase("C")) {
 			customer = ui.customerLogin();
 			if(customer != null) {
-				CustomerInterface ci = new CustomerInterface(customer);
-				ci.closeUserInput();
+				ui.renderCustomerMenu(customer, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), productFile, customerFile, ui);
 			}
 		}
 		else if(userType.equalsIgnoreCase("E")) {
 			employee = ui.employeeLogin();
 			if(employee != null) {
-				EmployeeInterface ei = new EmployeeInterface(employee);
+				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable(), productFile, customerFile, ui);
 			}
 		}
 		

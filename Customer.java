@@ -16,12 +16,6 @@ public class Customer extends User{
 
     /** CONSTRUCTORS */
 
-    /**
-     * Creates a new Customer when nothing is known about the Customer
-     * 
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     */
     public Customer() {
        this.first_name = "";
        this.last_name = "";
@@ -33,36 +27,25 @@ public class Customer extends User{
        this.zip = "";
        this.shippedOrders = new List<>();
        this.unshippedOrders = new List<>();
+       this.numOfShippedOrders = 0;
+       this.numOfUnshippedOrders = 0;
     }
     
-    // TODO: Change this constructor to match Calvin's
-    /**
-     * Creates a new Customer when only login and password are known
-     * 
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     */
-    public Customer(String login, String password) {
-    	this.first_name = "";
-    	this.last_name = "";
-        this.login = login;
-        this.password = password;
+    public Customer(String firstname, String lastname){
+        this.first_name = firstname;
+        this.last_name = lastname;
+        this.login = "";
+        this.password = "";
         this.address = "";
         this.city = "";
         this.state = "";
         this.zip = "";
         this.shippedOrders = new List<>();
         this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
     }
 
-    /**
-     * Creates a new Customer when name, login, and password are known
-     * 
-     * @param first_name the Customer's first name
-     * @param last_name the Customer's last name
-     * @param login the user name of the Customer
-     * @param password the password of the Customer
-     */
     public Customer(String first_name, String last_name, String login, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
@@ -74,6 +57,8 @@ public class Customer extends User{
         this.zip = "";
         this.shippedOrders = new List<>();
         this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
     }
 
     public Customer(String first_name, String last_name, String login, String password, String addy, String city, String state, String zip) {
@@ -85,6 +70,10 @@ public class Customer extends User{
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
     }
     
     public Customer(String first_name, String last_name, String login, String password, String address,
@@ -98,18 +87,8 @@ public class Customer extends User{
         this.city = city;
         this.state = state;
         this.zip = zip;
-        shipped.placeIterator();
-        // TODO: ask Calvin about this, i'm unsure
-        // Ansewr: use copy constructor instead because setting them equal (like in Calvin's) will create a shallow copy
-        for(int i = 0; i < shipped.getLength(); i++){
-            this.shippedOrders.addLast(shipped.getIterator());
-            shipped.advanceIterator();
-        }
-        unshipped.placeIterator();
-        for(int i = 0; i < unshipped.getLength(); i++){
-            this.shippedOrders.addLast(unshipped.getIterator());
-            unshipped.advanceIterator();
-        }
+        this.unshippedOrders = new List<Order>(unshipped);
+        this.shippedOrders = new List<Order>(shipped);;
         this.numOfShippedOrders = shippedNum;
         this.numOfUnshippedOrders = unshippedNum;
     }
@@ -237,6 +216,50 @@ public class Customer extends User{
         return result;
 
     }
+    
+    public String shippedToString(){
+        String s = "";
+        s += first_name + "\n";
+        s += last_name + "\n";
+        s += address + "\n";
+        s += city + "\n";
+        s += state + "\n";
+        s += zip + "\n";
+        if(shippedOrders.getLength() > 0 || unshippedOrders.getLength() > 0){
+            s += "\n" + first_name + " " + last_name + "'s Order History: \n";
+        }
+        if(shippedOrders.getLength() > 0){
+            s += "\nShipped Orders: \n";
+            s += shippedOrders + "\n";
+        }
+        // if(unshippedOrders.getLength() > 0){
+        //     s += "Unshipped Orders: \n";
+        //     s += unshippedOrders + "\n";
+        // }
+        return s;
+    }
+
+    public String unshippedToString(){
+        String s = "";
+        s += first_name + "\n";
+        s += last_name + "\n";
+        s += address + "\n";
+        s += city + "\n";
+        s += state + "\n";
+        s += zip + "\n";
+        if(shippedOrders.getLength() > 0 || unshippedOrders.getLength() > 0){
+            s += "\n" + first_name + " " + last_name + "'s Order History: \n";
+        }
+        // if(shippedOrders.getLength() > 0){
+        //     s += "\nShipped Orders: \n";
+        //     s += shippedOrders + "\n";
+        // }
+        if(unshippedOrders.getLength() > 0){
+            s += "Unshipped Orders: \n";
+            s += unshippedOrders + "\n";
+        }
+        return s;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -249,20 +272,14 @@ public class Customer extends User{
             return (this.getLogin().equals(temp.getLogin()) && this.passwordMatch(temp.password));
         }
     }
-
-    public void printShippedOrders() {
-    	shippedOrders.placeIterator();
-    	for(int i = 1; i < numOfShippedOrders; i++) {
-    		System.out.println(i + ". " + shippedOrders.getIterator());
-    		shippedOrders.advanceIterator();
-    	}
-    }
     
-    public void printUnshippedOrders() {
-    	unshippedOrders.placeIterator();
-    	for(int i = 1; i < numOfUnshippedOrders; i++) {
-    		System.out.println(i + ". " + unshippedOrders.getIterator());
-    		unshippedOrders.advanceIterator();
-    	}
+    @Override
+    public int hashCode() {
+        String key = login + password;
+        int sum = 0;
+        for (int i = 0; i < key.length(); i++) {
+            sum += (int) key.charAt(i);
+        }
+        return sum;
     }
 }

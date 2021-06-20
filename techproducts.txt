@@ -1,18 +1,102 @@
 iPhone 12
 Apple
-APL123
+A2342
 999.99
 2020
 Smartphone
 Macbook Pro 13
 Apple
-MBJ313
+MC373
 1299.99
 2021
 Laptop
+Macbook Air
+Apple
+MGN63
+999.99
+2020
+Laptop
+AirPods Pro
+Apple
+A2084
+249.99
+2019
+Audio
+AirPods Max
+Apple
+A2096
+549.99
+2020
+Audio
+AirPods
+Apple
+A2032
+159.99
+2017
+Audio
+Apple Watch Series 6
+Apple 
+A2291
+399.99
+2021
+Wearables
+Galaxy Watch
+Samsung
+SM-R500NZDAXAR
+139.99
+2020
+Wearables
+ENVY Desktop
+HP
+TE01-1154
+949.99
+2019
+Desktop
+Galaxy S21 
+Samsung
+SM-G998UZKAXAA
+1199.99
+2021
+Smartphone
 iPad Pro
 Apple
-IP1231
+A2378
 799.99
 2021
 Tablet
+Macbook Pro 16
+Apple
+MVVJ2
+2399.99
+2020
+Laptop
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
+Q60A Series 75" Class TV
+Samsung
+QN75Q60AAFXZA
+1499.99
+2021
+TV
+X950H Series 75" Class Tv
+Sony
+XBR75X950H
+1999.99
+2020
+TV
+Surface 7 Pro
+Microsoft
+QWV-00007
+1329.99
+2021
+Laptop
+iPhone SE
+Apple
+A2275
+399.99
+2020
+Smartphone

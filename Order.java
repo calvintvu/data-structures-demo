@@ -18,7 +18,7 @@ public class Order implements Comparable<Order> {
     	this.priority = priority;
     }
     
-    Order( String date, List<TechProduct> orderContents, int shippingSpeed, int priority) {
+    Order( String date, List<TechProduct> orderContents, int shippingSpeed, long priority) {
         this.date = date;
         this.orderContents = new List<>(orderContents);
         this.shippingSpeed = shippingSpeed;

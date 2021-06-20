@@ -81,6 +81,18 @@ public class TechProduct{
 
 	/** ADDITIONAL OPERATIONS */
 
+    public String toString2() {
+		String result = "";
+		result += deviceName + "\n";
+		result += brand + "\n";
+        result += modelNumber + "\n";
+        result += msrp + "\n";
+        result += yearReleased + "\n";
+        result += productDescription+ "\n";
+        //result += "\n";
+		return result;
+	}
+    
 	@Override
 	public String toString() {
 		String result = "";

@@ -2,6 +2,7 @@
 /**
  * HashTable.java
  */
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class HashTable<T> {
@@ -91,6 +92,19 @@ public class HashTable<T> {
 		return null;
 	}
 
+	public T getWithLinearSearch(T t){
+		for (int i = 0; i < Table.size(); i++) {
+			Table.get(i).placeIterator();
+			while(!Table.get(i).offEnd()) {
+			   if (Table.get(i).getIterator().equals(t)) {
+				  return Table.get(i).getIterator();
+			   }
+			   Table.get(i).advanceIterator();
+			}
+		 }
+		 return null;
+	}
+	
 	/**
 	 * Determines whether a specified key is in the Table
 	 * 
@@ -195,11 +209,7 @@ public class HashTable<T> {
 	 * @param bucket the index in the Table
 	 */
 	public void printBucket(int bucket) {
-//        List<T> L = Table.get(bucket);
-//        L
 		System.out.println("Printing Bucket #" + bucket + ":\n");
-
-//        Table.get(bucket).printNumberedList();
 		System.out.println(Table.get(bucket).toString());
 	}
 
@@ -235,14 +245,30 @@ public class HashTable<T> {
 
 		for (int i = 0; i < this.Table.size(); i++) {
 			result += Table.get(i).toString();
-			if (!(Table.get(i).isEmpty())) {
-				// Only print new line if there is data in the index
-				result += "\n";
-			}
-			// result += "\n";
+//			if (!(Table.get(i).isEmpty())) {
+//				// Only print new line if there is data in the index
+//				result += "\n";
+//			}
+//		// result += "\n";
 		}
 
 		return result;
+	}
+		
+	public void write(PrintStream ps){
+		for (int i = 0; i < this.Table.size(); i++) {
+			if (Table.get(i).getLength() != 0) {
+				Table.get(i).placeIterator();
+				for(int j = 0; j < Table.get(i).getLength(); j++){
+					Customer temp = (Customer) Table.get(i).getIterator();
+					ps.print(temp.fileToString());
+					Table.get(i).advanceIterator();
+				}
+				// Customer temp = (Customer) Table.get(i).getFirst();
+				// ps.print(temp.fileToString());
+				//System.out.println(temp.fileToString());
+			}
+		}
 	}
 
 }
