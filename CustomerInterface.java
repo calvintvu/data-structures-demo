@@ -26,30 +26,6 @@ public class CustomerInterface extends UserInterface {
 	}
 	
 	/**
-	 * Calculates the priority of an Order based on shipping speed and date
-	 * Helper method to placeOrder
-	 * @param shippingSpeed the speed of the Order
-	 * @param date the date the Order was placed
-	 * @return priority the priority of the Order to add
-	 */
-	private long calculatePriority(int shippingSpeed, String date) {
-		long priority = 0;
-		String s1, s2;
-		
-		s1 = String.valueOf(1);
-		s2 = date.replaceAll("\\s", "");
-		s2 = s2.replaceAll("\\D", "");
-		s1 = s1 + s2;
-		
-		System.out.println(s1);
-		System.out.println(s2);
-		
-		priority = Long.parseLong(s1);
-		
-		return priority;
-	}
-	
-	/**
 	 * List all products from the BST
 	 */
 	public void listProducts(BST<TechProduct> name, BST<TechProduct> modelNum) {
@@ -86,9 +62,9 @@ public class CustomerInterface extends UserInterface {
 		if(c.getFirstName().equals("Guest")) {
 			String choice;
 			
-			System.out.println("It seems that we don't have enough information to place an order.");
+			System.out.println("\nIt seems that we don't have enough information to place an order.");
 			System.out.println("Would you like to create a new account?");
-			System.out.print("Enter \'Y\' for Yes or \'N\' for No");
+			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
 			choice = userInput.nextLine();
 			if(choice.equals("N")) {
 				return;

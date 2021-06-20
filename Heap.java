@@ -16,6 +16,13 @@ public class Heap<T extends Comparable<T>> {
 
     /*** CONSTRUCTORS ***/
 
+    public Heap(Comparator<T> comparator) {
+    	heapSize = 0;
+    	heap = new ArrayList<>();
+    	heap.add(null);
+    	this.comparator = comparator;
+    }
+    
     /**
      * Constructor for the Heap class
      * @param data an unordered ArrayList
@@ -51,7 +58,7 @@ public class Heap<T extends Comparable<T>> {
     	if(index < 1 || index > heapSize) {
     		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
     	}
-        return (int) Math.floor(index/2);
+        return index / 2;
     }
 
     /**
@@ -151,7 +158,7 @@ public class Heap<T extends Comparable<T>> {
      */
     public void insert(T key){
         heapSize++;
-        heap.set(heapSize, key);
+        heap.add(key);
         heapIncreaseKey(heapSize, key);
     } 
     
@@ -162,9 +169,16 @@ public class Heap<T extends Comparable<T>> {
      * @param key the data
      */
     private void heapIncreaseKey(int index, T key){
-    	while(index > 1 && heap.get(getParent(index)).compareTo(heap.get(index)) < 0) {
-    		swap(index, getParent(index));
-    		index = getParent(index);
+    	while(index > 1) {
+    		System.out.println(getParent(index));
+    		System.out.println(heap.get(getParent(index)) + "\n");
+    		System.out.println(index);
+    		System.out.println(heap.get(index) + "\n");
+    		System.out.println(heap);
+    		while(heap.get(getParent(index)).compareTo(heap.get(index)) < 0) {
+	    		swap(index, getParent(index));
+	    		index = getParent(index);
+    		}
     	}
     }
     

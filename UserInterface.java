@@ -18,6 +18,7 @@ public class UserInterface {
 	UserInterface() {
 		customers = new HashTable<>(NUM_CUSTOMERS);
 		employees = new HashTable<>(NUM_EMPLOYEES);
+		orders = new Heap<>(new OrderComparator());
 		techProductByName = new BST<>();
 		techProductByModelNum = new BST<>();
 		userInput = new Scanner(System.in);
@@ -43,6 +44,34 @@ public class UserInterface {
 		return customers;
 	}
 	
+	public Heap<Order> getOrders() {
+		return orders;
+	}
+	
+	/**
+	 * Calculates the priority of an Order based on shipping speed and date
+	 * Helper method to placeOrder
+	 * @param shippingSpeed the speed of the Order
+	 * @param date the date the Order was placed
+	 * @return priority the priority of the Order to add
+	 */
+	public long calculatePriority(int shippingSpeed, String date) {
+		long priority = 0;
+		String s1, s2;
+		
+		s1 = String.valueOf(1);
+		s2 = date.replaceAll("\\s", "");
+		s2 = s2.replaceAll("\\D", "");
+		s1 = s1 + s2;
+		
+		System.out.println(s1);
+		System.out.println(s2);
+		
+		priority = Long.parseLong(s1);
+		
+		return priority;
+	}
+	
 	/**
 	 * Creates a new account for the user
 	 * 
@@ -60,7 +89,6 @@ public class UserInterface {
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
-		//add address city state zip
 		System.out.print("Please enter your address: ");
 		address = userInput.nextLine();
 		System.out.print("Please enter your city: ");
@@ -129,7 +157,7 @@ public class UserInterface {
 		}
 		
 		employee = employees.get(employee);
-		System.out.println("Welcome " + employee.getFirstName() + "!");
+		System.out.println("\nWelcome " + employee.getFirstName() + "!");
 		
 		return employee;
 	}
@@ -284,6 +312,7 @@ public class UserInterface {
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
 								unshippedOrders, shippingSpeed, priority);
 						orderunShipped.addLast(unshippedOrder);
+						orders.insert(unshippedOrder);
 						// System.out.println(orderunShipped);
 						// System.out.println("check 1");
 					}
@@ -405,7 +434,7 @@ public class UserInterface {
 		}
 	}
 
-	public void renderEmployeeMenu(Employee e, BST<TechProduct> name, BST<TechProduct> modelNum, HashTable<Customer> c, File pFile, File cFile, UserInterface ui){
+	public void renderEmployeeMenu(Employee e, BST<TechProduct> name, BST<TechProduct> modelNum, HashTable<Customer> c, Heap<Order> o, File pFile, File cFile, UserInterface ui){
 		boolean done = false;
 		EmployeeInterface ei = new EmployeeInterface(e);
 		while(done != true){
@@ -422,9 +451,11 @@ public class UserInterface {
 					break;
 				case "C":
 				case "c":
+					ei.viewOrdersByPriority(orders);
 					break;
 				case "D":
 				case "d":
+					ei.shipOrder(orders, c);
 					break;
 				case "E":
 				case "e":
@@ -502,7 +533,7 @@ public class UserInterface {
 		else if(userType.equalsIgnoreCase("E")) {
 			employee = ui.employeeLogin();
 			if(employee != null) {
-				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable(), productFile, customerFile, ui);
+				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable(), ui.getOrders(), productFile, customerFile, ui);
 			}
 		}
 		

@@ -5,6 +5,7 @@ public class EmployeeInterface extends UserInterface{
 	private Scanner userInput;
 	
 	EmployeeInterface(Employee employee) {
+		userInput = new Scanner(System.in);
 		this.employee = employee;
 	}
 	
@@ -45,6 +46,7 @@ public class EmployeeInterface extends UserInterface{
 		System.out.println("F: Add a Product");
 		System.out.println("G: Remove a Product");
 		System.out.println("H: Quit");
+		System.out.print("\nEnter Your Choice: ");
 	}
 
 	public void displayCustomers(HashTable<Customer> c){
@@ -158,6 +160,7 @@ public class EmployeeInterface extends UserInterface{
 	
 	public void viewOrdersByPriority(Heap<Order> o) {
 		System.out.println("\nHere is the list of orders by priority: ");
+		System.out.println(o);
 		o.sort();
 		System.out.println(o.toString());
 	}

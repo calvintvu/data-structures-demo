@@ -35,7 +35,6 @@ public class Employee extends User{
             return false;
         } else {
             Employee temp = (Employee) o;
-            System.out.println("we made it here");
             return (this.getLogin().equals(temp.getLogin()) && this.passwordMatch(temp.password));
         }
     }

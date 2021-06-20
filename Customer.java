@@ -212,6 +212,8 @@ public class Customer extends User{
         String result = "";
         result += first_name + "\n";
         result += last_name + "\n";
+        result += login + "\n";
+        result += password + "\n";
         result += address + "\n";
         result += city + "\n";
         result += state + "\n";
@@ -224,11 +226,11 @@ public class Customer extends User{
         }
         //result += shippedOrders;
         result += numOfUnshippedOrders + "\n";
-        // unshippedOrders.placeIterator();
-        // for(int i = 0; i < unshippedOrders.getLength(); i++){
-        //     unshippedOrders.getIterator().fileToString();
-        //     unshippedOrders.advanceIterator();
-        // }
+        unshippedOrders.placeIterator();
+        for(int i = 0; i < unshippedOrders.getLength(); i++){
+            result += unshippedOrders.getIterator().fileToString();
+            unshippedOrders.advanceIterator();
+        }
         return result;
 
     }
