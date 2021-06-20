@@ -19,6 +19,10 @@ public class Order {
     	this.priority = priority;
     }
     
+    public int getPriority() {
+    	return priority;
+    }
+    
     public String toString() {
     	String result = "";
     	return result;
@@ -26,4 +30,4 @@ public class Order {
 
 }
 
-// priorityComparator class
+// orderComparator

@@ -5,7 +5,7 @@
 
 import java.util.Comparator;
 import java.util.ArrayList;
-public class Heap<T> {
+public class Heap<T extends Comparable<T>> {
 
     private int heapSize;
     private ArrayList<T> heap;
@@ -42,7 +42,7 @@ public class Heap<T> {
     } 
     
     /** 
-     * helper method to buildHeap, remove, and sort
+     * helper method to buildHeap, poll, and sort
      * bubbles an element down to its proper location within the heap
      * @param index an index in the heap
      */
@@ -73,7 +73,7 @@ public class Heap<T> {
      */
     public void insert(T key){
         heapSize++;
-        
+        heap.set(heapSize, key);
         heapIncreaseKey(heapSize, key);
     } 
     
@@ -84,27 +84,40 @@ public class Heap<T> {
      * @param key the data
      */
     private void heapIncreaseKey(int index, T key){
-        
+    	while(index > 1 && heap.get(getParent(index)).compareTo(heap.get(index)) < 0) {
+    		swap(index, getParent(index));
+    		index = getParent(index);
+    	}
     }
     
     
     /**
-     * removes the element at the specified index
+     * Removes the element at the root of the heap
      * Calls helper method heapify
-     * @param index the index of the element to remove
+     * @return the element removed from the heap
      */
-    public void remove(int index){
-        
+    public T poll(){
+    	if(heapSize == 0) {
+    		return null;
+    	}
+    	T root = heap.get(1);
+    	
+    	swap(1, heapSize);
+    	heap.set(heapSize, null);
+    	heapSize--;
+    	heapify(1);
+    	
+        return root;
     }   
    
     /**Accessors*/
 
     /**
-     * returns the maximum element (highest priority)
+     * returns the root (highest priority)
      * @return the max value
      */
-    public T getMax(){
-        return null;
+    public T peek(){
+        return heap.get(1);
     }
    
     /**
@@ -116,7 +129,10 @@ public class Heap<T> {
      * @throws IndexOutOfBoundsException
      */
     public int getParent(int index) throws IndexOutOfBoundsException {
-        return -1;
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return (int) Math.floor(index/2);
     }
 
     /**
@@ -128,7 +144,10 @@ public class Heap<T> {
      * @throws IndexOutOfBoundsException
      */
     public int get_left(int index) throws IndexOutOfBoundsException {
-        return -1;
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return index * 2;
     }
 
     /**
@@ -140,7 +159,10 @@ public class Heap<T> {
      * @throws IndexOutOfBoundsException
      */
     public int get_right(int index) throws IndexOutOfBoundsException {
-        return -1;
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return index * 2 + 1;
     } 
  
     /**
@@ -158,7 +180,10 @@ public class Heap<T> {
      * @throws IndexOutOfBoundsException
      */
     public T getElement(int index) throws IndexOutOfBoundsException {
-        return null;
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("getElement: index out of bounds");
+    	}
+        return heap.get(index);
     }
 
     /**Additional Operations*/
@@ -194,6 +219,17 @@ public class Heap<T> {
         }
 
         return tempHeap;
+    }
+    
+    /**
+     * Swaps two elements in a heap
+     * @param the first index to be swapped
+     * @param the second index to be swapped
+     */
+    public void swap(int index1, int index2) {
+    	T temp = heap.get(index1);
+    	heap.set(index1, heap.get(index2));
+    	heap.set(index2, temp);
     }
    
 }
