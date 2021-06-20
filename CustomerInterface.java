@@ -22,6 +22,7 @@ public class CustomerInterface extends UserInterface {
 		System.out.println("C: Place an Order");
 		System.out.println("D: View Your Purchases");
 		System.out.println("E: Quit");
+		System.out.print("\nEnter Your Choice: ");
 	}
 	
 	/**
@@ -34,8 +35,10 @@ public class CustomerInterface extends UserInterface {
 		System.out.print("Enter your choice (1 or 2): ");
 		choice = userInput.nextLine();
 		if(choice.equals("1")) {
+			System.out.println();
 			name.inOrderPrint();
 		} else if(choice.equals("2")) {
+			System.out.println();
 			modelNum.inOrderPrint();
 		} else {
 			System.out.println("\nInvalid input.\n");
@@ -129,7 +132,41 @@ public class CustomerInterface extends UserInterface {
 	 * Displays all orders for a Customer
 	 */
 	public void viewOrders() {
-		System.out.println("\nHere is a list of all your orders: \n" + this.customer.toString() );
-		// customer.printOrders();
+		System.out.println("View Which Orders: ");
+		System.out.println("\n1. Shipped Orders\n2. Unshipped Orders\n3. Both\n");
+		System.out.print("Enter your choice (1 or 2 or 3): ");
+		String choice = userInput.nextLine();
+
+		switch(choice){
+			case "1":
+				if((this.customer.getShippedOrders().getLength() == 0)){
+					System.out.println("\nYou currently do not have any shipped orders!");
+					return;
+				}
+				else{
+				System.out.println("\nHere is a list of all your shipped orders: \n" + this.customer.shippedToString());
+				}
+				break;
+			case "2":
+				if((this.customer.getUnshippedOrders().getLength() == 0)){
+					System.out.println("\nYou currently do not have any unshipped orders!");
+					return;
+				}
+				else{
+					System.out.println("\nHere is a list of all your unshipped orders: \n" + this.customer.unshippedToString());
+				}
+				break;
+			case "3":
+				if((this.customer.getShippedOrders().getLength() == 0) && (this.customer.getUnshippedOrders().getLength() == 0)){
+					System.out.println("\nYou currently do not have any shipped or unshipped orders!");
+					return;
+				}else{
+					System.out.println("\nHere is a list of all your orders: \n" + this.customer.toString());
+				}
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				break;
+		}
 	}
 }

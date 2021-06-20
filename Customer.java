@@ -35,6 +35,8 @@ public class Customer extends User{
         this.zip = "";
         this.shippedOrders = new List<>();
         this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
      }
 
     public Customer(String firstname, String lastname){
@@ -48,6 +50,8 @@ public class Customer extends User{
         this.zip = "";
         this.shippedOrders = new List<>();
         this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
     }
 
     public Customer(String first_name, String last_name, String login, String password) {
@@ -59,6 +63,10 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
     }
 
     public Customer(String first_name, String last_name, String login, String password, String addy, String city, String state, String zip) {
@@ -72,6 +80,8 @@ public class Customer extends User{
         this.zip = zip;
         this.shippedOrders = new List<>();
         this.unshippedOrders = new List<>();
+        this.numOfShippedOrders = 0;
+        this.numOfUnshippedOrders = 0;
     }
 
     public Customer(String first_name, String last_name, String login, String password, String address,
@@ -234,6 +244,50 @@ public class Customer extends User{
         }
         return result;
 
+    }
+
+    public String shippedToString(){
+        String s = "";
+        s += first_name + "\n";
+        s += last_name + "\n";
+        s += address + "\n";
+        s += city + "\n";
+        s += state + "\n";
+        s += zip + "\n";
+        if(shippedOrders.getLength() > 0 || unshippedOrders.getLength() > 0){
+            s += "\n" + first_name + " " + last_name + "'s Order History: \n";
+        }
+        if(shippedOrders.getLength() > 0){
+            s += "\nShipped Orders: \n";
+            s += shippedOrders + "\n";
+        }
+        // if(unshippedOrders.getLength() > 0){
+        //     s += "Unshipped Orders: \n";
+        //     s += unshippedOrders + "\n";
+        // }
+        return s;
+    }
+
+    public String unshippedToString(){
+        String s = "";
+        s += first_name + "\n";
+        s += last_name + "\n";
+        s += address + "\n";
+        s += city + "\n";
+        s += state + "\n";
+        s += zip + "\n";
+        if(shippedOrders.getLength() > 0 || unshippedOrders.getLength() > 0){
+            s += "\n" + first_name + " " + last_name + "'s Order History: \n";
+        }
+        // if(shippedOrders.getLength() > 0){
+        //     s += "\nShipped Orders: \n";
+        //     s += shippedOrders + "\n";
+        // }
+        if(unshippedOrders.getLength() > 0){
+            s += "Unshipped Orders: \n";
+            s += unshippedOrders + "\n";
+        }
+        return s;
     }
 
     @Override
