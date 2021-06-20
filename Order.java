@@ -48,6 +48,7 @@ public String toString() {
     result += "Number of Items: " + orderContents.getLength() + "\n";
     orderContents.placeIterator();
     for(int i = 0; i < orderContents.getLength(); i++){
+        result += i+1 + ". ";
         result += orderContents.getIterator().getDeviceName() + "\n";
         orderContents.advanceIterator();
     }

@@ -27,16 +27,16 @@ public class CustomerInterface extends UserInterface {
 	/**
 	 * List all products from the BST
 	 */
-	public void listProducts() {
+	public void listProducts(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		String choice;
 		System.out.println("\nList Products By: ");
 		System.out.println("\n1. Name\n2. Model Number\n");
 		System.out.print("Enter your choice (1 or 2): ");
 		choice = userInput.nextLine();
 		if(choice.equals("1")) {
-			techProductByName.inOrderPrint();
+			name.inOrderPrint();
 		} else if(choice.equals("2")) {
-			techProductByModelNum.inOrderPrint();
+			modelNum.inOrderPrint();
 		} else {
 			System.out.println("\nInvalid input.\n");
 		}
@@ -88,9 +88,11 @@ public class CustomerInterface extends UserInterface {
 	/**
 	 * Searches a product from BST
 	 */
-	public void searchProduct() {
+	public void searchProduct(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		String choice;
 		TechProduct product = null;
+
+		//techProductByName.preOrderPrint();
 		
 		System.out.println("Search Product By: ");
 		System.out.println("\n1. Name\n2. Model Number\n");
@@ -100,12 +102,12 @@ public class CustomerInterface extends UserInterface {
 			System.out.print("Please enter the name of the product: ");
 			choice = userInput.nextLine();
 			product = new TechProduct(choice);
-			product = techProductByName.search(product, new NameComparator());
+			product = name.search(product, new NameComparator());
 		} else if(choice.equals("2")) {
 			System.out.print("Please enter the model number of the product: ");
 			choice = userInput.nextLine();
 			product = new TechProduct("", choice);
-			product = techProductByModelNum.search(product, new modelNumComparator());
+			product = modelNum.search(product, new modelNumComparator());
 		} else {
 			System.out.println("\nInvalid input.\n");
 			return;
@@ -127,7 +129,7 @@ public class CustomerInterface extends UserInterface {
 	 * Displays all orders for a Customer
 	 */
 	public void viewOrders() {
-		System.out.println("\nHere is a list of all your orders: \n");
+		System.out.println("\nHere is a list of all your orders: \n" + this.customer.toString() );
 		// customer.printOrders();
 	}
 }

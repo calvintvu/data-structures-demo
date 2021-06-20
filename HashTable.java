@@ -38,6 +38,12 @@ public class HashTable<T> {
 		return code % Table.size();
 	}
 
+	private int hashName(T t) {
+		Customer temp = (Customer) t;
+		int code = temp.hashCodeName();
+		return code % Table.size();
+	}
+
 	/**
 	 * counts the number of elements at this index
 	 * 
@@ -89,6 +95,20 @@ public class HashTable<T> {
 		}
 		return null;
 	}
+
+	public T getWithLinearSearch(T t){
+		for (int i = 0; i < Table.size(); i++) {
+			Table.get(i).placeIterator();
+			while(!Table.get(i).offEnd()) {
+			   if (Table.get(i).getIterator().equals(t)) {
+				  return Table.get(i).getIterator();
+			   }
+			   Table.get(i).advanceIterator();
+			}
+		 }
+		 return null;
+	}
+
 
 	/**
 	 * Determines whether a specified key is in the Table

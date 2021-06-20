@@ -204,6 +204,7 @@ public class BST<T> {
 	 */
 	public T search(T data, Comparator<T> c) {
 		if (root == null) {
+			//System.out.println(this.root.data);
 			return null;
 		} else {
 			return search(data, root, c);
@@ -225,11 +226,13 @@ public class BST<T> {
 		// else if(((Comparable<T>) data).compareTo(node.data) < 0) {
 		else if (c.compare(data, node.data) < 0) {
 			if (node.left == null) {
+				//System.out.println(node.data);
 				return null;
 			}
 			return search(data, node.left, c);
 		} else {
 			if (node.right == null) {
+				//System.out.println(node.data);
 				return null;
 			}
 			return search(data, node.right, c);
@@ -353,7 +356,7 @@ public class BST<T> {
 		if (node == null) {
 			return;
 		} else {
-			System.out.print(node.data + " ");
+			System.out.print(node.data);
 			preOrderPrint(node.left);
 			preOrderPrint(node.right);
 		}
@@ -399,7 +402,7 @@ public class BST<T> {
 		} else {
 			postOrderPrint(node.left);
 			postOrderPrint(node.right);
-			System.out.print(node.data + " ");
+			System.out.print(node.data);
 		}
 	}
 }

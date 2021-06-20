@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class TechProduct extends BST<TechProduct>{
+public class TechProduct {
     private String deviceName; //primary key
     private String brand; 
     private String modelNumber; //secondary key

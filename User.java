@@ -32,7 +32,7 @@ abstract class User{
     }
     
     boolean passwordMatch(String n) {
-    	return this.password == n;
+    	return this.password.equals(n);
     }
 
     @Override

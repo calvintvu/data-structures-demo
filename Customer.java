@@ -24,7 +24,7 @@ public class Customer extends User{
     //     this.password = password;
     // }
 
-    public Customer(){
+    public Customer() {
         this.first_name = "";
         this.last_name = "";
         this.login = "";
@@ -33,7 +33,9 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
-    }
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
+     }
 
     public Customer(String firstname, String lastname){
         this.first_name = firstname;
@@ -44,6 +46,8 @@ public class Customer extends User{
         this.city = "";
         this.state = "";
         this.zip = "";
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
     }
 
     public Customer(String first_name, String last_name, String login, String password) {
@@ -66,6 +70,8 @@ public class Customer extends User{
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.shippedOrders = new List<>();
+        this.unshippedOrders = new List<>();
     }
 
     public Customer(String first_name, String last_name, String login, String password, String address,
@@ -78,8 +84,9 @@ public class Customer extends User{
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.unshippedOrders = unshipped;
-        this.shippedOrders = shipped;
+        this.unshippedOrders = new List<Order>(unshipped);
+        this.shippedOrders = new List<Order>(shipped);;
+
         this.numOfShippedOrders = shippedNum;
         this.numOfUnshippedOrders = unshippedNum;
     }
@@ -206,6 +213,8 @@ public class Customer extends User{
         String result = "";
         result += first_name + "\n";
         result += last_name + "\n";
+        result += login + "\n";
+        result += password + "\n";
         result += address + "\n";
         result += city + "\n";
         result += state + "\n";
@@ -218,11 +227,11 @@ public class Customer extends User{
         }
         //result += shippedOrders;
         result += numOfUnshippedOrders + "\n";
-        // unshippedOrders.placeIterator();
-        // for(int i = 0; i < unshippedOrders.getLength(); i++){
-        //     unshippedOrders.getIterator().fileToString();
-        //     unshippedOrders.advanceIterator();
-        // }
+        unshippedOrders.placeIterator();
+        for(int i = 0; i < unshippedOrders.getLength(); i++){
+            result += unshippedOrders.getIterator().fileToString();
+            unshippedOrders.advanceIterator();
+        }
         return result;
 
     }
@@ -235,13 +244,22 @@ public class Customer extends User{
             return false;
         } else {
             Customer temp = (Customer) o;
-            return (this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name));
+            return ((this.login.equals(temp.login) && this.password.equals(temp.password)) || (this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name)));
         }
     }
 
     @Override
     public int hashCode() {
         String key = login + password;
+        int sum = 0;
+        for (int i = 0; i < key.length(); i++) {
+            sum += (int) key.charAt(i);
+        }
+        return sum;
+    }
+
+    public int hashCodeName() {
+        String key = first_name + last_name;
         int sum = 0;
         for (int i = 0; i < key.length(); i++) {
             sum += (int) key.charAt(i);

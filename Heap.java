@@ -5,14 +5,14 @@
 
 import java.util.Comparator;
 import java.util.ArrayList;
-public class Heap<T> {
+public class Heap<T extends Comparable<T>> {
 
     private int heapSize;
     private ArrayList<T> heap;
     private Comparator<T> comparator;
 
 
-    /**Constructors/
+    /*** CONSTRUCTORS ***/
 
     /**
      * Constructor for the Heap class
@@ -27,7 +27,83 @@ public class Heap<T> {
         buildHeap();
     }
     
-    /**Mutators*/
+    /*** ACCESSORS ***/
+
+    /**
+     * returns the root (highest priority)
+     * @return the max value
+     */
+    public T peek(){
+        return heap.get(1);
+    }
+   
+    /**
+     * returns the location (index) of the 
+     * parent of the element stored at index
+     * @param index the current index
+     * @return the index of the parent
+     * @precondition 0 < i <= heap_size
+     * @throws IndexOutOfBoundsException
+     */
+    public int getParent(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return (int) Math.floor(index/2);
+    }
+
+    /**
+     * returns the location (index) of the 
+     * left child of the element stored at index
+     * @param index the current index
+     * @return the index of the left child
+     * @precondition 0 < i <= heap_size
+     * @throws IndexOutOfBoundsException
+     */
+    public int get_left(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return index * 2;
+    }
+
+    /**
+     * returns the location (index) of the 
+     * right child of the element stored at index
+     * @param index the current index
+     * @return the index of the right child
+     * @precondition 0 < i <= heap_size
+     * @throws IndexOutOfBoundsException
+     */
+    public int get_right(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	}
+        return index * 2 + 1;
+    } 
+ 
+    /**
+     * returns the heap size (current number of elements)
+     * @return the size of the heap
+     */
+    public int getHeapSize() {
+        return heapSize;
+    }
+
+    /**
+     * 
+     * @param index
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
+    public T getElement(int index) throws IndexOutOfBoundsException {
+    	if(index < 1 || index > heapSize) {
+    		throw new IndexOutOfBoundsException("getElement: index out of bounds");
+    	}
+        return heap.get(index);
+    }
+    
+    /*** MUTATORS ***/
 
     /**
      * Converts an ArrayList into a valid
@@ -42,7 +118,7 @@ public class Heap<T> {
     } 
     
     /** 
-     * helper method to buildHeap, remove, and sort
+     * helper method to buildHeap, poll, and sort
      * bubbles an element down to its proper location within the heap
      * @param index an index in the heap
      */
@@ -73,6 +149,7 @@ public class Heap<T> {
      */
     public void insert(T key){
         heapSize++;
+        heap.set(heapSize, key);
         heapIncreaseKey(heapSize, key);
     } 
     
@@ -83,84 +160,33 @@ public class Heap<T> {
      * @param key the data
      */
     private void heapIncreaseKey(int index, T key){
-        
+    	while(index > 1 && heap.get(getParent(index)).compareTo(heap.get(index)) < 0) {
+    		swap(index, getParent(index));
+    		index = getParent(index);
+    	}
     }
     
     
     /**
-     * removes the element at the specified index
+     * Removes the element at the root of the heap
      * Calls helper method heapify
-     * @param index the index of the element to remove
+     * @return the element removed from the heap
      */
-    public void remove(int index){
-        
+    public T poll(){
+    	if(heapSize == 0) {
+    		return null;
+    	}
+    	T root = heap.get(1);
+    	
+    	swap(1, heapSize);
+    	heap.set(heapSize, null);
+    	heapSize--;
+    	heapify(1);
+    	
+        return root;
     }   
-   
-    /**Accessors*/
 
-    /**
-     * returns the maximum element (highest priority)
-     * @return the max value
-     */
-    public T getMax(){
-        return null;
-    }
-   
-    /**
-     * returns the location (index) of the 
-     * parent of the element stored at index
-     * @param index the current index
-     * @return the index of the parent
-     * @precondition 0 < i <= heap_size
-     * @throws IndexOutOfBoundsException
-     */
-    public int getParent(int index) throws IndexOutOfBoundsException {
-        return -1;
-    }
-
-    /**
-     * returns the location (index) of the 
-     * left child of the element stored at index
-     * @param index the current index
-     * @return the index of the left child
-     * @precondition 0 < i <= heap_size
-     * @throws IndexOutOfBoundsException
-     */
-    public int get_left(int index) throws IndexOutOfBoundsException {
-        return -1;
-    }
-
-    /**
-     * returns the location (index) of the 
-     * right child of the element stored at index
-     * @param index the current index
-     * @return the index of the right child
-     * @precondition 0 < i <= heap_size
-     * @throws IndexOutOfBoundsException
-     */
-    public int get_right(int index) throws IndexOutOfBoundsException {
-        return -1;
-    } 
- 
-    /**
-     * returns the heap size (current number of elements)
-     * @return the size of the heap
-     */
-    public int getHeapSize() {
-        return heapSize;
-    }
-
-    /**
-     * 
-     * @param index
-     * @return
-     * @throws IndexOutOfBoundsException
-     */
-    public T getElement(int index) throws IndexOutOfBoundsException {
-        return null;
-    }
-
-    /**Additional Operations*/
+    /** ADDITIONAL OPERATIONS */
 
     /**
      * Creates a String of all elements in the heap
@@ -193,6 +219,17 @@ public class Heap<T> {
         }
 
         return tempHeap;
+    }
+    
+    /**
+     * Swaps two elements in a heap
+     * @param the first index to be swapped
+     * @param the second index to be swapped
+     */
+    public void swap(int index1, int index2) {
+    	T temp = heap.get(index1);
+    	heap.set(index1, heap.get(index2));
+    	heap.set(index2, temp);
     }
    
 }

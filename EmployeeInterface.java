@@ -5,6 +5,7 @@ public class EmployeeInterface extends UserInterface{
 	private Scanner userInput;
 	
 	EmployeeInterface(Employee employee) {
+		userInput = new Scanner(System.in);
 		this.employee = employee;
 	}
 	
@@ -24,22 +25,47 @@ public class EmployeeInterface extends UserInterface{
 		System.out.println("H: Quit");
 	}
 
-	public void searchCustomer(String first, String last){
-		Customer search = customers.get(new Customer(first, last));
-		System.out.println("Here is the customer you searched for: ");
+	public void searchCustomer(HashTable<Customer> c){
+		System.out.println("Enter First Name of Customer to search for: ");
+		String fn = userInput.nextLine();
+		System.out.println("Enter Last Name of Customer to search for: ");
+		String ln = userInput.nextLine();
+		Customer search = c.getWithLinearSearch(new Customer(fn, ln));
 		System.out.println(search);
+		if(search != null){
+			System.out.println("Here is the customer you searched for: ");
+			System.out.println(search);
+		}
+		else{
+			System.out.println("We have not found this customer.");
+		}
 	}
 
-	public void displayCustomers(){
-		System.out.println(customers);
+	public void displayCustomers(HashTable<Customer> c){
+		System.out.println(c);
 	}
 
-	public void listProductsByName(){
-		techProductByName.inOrderPrint();
-	}
+	// public void listProductsByName(){
+	// 	techProductByName.inOrderPrint();
+	// }
 
-	public void listProductsByModelNum(){
-		techProductByModelNum.inOrderPrint();
+	// public void listProductsByModelNum(){
+	// 	techProductByModelNum.inOrderPrint();
+	// }
+
+	public void listProducts() {
+		String choice;
+		System.out.println("\nList Products By: ");
+		System.out.println("\n1. Name\n2. Model Number\n");
+		System.out.print("Enter your choice (1 or 2): ");
+		choice = userInput.nextLine();
+		if(choice.equals("1")) {
+			techProductByName.inOrderPrint();
+		} else if(choice.equals("2")) {
+			techProductByModelNum.inOrderPrint();
+		} else {
+			System.out.println("\nInvalid input.\n");
+		}
 	}
 
 	public void addProduct(String productName){

@@ -32,8 +32,12 @@ public class UserInterface {
 		return this.userInput;
 	}
 
-	public BST<TechProduct> getProductBST() {
+	public BST<TechProduct> getProductBST_Name() {
 		return techProductByName;
+	}
+
+	public BST<TechProduct> getProductBST_ModelNum() {
+		return techProductByModelNum;
 	}
 
 	public HashTable<Customer> getCustomerTable(){
@@ -138,7 +142,7 @@ public class UserInterface {
 		login = userInput.nextLine();
 		System.out.print("Please enter your password: ");
 		password = userInput.nextLine();
-		Customer customer = new Customer(login, password);
+		Customer customer = new Customer("", "", login, password);
 
 		if (!customers.contains(customer)) {
 			System.out.println("\nIt seems that we can't find your account... ");
@@ -280,7 +284,6 @@ public class UserInterface {
 						// System.out.println(orderunShipped);
 						// System.out.println("check 1");
 					}
-					// TODO make insert work when there are 0 orders
 					// System.out.println(unshippedOrders);
 				}
 
@@ -301,8 +304,9 @@ public class UserInterface {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(customers);
+		//System.out.println(customers);
 		// System.out.println(customers.toString());
+		//customers.printTable();
 	}
 
 	/**
@@ -357,9 +361,93 @@ public class UserInterface {
 			System.out.println(e.getMessage());
 		}
 
-		// techProductByModelNum.inOrderPrint();
-		// //techProductByName.inOrderPrint();
+		//techProductByModelNum.inOrderPrint();
+		//techProductByName.preOrderPrint();
+		//System.out.println(techProductByName.getRoot());
 		// System.out.println(techProductByName.getSize());
+	}
+
+	public void renderCustomerMenu(Customer customer, BST<TechProduct> name, BST<TechProduct> modelNum){
+		boolean done = false;
+		CustomerInterface ci = new CustomerInterface(customer);
+		while(done != true){
+			ci.customerPrompt();
+			String userChoice = userInput.nextLine();
+			switch(userChoice){
+				case "A":
+				case "a":
+					ci.searchProduct(name, modelNum);
+					break;
+				case "B":
+				case "b":
+					ci.listProducts(name, modelNum);
+					break;
+				case "C":
+				case "c":
+					ci.placeOrder();
+					break;
+				case "D":
+				case "d":
+					ci.viewOrders();
+					break;
+				case "E":
+				case "e":
+					//quit method
+					done = true;
+					break;
+				default:
+				System.out.println("Invalid Choice");
+					break;
+	
+			}
+		}
+	}
+
+	public void renderEmployeeMenu(Employee e, BST<TechProduct> name, BST<TechProduct> modelNum, HashTable<Customer> c){
+		boolean done = false;
+		EmployeeInterface ei = new EmployeeInterface(e);
+		while(done != true){
+			ei.employeePrompt();
+			String userChoice = userInput.nextLine();
+			switch(userChoice){
+				case "A":
+				case "a":
+					ei.searchCustomer(c);
+					break;
+				case "B":
+				case "b":
+					ei.displayCustomers(c);
+					break;
+				case "C":
+				case "c":
+					break;
+				case "D":
+				case "d":
+					break;
+				case "E":
+				case "e":
+					break;
+				case "F":
+				case "f":
+					break;
+				case "G":
+				case "g":
+					break;
+				case "H":
+				case "h":
+					//quit
+					done = true;
+					break;
+				default:
+				System.out.println("Invalid Choice");
+					break;
+	
+			}
+		}
+	}
+
+	public void quit(){
+
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -386,16 +474,14 @@ public class UserInterface {
 		FileOutputStream file = new FileOutputStream(productFile);
 		// Creates a PrintStream
 		PrintStream output = new PrintStream(file);
-		ui.getProductBST().write(output);
+		ui.getProductBST_Name().write(output);
 
 		// Creates a FileOutputStream
-		FileOutputStream file1 = new FileOutputStream("customertest.txt");
+		FileOutputStream file1 = new FileOutputStream(customerFile);
 		// Creates a PrintStream
 		PrintStream output1 = new PrintStream(file1);
 		ui.getCustomerTable().write(output1);
 
-
-		
 		System.out.println("Are you a customer or employee?");
 		System.out.print("Enter \'C\' for Customer or \'E\' for Employee: ");
 		userType = ui.getUserInput().nextLine();
@@ -403,12 +489,14 @@ public class UserInterface {
 		if(userType.equalsIgnoreCase("C")) {
 			customer = ui.customerLogin();
 			if(customer != null) {
-				// CustomerInteface ci = new CustomerInterface(customer);
+				//CustomerInteface ci = new CustomerInterface(customer);
+				ui.renderCustomerMenu(customer, ui.getProductBST_Name(), ui.getProductBST_ModelNum());
 			}
 		}
 		else if(userType.equalsIgnoreCase("E")) {
 			employee = ui.employeeLogin();
 			if(employee != null) {
+				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable());
 				// EmployeeInterface ei = new EmployeeInterface(employee);
 			}
 		}
