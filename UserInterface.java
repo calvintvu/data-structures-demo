@@ -11,6 +11,7 @@ public class UserInterface {
 	final int NUM_CUSTOMERS = 12;
 	protected HashTable<Customer> customers;
 	protected HashTable<Employee> employees;
+    protected Heap<Order> orders;
 	protected BST<TechProduct> techProductByName;
 	protected BST<TechProduct> techProductByModelNum;
 	private Scanner userInput;
@@ -29,6 +30,14 @@ public class UserInterface {
 	
 	public Scanner getUserInput() {
 		return this.userInput;
+	}
+	
+	public BST<TechProduct> getProductBST() {
+		return techProductByName;
+	}
+
+	public HashTable<Customer> getCustomerTable(){
+		return customers;
 	}
 	
 	/**
@@ -173,6 +182,10 @@ public class UserInterface {
 			Scanner fileInput = new Scanner(file);
 			while (fileInput.hasNextLine()) {
 				firstName = fileInput.nextLine();
+				if(firstName.equals("")){
+					fileInput.close();
+					return;
+				}
 				lastName = fileInput.nextLine();
 				login = fileInput.nextLine();
 				password = fileInput.nextLine();
@@ -180,8 +193,104 @@ public class UserInterface {
 				city = fileInput.nextLine();
 				state = fileInput.nextLine();
 				zip = fileInput.nextLine();
-				// TODO: add loop to read in orders
-				// customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip));
+				// System.out.println(new Customer(firstName, lastName, login, password,
+				// address, city, state, zip));
+				int numShipped = Integer.parseInt(fileInput.nextLine());
+				List<TechProduct> shippedProductsInOrder = new List<>();
+				List<Order> orderShipped = new List<>();
+				// System.out.println(numShipped);
+
+				if (numShipped == 0) {
+					numShipped = 0;
+					orderShipped = new List<>();
+					shippedProductsInOrder = new List<>();
+				}
+
+				if (numShipped > 0) {
+					// int numOfItems = fileInput.nextInt();
+					for (int i = 0; i < numShipped; i++) {
+
+						int numOfItems = Integer.parseInt(fileInput.nextLine());
+						// fileInput.nextLine();
+						for (int j = 0; j < numOfItems; j++) {
+							String deviceName = fileInput.nextLine();
+							String brand = fileInput.nextLine();
+							String modelNum = fileInput.nextLine();
+							double msrp = Double.parseDouble(fileInput.nextLine());
+							int year = Integer.parseInt(fileInput.nextLine());
+							String desc = fileInput.nextLine();
+							TechProduct orderedProduct = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
+							shippedProductsInOrder.addLast(orderedProduct);
+						}
+						// System.out.println(shippedProductsInOrder);
+						String date = fileInput.nextLine();
+						// fileInput.nextLine();
+						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
+						int priority = Integer.parseInt(fileInput.nextLine());
+						Order shippedOrder = new Order(
+								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
+								shippedProductsInOrder, shippingSpeed, priority);
+						orderShipped.addLast(shippedOrder);
+						shippedProductsInOrder = new List<>();
+						// System.out.println(shippedOrder);
+					}
+
+				}
+
+				int numUnshipped = Integer.parseInt(fileInput.nextLine());
+
+				List<TechProduct> unshippedOrders = new List<>();
+				List<Order> orderunShipped = new List<>();
+
+				if (numUnshipped == 0) {
+					numUnshipped = 0;
+					orderunShipped = new List<>();
+					unshippedOrders = new List<>();
+				}
+
+				if (numUnshipped > 0) {
+					// int numOfItems = fileInput.nextInt();
+					for (int i = 0; i < numUnshipped; i++) {
+						int numOfItems = Integer.parseInt(fileInput.nextLine());
+						// fileInput.nextLine();
+						// System.out.println(numOfItems);
+						for (int j = 0; j < numOfItems; j++) {
+							String deviceName = fileInput.nextLine();
+							String brand = fileInput.nextLine();
+							String modelNum = fileInput.nextLine();
+							double msrp = Double.parseDouble(fileInput.nextLine());
+							int year = Integer.parseInt(fileInput.nextLine());
+							String desc = fileInput.nextLine();
+							TechProduct orderedProduct = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
+							unshippedOrders.addLast(orderedProduct);
+							// System.out.println(orderedProduct);
+							// System.out.println(unshippedOrders);
+						}
+						String date = fileInput.nextLine();
+						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
+						int priority = Integer.parseInt(fileInput.nextLine());
+						Order unshippedOrder = new Order(
+								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
+								unshippedOrders, shippingSpeed, priority);
+						orderunShipped.addLast(unshippedOrder);
+						// System.out.println(orderunShipped);
+						// System.out.println("check 1");
+					}
+					// TODO make insert work when there are 0 orders
+					// System.out.println(unshippedOrders);
+				}
+
+				// else{
+				// orderunShipped = new List<Order>();
+				// numUnshipped = 0;
+				// }
+				// System.out.println("check 2");
+				customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip,
+						orderShipped, orderunShipped, numShipped, numUnshipped));
+				// System.out.println("check");
+				// System.out.println(new Customer(firstName, lastName, login, password,
+				// address, city, state, zip, orderShipped, orderunShipped, numShipped,
+				// numUnshipped));
 			}
 			fileInput.close();
 		} catch (IOException e) {

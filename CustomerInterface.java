@@ -25,6 +25,30 @@ public class CustomerInterface extends UserInterface {
 	}
 	
 	/**
+	 * Calculates the priority of an Order based on shipping speed and date
+	 * Helper method to placeOrder
+	 * @param shippingSpeed the speed of the Order
+	 * @param date the date the Order was placed
+	 * @return priority the priority of the Order to add
+	 */
+	private long calculatePriority(int shippingSpeed, String date) {
+		long priority = 0;
+		String s1, s2;
+		
+		s1 = String.valueOf(1);
+		s2 = date.replaceAll("\\s", "");
+		s2 = s2.replaceAll("\\D", "");
+		s1 = s1 + s2;
+		
+		System.out.println(s1);
+		System.out.println(s2);
+		
+		priority = Long.parseLong(s1);
+		
+		return priority;
+	}
+	
+	/**
 	 * List all products from the BST
 	 */
 	public void listProducts() {
@@ -47,9 +71,15 @@ public class CustomerInterface extends UserInterface {
 	 * Adds order to Heap
 	 */
 	public void placeOrder() {
-		String productName, shippingSpeed, anotherProduct = "N";
-		TechProduct product;
+		DateTimeFormatter formatter;
+		int shippingSpeed;
+		LocalDateTime dateTime;
+		long priority;
 		List<TechProduct> productList = new List<>();
+		String productName, anotherProduct = "N";
+		String date;
+		TechProduct product;
+		
 		do {
 			System.out.println("\nHere is a list of products: \n");
 			techProductByName.inOrderPrint();
@@ -67,22 +97,23 @@ public class CustomerInterface extends UserInterface {
 			System.out.println("\nWhat shipping speed would you like?");
 			System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
 			System.out.print("Enter your choice (1, 2, or 3): ");
-			shippingSpeed = userInput.nextLine();
+			shippingSpeed = Integer.parseInt(userInput.nextLine());
 			
 			System.out.println("Would you like to add another product?");
 			System.out.print("Enter \'Y\' for Yes or \'N\' for No");
 			anotherProduct = userInput.nextLine();
 		} while (anotherProduct.equals("Y"));
 		
-		LocalDateTime dateTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		String date = formatter.format(dateTime);
+		dateTime = LocalDateTime.now();
+		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		date = formatter.format(dateTime);
+		priority = calculatePriority(shippingSpeed, date);
 		
-		// TODO: determine priority from date, time, and shipping speed
-		
-		// TODO: this constructor may change, confirm with team partner
-		Order order = new Order(customer, date, productList, 0, 0);
+		Order order = new Order(customer, date, productList, shippingSpeed, priority);
 		customer.addOrder(order);
+		
+		// TODO: if the customer is a guest, they have to create an account first
+		// before making a purchase
 	}
 	
 	/**
