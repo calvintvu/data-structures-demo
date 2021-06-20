@@ -138,8 +138,12 @@ public class Customer extends User{
         this.numOfUnshippedOrders =  this.numOfUnshippedOrders--;
     }
     
-    public void addOrder(Order order) {
+    public void addUnshippedOrder(Order order) {
     	unshippedOrders.addLast(order);
+    }
+    
+    public void addShippedOrder(Order order) {
+    	shippedOrders.addLast(order);
     }
     
     public void setAddress(String address) {
@@ -164,6 +168,18 @@ public class Customer extends User{
 
     public void setNumUnShippedOrders(int x){
         this.numOfUnshippedOrders = x;
+    }
+    
+    public boolean removeOrder(Order order) {
+    	boolean success = false;
+    	int found = unshippedOrders.linearSearch(order);
+    	if(found != -1) {
+    		unshippedOrders.placeIterator();
+    		unshippedOrders.iteratorToIndex(found);
+    		unshippedOrders.removeIterator();
+    		success = true;
+    	}
+    	return success;
     }
 
     /** ADDITIONAL OPERATIONS */

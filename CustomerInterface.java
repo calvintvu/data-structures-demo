@@ -73,7 +73,7 @@ public class CustomerInterface extends UserInterface {
 	 * Adds an order to List of orders for Customer
 	 * Adds order to Heap
 	 */
-	public void placeOrder() {
+	public void placeOrder(BST<TechProduct> name, Customer c) {
 		DateTimeFormatter formatter;
 		int shippingSpeed;
 		LocalDateTime dateTime;
@@ -83,14 +83,27 @@ public class CustomerInterface extends UserInterface {
 		String date;
 		TechProduct product;
 		
+		if(c.getFirstName().equals("Guest")) {
+			String choice;
+			
+			System.out.println("It seems that we don't have enough information to place an order.");
+			System.out.println("Would you like to create a new account?");
+			System.out.print("Enter \'Y\' for Yes or \'N\' for No");
+			choice = userInput.nextLine();
+			if(choice.equals("N")) {
+				return;
+			}
+			super.createCustomerAccount();
+		}
+		
 		do {
 			System.out.println("\nHere is a list of products: \n");
-			techProductByName.inOrderPrint();
+			name.inOrderPrint();
 			System.out.print("Please enter the name of the product to purchase: ");
 			productName = userInput.nextLine();
 			
 			product = new TechProduct(productName);
-			product = techProductByName.search(product, new NameComparator());
+			product = name.search(product, new NameComparator());
 			if(product == null) { 
 				System.out.println("\nInvalid product name.\n");
 				return;
@@ -113,10 +126,7 @@ public class CustomerInterface extends UserInterface {
 		priority = calculatePriority(shippingSpeed, date);
 		
 		Order order = new Order(customer, date, productList, shippingSpeed, priority);
-		customer.addOrder(order);
-		
-		// TODO: if the customer is a guest, they have to create an account first
-		// before making a purchase
+		c.addUnshippedOrder(order);
 	}
 	
 	/**

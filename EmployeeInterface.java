@@ -113,14 +113,53 @@ public class EmployeeInterface extends UserInterface{
 		this.userInput = userInput;
 	}
 	
-	public void shipOrder() {
+	public void shipOrder(Heap<Order> o, HashTable<Customer> c) {
+		Customer customer;
+		Order order;
+		boolean orderRemoved;
+		
+		// if there are no orders to ship, tell the employee
+		if(o.getHeapSize() == 0) {
+			System.out.println("There are no orders to ship.");
+			return;
+		}
+		
 		// display the order that is about to be shipped to let the employee know
-		// remove the order from the heap and from the respective customer's unshippedOrders list
-		// end with a "success" message or something
+		// remove order from heap
+		System.out.println("\nHere is your order to be shipped: \n");
+		order = o.poll();
+		System.out.println(order);
+
+		// remove the order the customer's unshippedOrders list
+		customer = order.getCustomer();
+		if(customer == null) {
+			System.out.println("\nError: \nThe order has no assigned customer.");
+			System.out.println("The order will not be shipped.\n");
+			return;
+		}
+		customer = c.get(customer);
+		if(customer == null) {
+			System.out.println("\nError: \nWe couldn't find the customer assigned to this order.");
+			System.out.println("The order will not be shipped.\n");
+			return;
+		}
+		orderRemoved = customer.removeOrder(order);
+		if(!orderRemoved) {
+			System.out.println("\nError: \nThe order could not be removed from the customer's list.");
+			System.out.println("The order will not be shipped.\n");
+			return;
+		}
+		
+		// add order to shippedOrders list
+		customer.addShippedOrder(order);
+		
+		System.out.println("\nThe order has been shipped.\n");
 	}
 	
-	public void viewOrders() {
-		// call heap toString (this may mean that the toString in heap will change)
+	public void viewOrdersByPriority(Heap<Order> o) {
+		System.out.println("\nHere is the list of orders by priority: ");
+		o.sort();
+		System.out.println(o.toString());
 	}
 
 }

@@ -23,7 +23,7 @@ public class Employee extends User{
 
     @Override
     public String toString() {
-        String result = "";
+        String result = first_name + "\n" + last_name + "\n";
         return result;
     }
 
@@ -35,6 +35,7 @@ public class Employee extends User{
             return false;
         } else {
             Employee temp = (Employee) o;
+            System.out.println("we made it here");
             return (this.getLogin().equals(temp.getLogin()) && this.passwordMatch(temp.password));
         }
     }

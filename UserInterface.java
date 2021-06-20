@@ -3,7 +3,6 @@
 */
 import java.io.*;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class UserInterface {
 	
@@ -381,7 +380,7 @@ public class UserInterface {
 					break;
 				case "C":
 				case "c":
-					ci.placeOrder();
+					ci.placeOrder(name, customer);
 					break;
 				case "D":
 				case "d":
