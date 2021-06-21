@@ -1,34 +1,4 @@
-f
-f
-f
-f
-f
-f
-f
-f
-0
-2
-1
-iPhone SE
-Apple
-A2275
-399.99
-2020
-Smartphone
-2021-06-20 19:11:46
-3
-320210620191146
-1
-iPhone 12
-Apple
-A2342
-999.99
-2020
-Smartphone
-2021-06-20 19:11:55
-2
-220210620191155
-Lisa 
+Lisa
 Su
 lisasu@amd.com
 intelsux
@@ -88,36 +58,6 @@ CA
 94043
 0
 0
-T
-N
-tn
-nt
-n
-o
-CA
-39442
-0
-2
-1
-iPhone SE
-Apple
-A2275
-399.99
-2020
-Smartphone
-2021-06-20 19:07:10
-2
-220210620190710
-1
-iPhone 12
-Apple
-A2342
-999.99
-2020
-Smartphone
-2021-06-20 19:07:24
-3
-320210620190724
 Mark
 Zuckerberg
 markzucc@facebook.com
@@ -126,16 +66,6 @@ noprivacy
 Menlo Park
 CA
 94025
-0
-0
-T
-N
-t
-n
-no
-yes
-ca
-93113
 0
 0
 Jensen
