@@ -103,7 +103,7 @@ public class EmployeeInterface extends UserInterface {
 
 	public void removeProduct(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		NameComparator nc = new NameComparator();
-		// modelNumComparator mc = new modelNumComparator();
+		modelNumComparator mc = new modelNumComparator();
 		System.out.print("Enter Product Name to remove: ");
 		String productName = userInput.nextLine();
 		TechProduct search = name.search(new TechProduct(productName), nc);
@@ -112,6 +112,8 @@ public class EmployeeInterface extends UserInterface {
 		} else {
 			name.remove(new TechProduct(productName), nc);
 			modelNum.remove(new TechProduct(productName), nc);
+			name.remove(new TechProduct(productName), mc);
+			modelNum.remove(new TechProduct(productName), mc);
 			System.out.println("\nThe item " + productName + " has been removed.");
 		}
 	}
