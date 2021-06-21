@@ -46,14 +46,6 @@ public class EmployeeInterface extends UserInterface {
 		System.out.println(c);
 	}
 
-	// public void listProductsByName(){
-	// techProductByName.inOrderPrint();
-	// }
-
-	// public void listProductsByModelNum(){
-	// techProductByModelNum.inOrderPrint();
-	// }
-
 	public void listProducts(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		String choice;
 		System.out.println("\nList Products By: ");
@@ -159,12 +151,6 @@ public class EmployeeInterface extends UserInterface {
 
 		// add order to shippedOrders list
 		customer.addShippedOrder(order);
-
-		//remove order from unshipped orders list
-		// int index = customer.getUnshippedOrders().linearSearch(order);
-		// customer.getUnshippedOrders().iteratorToIndex(index);
-		// customer.getUnshippedOrders().removeIterator();
-
 		customer.decrementNumUnshippedOrders();
 		customer.incrementNumShippedOrders();
 

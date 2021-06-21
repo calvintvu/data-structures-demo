@@ -66,6 +66,9 @@ public class UserInterface {
 		s2 = s2.replaceAll("\\D", "");
 		s1 = s1 + s2;
 		
+		//System.out.println(s1);
+		//System.out.println(s2);
+		
 		priority = Long.parseLong(s1);
 		
 		return priority;
@@ -163,6 +166,9 @@ public class UserInterface {
 		System.out.println("\nWelcome " + employee.getFirstName() + "!");
 
 		return employee;
+
+		// TODO: it's possible to get stuck in an infinite loop here, so i should give
+		// the employee the option to quit
 	}
 
 	/**
@@ -236,15 +242,26 @@ public class UserInterface {
 				city = fileInput.nextLine();
 				state = fileInput.nextLine();
 				zip = fileInput.nextLine();
-				
+				// System.out.println(new Customer(firstName, lastName, login, password,
+				// address, city, state, zip));
 				int numShipped = Integer.parseInt(fileInput.nextLine());
 				List<TechProduct> shippedProductsInOrder = new List<>();
 				List<Order> orderShipped = new List<>();
+				// System.out.println(numShipped);
+
+				// if (numShipped == 0) {
+				// 	numShipped = 0;
+				// 	fileInput.nextLine();
+				// 	orderShipped = new List<>();
+				// 	shippedProductsInOrder = new List<>();
+				// }
 
 				if (numShipped > 0) {
+					// int numOfItems = fileInput.nextInt();
 					for (int i = 0; i < numShipped; i++) {
 
 						int numOfItems = Integer.parseInt(fileInput.nextLine());
+						// fileInput.nextLine();
 						for (int j = 0; j < numOfItems; j++) {
 							String deviceName = fileInput.nextLine();
 							String brand = fileInput.nextLine();
@@ -255,7 +272,9 @@ public class UserInterface {
 							TechProduct orderedProduct = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
 							shippedProductsInOrder.addLast(orderedProduct);
 						}
+						// System.out.println(shippedProductsInOrder);
 						String date = fileInput.nextLine();
+						// fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
 						long priority = Long.parseLong(fileInput.nextLine());
 						Order shippedOrder = new Order(
@@ -263,11 +282,13 @@ public class UserInterface {
 								shippedProductsInOrder, shippingSpeed, priority);
 						orderShipped.addLast(shippedOrder);
 						shippedProductsInOrder = new List<>();
+						// System.out.println(shippedOrder);
 					}
 
 				}
 				else{
 					numShipped = 0;
+					//int numOfItems = Integer.parseInt(fileInput.nextLine());
 					orderShipped = new List<>();
 					shippedProductsInOrder = new List<>();
 				}
@@ -277,9 +298,18 @@ public class UserInterface {
 				List<TechProduct> unshippedOrders = new List<>();
 				List<Order> orderunShipped = new List<>();
 
+				// if (numUnshipped == 0) {
+				// 	numUnshipped = 0;
+				// 	orderunShipped = new List<>();
+				// 	unshippedOrders = new List<>();
+				// }
+
 				if (numUnshipped > 0) {
+					// int numOfItems = fileInput.nextInt();
 					for (int i = 0; i < numUnshipped; i++) {
 						int numOfItems = Integer.parseInt(fileInput.nextLine());
+						// fileInput.nextLine();
+						// System.out.println(numOfItems);
 						for (int j = 0; j < numOfItems; j++) {
 							String deviceName = fileInput.nextLine();
 							String brand = fileInput.nextLine();
@@ -289,6 +319,8 @@ public class UserInterface {
 							String desc = fileInput.nextLine();
 							TechProduct orderedProduct = new TechProduct(deviceName, brand, modelNum, msrp, year, desc);
 							unshippedOrders.addLast(orderedProduct);
+							// System.out.println(orderedProduct);
+							// System.out.println(unshippedOrders);
 						}
 						String date = fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
@@ -299,20 +331,40 @@ public class UserInterface {
 						orderunShipped.addLast(unshippedOrder);
 						orders.insert(unshippedOrder);
 						unshippedOrders = new List<>();
+						// System.out.println(orderunShipped);
+						// System.out.println("check 1");
 					}
+					// System.out.println(unshippedOrders);
 				}
 				else{
 					numUnshipped = 0;
 					orderunShipped = new List<>();
 					unshippedOrders = new List<>();
+					//int numOfItems = Integer.parseInt(fileInput.nextLine());
 				}
+
+				// else{
+				// orderunShipped = new List<Order>();
+				// numUnshipped = 0;
+				// }
+				// System.out.println("check 2");
 				customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip,
 					orderShipped, orderunShipped, numShipped, numUnshipped));
+				// System.out.println("check");
+				// System.out.println(new Customer(firstName, lastName, login, password,
+				// address, city, state, zip, orderShipped, orderunShipped, numShipped,
+				// numUnshipped));
+
 			}
 			fileInput.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+		//System.out.println(customers);
+		// System.out.println(customers.toString());
+		//customers.printTable();
+		// System.out.println(orders.peek());
+		// System.out.println(orders.getHeapSize());
 	}
 
 	/**
@@ -366,6 +418,11 @@ public class UserInterface {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+
+		//techProductByModelNum.inOrderPrint();
+		//techProductByName.preOrderPrint();
+		//System.out.println(techProductByName.getRoot());
+		// System.out.println(techProductByName.getSize());
 	}
 
 	public void renderCustomerMenu(Customer customer, BST<TechProduct> name, BST<TechProduct> modelNum, File pFile, File cFile, UserInterface ui, Heap<Order> o){
@@ -385,6 +442,18 @@ public class UserInterface {
 					break;
 				case "C":
 				case "c":
+					if(customer.getFirstName().equals("Guest")) {
+						String choice;
+						
+						System.out.println("\nIt seems that we don't have enough information to place an order.");
+						System.out.println("Would you like to create a new account?");
+						System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
+						choice = userInput.nextLine();
+						if(choice.equalsIgnoreCase("N")) {
+							return;
+						}
+						customer = createCustomerAccount();
+					}
 					ci.placeOrder(name, customer, o);
 					break;
 				case "D":
@@ -492,6 +561,7 @@ public class UserInterface {
 		File customerFile = new File("customers.txt");
 		File employeeFile = new File("employees.txt");
 		File productFile = new File("techproducts.txt");
+		//File productFile1 = new File("techproductTEST.txt");
 		
 		ui.loadCustomers(customerFile);
 		ui.loadEmployees(employeeFile);
@@ -507,6 +577,7 @@ public class UserInterface {
 		if(userType.equalsIgnoreCase("C")) {
 			customer = ui.customerLogin();
 			if(customer != null) {
+				//CustomerInteface ci = new CustomerInterface(customer);
 				ui.renderCustomerMenu(customer, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), productFile, customerFile, ui, ui.getOrders());
 			}
 		}
@@ -514,6 +585,7 @@ public class UserInterface {
 			employee = ui.employeeLogin();
 			if(employee != null) {
 				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable(), productFile, customerFile, ui, ui.getOrders());
+				// EmployeeInterface ei = new EmployeeInterface(employee);
 			}
 		}
 		ui.getUserInput().close();

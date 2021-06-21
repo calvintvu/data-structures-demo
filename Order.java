@@ -81,6 +81,19 @@ public class Order implements Comparable<Order>{
         result += shippingSpeed + "\n";
         result += priority + "\n";
 
+        // result += orderContents.getLength() + "\n";
+        // for(int i = 0; i < orderContents.getLength(); i++){
+        // result += orderContents.getIterator().getDeviceName() + "\n";
+        // result += orderContents.getIterator().getBrand() + "\n";
+        // result += orderContents.getIterator().getModelNumber() + "\n";
+        // result += orderContents.getIterator().getMSRP() + "\n";
+        // result += orderContents.getIterator().getYearReleased() + "\n";
+        // result += orderContents.getIterator().getDescription() + "\n";
+        // orderContents.advanceIterator();
+        // }
+        // result += date + "\n";
+        // result += shippingSpeed + "\n";
+        // result += priority;
         return result;
     }
 

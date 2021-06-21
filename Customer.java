@@ -4,10 +4,6 @@
 
 public class Customer extends User{
 
-    // private String first_name;
-    // private String last_name;
-    // private String login;
-    // private String password;
     private String address;
     private String city;
     private String state;
@@ -18,11 +14,6 @@ public class Customer extends User{
     private int numOfUnshippedOrders;
 
     /** CONSTRUCTORS */
-
-    // public Customer(String login, String password) {
-    //     this.login = login;
-    //     this.password = password;
-    // }
 
     public Customer() {
         this.first_name = "";
@@ -103,30 +94,12 @@ public class Customer extends User{
 
     /** ACCESSORS */
 
-    // public String getFirstName() {
-    //     return first_name;
-    // }
-
-    // public String getLastName() {
-    //     return last_name;
-    // }
-
-    // public String getLogin() {
-    //     return login;
-    // }
-
-    // public String getPassword() {
-    //     return password;
-    // }
-
     public int getNumShippedOrders(){
         return numOfShippedOrders;
     }
     public int getNumUnshippedOrders(){
         return numOfUnshippedOrders;
     }
-
-
 
     public List<Order> getShippedOrders(){
         return shippedOrders;
@@ -157,22 +130,6 @@ public class Customer extends User{
     }
 
     /** MUTATORS */
-    // public void setFirstName(String firstName) {
-    //     this.first_name = firstName;
-    // }
-
-    // public void setLastName(String lastName) {
-    //     this.last_name = lastName;
-    // }
-
-    
-    // public void setLogin(String login) {
-    //     this.login = login;
-    // }
-
-    // public void setPassword(String password) {
-    //     this.password = password;
-    // }
 
     public void incrementNumShippedOrders(){
         int temp = this.numOfShippedOrders+1;
@@ -293,10 +250,6 @@ public class Customer extends User{
             s += "\nShipped Orders: \n";
             s += shippedOrders + "\n";
         }
-        // if(unshippedOrders.getLength() > 0){
-        //     s += "Unshipped Orders: \n";
-        //     s += unshippedOrders + "\n";
-        // }
         return s;
     }
 
@@ -311,10 +264,6 @@ public class Customer extends User{
         if(shippedOrders.getLength() > 0 || unshippedOrders.getLength() > 0){
             s += "\n" + first_name + " " + last_name + "'s Order History: \n";
         }
-        // if(shippedOrders.getLength() > 0){
-        //     s += "\nShipped Orders: \n";
-        //     s += shippedOrders + "\n";
-        // }
         if(unshippedOrders.getLength() > 0){
             s += "Unshipped Orders: \n";
             s += unshippedOrders + "\n";
@@ -336,7 +285,6 @@ public class Customer extends User{
             if(this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name)){
                 return true;
             }
-            // return ((this.login.equals(temp.login) && this.password.equals(temp.password)) || (this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name)));
             else{
                 return false;
             }

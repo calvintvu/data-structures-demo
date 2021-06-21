@@ -68,6 +68,16 @@ CA
 94025
 0
 0
+T
+N
+t
+n
+no
+yes
+ca
+93113
+0
+0
 Jensen
 Huang
 jensenhuang@nvidia.com

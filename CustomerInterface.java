@@ -59,18 +59,19 @@ public class CustomerInterface extends UserInterface {
 		String date;
 		TechProduct product;
 		
-		if(c.getFirstName().equals("Guest")) {
-			String choice;
+		// if(c.getFirstName().equals("Guest")) {
+		// 	String choice;
 			
-			System.out.println("\nIt seems that we don't have enough information to place an order.");
-			System.out.println("Would you like to create a new account?");
-			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
-			choice = userInput.nextLine();
-			if(choice.equalsIgnoreCase("N")) {
-				return;
-			}
-			super.createCustomerAccount();
-		}
+		// 	System.out.println("\nIt seems that we don't have enough information to place an order.");
+		// 	System.out.println("Would you like to create a new account?");
+		// 	System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
+		// 	choice = userInput.nextLine();
+		// 	if(choice.equalsIgnoreCase("N")) {
+		// 		return;
+		// 	}
+		// 	c = super.createCustomerAccount();
+		// 	this.customer = c;
+		// }
 		
 		do {
 			System.out.println("\nHere is a list of products: \n");
@@ -85,6 +86,11 @@ public class CustomerInterface extends UserInterface {
 				return;
 			}
 			productList.addLast(product);
+			
+			// System.out.println("\nWhat shipping speed would you like?");
+			// System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
+			// System.out.print("Enter your choice (1, 2, or 3): ");
+			// shippingSpeed = Integer.parseInt(userInput.nextLine());
 			
 			System.out.println("Would you like to add another product?");
 			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
@@ -104,8 +110,11 @@ public class CustomerInterface extends UserInterface {
 		Order order = new Order(date, productList, shippingSpeed, priority);
 		c.addUnshippedOrder(order);
 		c.incrementNumUnshippedOrders();
+		//System.out.println(c.getNumUnshippedOrders());
 		System.out.println("Here is the order you placed: \n");
 		System.out.println(order);
+		//o.insert(order);
+
 	}
 	
 	/**
@@ -114,6 +123,9 @@ public class CustomerInterface extends UserInterface {
 	public void searchProduct(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		String choice;
 		TechProduct product = null;
+
+		//techProductByName.preOrderPrint();
+		
 		System.out.println("Search Product By: ");
 		System.out.println("\n1. Name\n2. Model Number\n");
 		System.out.print("Enter your choice (1 or 2): ");

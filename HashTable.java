@@ -131,6 +131,12 @@ public class HashTable<T> {
 			}
 		}
 		return false;
+
+//        //iterator methods
+//        //Table.get(bucket)
+//       if(L.getIterator() != null) {return true;}
+//       else {return false;}
+//        //return false; //something != null
 	}
 
 	/** Mutators */
@@ -234,6 +240,11 @@ public class HashTable<T> {
 		String result = "";
 		for (int i = 0; i < this.Table.size(); i++) {
 			result += Table.get(i).toString();
+			// if (!(Table.get(i).isEmpty())) {
+			// 	// Only print new line if there is data in the index
+			// 	result += "\n";
+			// }
+			// result += "\n";
 		}
 		return result;
 	}
@@ -247,6 +258,9 @@ public class HashTable<T> {
 					ps.print(temp.fileToString());
 					Table.get(i).advanceIterator();
 				}
+				// Customer temp = (Customer) Table.get(i).getFirst();
+				// ps.print(temp.fileToString());
+				//System.out.println(temp.fileToString());
 			}
 		}
 	}

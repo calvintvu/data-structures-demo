@@ -68,9 +68,14 @@ public class Heap<T extends Comparable<T>> {
      * @throws IndexOutOfBoundsException
      */
     public int get_left(int index) throws IndexOutOfBoundsException {
+        // System.out.println("CHECK");
+        // System.out.println(index);
+        // System.out.println("CHECK");
+        // System.out.println(heapSize);
     	if(index < 1 || index > heapSize+1) {
     		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
     	}
+
         return index * 2;
     }
 
@@ -168,8 +173,17 @@ public class Heap<T extends Comparable<T>> {
      */
     private void heapIncreaseKey(int index, T key){
     	while((index > 1) && (comparator.compare(heap.get(getParent(index)), heap.get(index)) < 0)) {
+    		// System.out.println(getParent(index));
+    		// System.out.println(heap.get(getParent(index)) + "\n");
+    		// System.out.println(index);
+    		// System.out.println(heap.get(index) + "\n");
+    		// System.out.println(heap);
             swap(index, getParent(index));
             index = getParent(index);
+    		// while(heap.get(getParent(index)).compareTo(heap.get(index)) < 0) {
+	    	// 	swap(index, getParent(index));
+	    	// 	index = getParent(index);
+    		// }
     	}
     }
     
@@ -185,7 +199,14 @@ public class Heap<T extends Comparable<T>> {
     	}
 
     	T root = heap.get(1);
-    	
+
+    	// if(heapSize == 1){
+        //     heap.set(1, null);
+        //     return root;
+        // }
+        // System.out.println("CHECK:");
+        // System.out.println(heapSize);
+
     	swap(1, heapSize);
     	heap.set(heapSize, null);
     	heapSize--;

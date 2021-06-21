@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class TechProduct{
+public class TechProduct {
     private String deviceName; //primary key
     private String brand; 
     private String modelNumber; //secondary key
@@ -8,26 +8,6 @@ public class TechProduct{
     private int yearReleased;
     private String productDescription;
 
-    /*** CONSTRUCTORS ***/
-    
-    TechProduct(String name) {
-        this.deviceName = name;
-        this.brand = "";
-        this.modelNumber = "";
-        this.msrp = -1;
-        this.yearReleased = 0;
-        this.productDescription = "";
-    }
-    
-    TechProduct(String name, String modelNumber) {
-    	this.deviceName = name;
-    	this.brand = "";
-    	this.modelNumber = modelNumber;
-    	this.msrp = -1;
-    	this.yearReleased = 0;
-    	this.productDescription = "";
-    }
-    
     TechProduct(String name, String brand, String modelnum, double msrp, int year, String desc){
         this.deviceName = name;
         this.brand = brand;
@@ -37,8 +17,24 @@ public class TechProduct{
         this.productDescription = desc;
     }
 
-    /*** ACCESSORS ***/
-    
+    TechProduct(String name){
+        this.deviceName = name;
+        this.brand = "";
+        this.modelNumber = "";
+        this.msrp = -1;
+        this.yearReleased = 0;
+        this.productDescription = "";
+    }
+
+    TechProduct(String name, String modelNumber) {
+    	this.deviceName = name;
+    	this.brand = "";
+    	this.modelNumber = modelNumber;
+    	this.msrp = -1;
+    	this.yearReleased = 0;
+    	this.productDescription = "";
+    }
+
     String getDeviceName(){
         return deviceName;
     }
@@ -57,8 +53,6 @@ public class TechProduct{
     String getDescription(){
         return productDescription;
     }
-    
-    /*** MUTATORS ***/
 
     void setDeviceName(String n){
         this.deviceName = n;
@@ -79,9 +73,9 @@ public class TechProduct{
         this.productDescription = n;
     }
 
-	/** ADDITIONAL OPERATIONS */
+    	/** ADDITIONAL OPERATIONS */
 
-    public String toString2() {
+	public String toString2() {
 		String result = "";
 		result += deviceName + "\n";
 		result += brand + "\n";
@@ -92,15 +86,15 @@ public class TechProduct{
         //result += "\n";
 		return result;
 	}
-    
-	@Override
+
+    @Override
 	public String toString() {
 		String result = "";
 		result += "Name: " + deviceName + "\n";
 		result += "Brand: " + brand + "\n";
         result += "Model Number: " + modelNumber + "\n";
-        result += "Price: $" + msrp + "\n";
-        result += "Release Date: " + yearReleased + "\n";
+        result += "Price: " + msrp + "\n";
+        result += "Year Released: " + yearReleased + "\n";
         result += "Description: " + productDescription+ "\n";
         result += "\n";
 		return result;
