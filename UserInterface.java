@@ -442,6 +442,18 @@ public class UserInterface {
 					break;
 				case "C":
 				case "c":
+					if(customer.getFirstName().equals("Guest")) {
+						String choice;
+						
+						System.out.println("\nIt seems that we don't have enough information to place an order.");
+						System.out.println("Would you like to create a new account?");
+						System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
+						choice = userInput.nextLine();
+						if(choice.equalsIgnoreCase("N")) {
+							return;
+						}
+						customer = createCustomerAccount();
+					}
 					ci.placeOrder(name, customer, o);
 					break;
 				case "D":

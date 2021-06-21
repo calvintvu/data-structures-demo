@@ -3,7 +3,6 @@
 */
 
 public class Customer extends User{
-
     // private String first_name;
     // private String last_name;
     // private String login;
@@ -275,7 +274,6 @@ public class Customer extends User{
             unshippedOrders.advanceIterator();
         }
         return result;
-
     }
 
     public String shippedToString(){
@@ -352,6 +350,4 @@ public class Customer extends User{
         }
         return sum;
     }
-
-
 }
