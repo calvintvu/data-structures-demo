@@ -453,6 +453,7 @@ public class UserInterface {
 							return;
 						}
 						customer = createCustomerAccount();
+						ci = new CustomerInterface(customer);
 					}
 					ci.placeOrder(name, customer, o);
 					break;
