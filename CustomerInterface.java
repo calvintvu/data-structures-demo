@@ -49,43 +49,71 @@ public class CustomerInterface extends UserInterface {
 	 * Adds an order to List of orders for Customer
 	 * Adds order to Heap
 	 */
-	public void placeOrder() {
-		String productName, shippingSpeed, anotherProduct = "N";
-		TechProduct product;
+	public void placeOrder(BST<TechProduct> name, Customer c, Heap<Order> o) {
+		DateTimeFormatter formatter;
+		int shippingSpeed;
+		LocalDateTime dateTime;
+		long priority;
 		List<TechProduct> productList = new List<>();
+		String productName, anotherProduct = "N";
+		String date;
+		TechProduct product;
+		
+		if(c.getFirstName().equals("Guest")) {
+			String choice;
+			
+			System.out.println("\nIt seems that we don't have enough information to place an order.");
+			System.out.println("Would you like to create a new account?");
+			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
+			choice = userInput.nextLine();
+			if(choice.equalsIgnoreCase("N")) {
+				return;
+			}
+			super.createCustomerAccount();
+		}
+		
 		do {
 			System.out.println("\nHere is a list of products: \n");
-			techProductByName.inOrderPrint();
+			name.inOrderPrint();
 			System.out.print("Please enter the name of the product to purchase: ");
 			productName = userInput.nextLine();
 			
 			product = new TechProduct(productName);
-			product = techProductByName.search(product, new NameComparator());
+			product = name.search(product, new NameComparator());
 			if(product == null) { 
 				System.out.println("\nInvalid product name.\n");
 				return;
 			}
 			productList.addLast(product);
 			
-			System.out.println("\nWhat shipping speed would you like?");
-			System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
-			System.out.print("Enter your choice (1, 2, or 3): ");
-			shippingSpeed = userInput.nextLine();
+			// System.out.println("\nWhat shipping speed would you like?");
+			// System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
+			// System.out.print("Enter your choice (1, 2, or 3): ");
+			// shippingSpeed = Integer.parseInt(userInput.nextLine());
 			
 			System.out.println("Would you like to add another product?");
-			System.out.print("Enter \'Y\' for Yes or \'N\' for No");
+			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
 			anotherProduct = userInput.nextLine();
-		} while (anotherProduct.equals("Y"));
+		} while (anotherProduct.equalsIgnoreCase("Y"));
+
+		System.out.println("\nWhat shipping speed would you like?");
+		System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
+		System.out.print("Enter your choice (1, 2, or 3): ");
+		shippingSpeed = Integer.parseInt(userInput.nextLine());
 		
-		LocalDateTime dateTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		String date = formatter.format(dateTime);
+		dateTime = LocalDateTime.now();
+		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		date = formatter.format(dateTime);
+		priority = calculatePriority(shippingSpeed, date);
 		
-		// TODO: determine priority from date, time, and shipping speed
-		
-		// TODO: this constructor may change, confirm with team partner
-		Order order = new Order(customer, date, productList, 0, 0);
-		customer.addOrder(order);
+		Order order = new Order(date, productList, shippingSpeed, priority);
+		c.addUnshippedOrder(order);
+		c.incrementNumUnshippedOrders();
+		//System.out.println(c.getNumUnshippedOrders());
+		System.out.println("Here is the order you placed: \n");
+		System.out.println(order);
+		//o.insert(order);
+
 	}
 	
 	/**

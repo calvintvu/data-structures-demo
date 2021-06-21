@@ -10,6 +10,7 @@ public class UserInterface {
 
 	final int NUM_EMPLOYEES = 8;
 	final int NUM_CUSTOMERS = 12;
+	protected Heap<Order> orders;
 	protected HashTable<Customer> customers;
 	protected HashTable<Employee> employees;
 	protected BST<TechProduct> techProductByName;
@@ -21,6 +22,7 @@ public class UserInterface {
 		employees = new HashTable<>(NUM_EMPLOYEES);
 		techProductByName = new BST<>();
 		techProductByModelNum = new BST<>();
+		orders = new Heap<>(new OrderComparator());
 		userInput = new Scanner(System.in);
 	}
 
@@ -43,6 +45,35 @@ public class UserInterface {
 	public HashTable<Customer> getCustomerTable(){
 		return customers;
 	}
+
+	public Heap<Order> getOrders() {
+		return orders;
+	}
+
+	/**
+	 * Calculates the priority of an Order based on shipping speed and date
+	 * Helper method to placeOrder
+	 * @param shippingSpeed the speed of the Order
+	 * @param date the date the Order was placed
+	 * @return priority the priority of the Order to add
+	 */
+	public long calculatePriority(int shippingSpeed, String date) {
+		long priority = 0;
+		String s1, s2;
+		
+		s1 = "" + shippingSpeed;
+		s2 = date.replaceAll("\\s", "");
+		s2 = s2.replaceAll("\\D", "");
+		s1 = s1 + s2;
+		
+		//System.out.println(s1);
+		//System.out.println(s2);
+		
+		priority = Long.parseLong(s1);
+		
+		return priority;
+	}
+	
 
 	/**
 	 * Creates a new account for the user
@@ -132,7 +163,7 @@ public class UserInterface {
 		}
 
 		employee = employees.get(employee);
-		System.out.println("Welcome " + employee.getFirstName() + "!");
+		System.out.println("\nWelcome " + employee.getFirstName() + "!");
 
 		return employee;
 
@@ -218,11 +249,12 @@ public class UserInterface {
 				List<Order> orderShipped = new List<>();
 				// System.out.println(numShipped);
 
-				if (numShipped == 0) {
-					numShipped = 0;
-					orderShipped = new List<>();
-					shippedProductsInOrder = new List<>();
-				}
+				// if (numShipped == 0) {
+				// 	numShipped = 0;
+				// 	fileInput.nextLine();
+				// 	orderShipped = new List<>();
+				// 	shippedProductsInOrder = new List<>();
+				// }
 
 				if (numShipped > 0) {
 					// int numOfItems = fileInput.nextInt();
@@ -254,17 +286,23 @@ public class UserInterface {
 					}
 
 				}
+				else{
+					numShipped = 0;
+					//int numOfItems = Integer.parseInt(fileInput.nextLine());
+					orderShipped = new List<>();
+					shippedProductsInOrder = new List<>();
+				}
 
 				int numUnshipped = Integer.parseInt(fileInput.nextLine());
 
 				List<TechProduct> unshippedOrders = new List<>();
 				List<Order> orderunShipped = new List<>();
 
-				if (numUnshipped == 0) {
-					numUnshipped = 0;
-					orderunShipped = new List<>();
-					unshippedOrders = new List<>();
-				}
+				// if (numUnshipped == 0) {
+				// 	numUnshipped = 0;
+				// 	orderunShipped = new List<>();
+				// 	unshippedOrders = new List<>();
+				// }
 
 				if (numUnshipped > 0) {
 					// int numOfItems = fileInput.nextInt();
@@ -291,10 +329,18 @@ public class UserInterface {
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
 								unshippedOrders, shippingSpeed, priority);
 						orderunShipped.addLast(unshippedOrder);
+						orders.insert(unshippedOrder);
+						unshippedOrders = new List<>();
 						// System.out.println(orderunShipped);
 						// System.out.println("check 1");
 					}
 					// System.out.println(unshippedOrders);
+				}
+				else{
+					numUnshipped = 0;
+					orderunShipped = new List<>();
+					unshippedOrders = new List<>();
+					//int numOfItems = Integer.parseInt(fileInput.nextLine());
 				}
 
 				// else{
@@ -303,7 +349,7 @@ public class UserInterface {
 				// }
 				// System.out.println("check 2");
 				customers.insert(new Customer(firstName, lastName, login, password, address, city, state, zip,
-						orderShipped, orderunShipped, numShipped, numUnshipped));
+					orderShipped, orderunShipped, numShipped, numUnshipped));
 				// System.out.println("check");
 				// System.out.println(new Customer(firstName, lastName, login, password,
 				// address, city, state, zip, orderShipped, orderunShipped, numShipped,
@@ -317,6 +363,8 @@ public class UserInterface {
 		//System.out.println(customers);
 		// System.out.println(customers.toString());
 		//customers.printTable();
+		// System.out.println(orders.peek());
+		// System.out.println(orders.getHeapSize());
 	}
 
 	/**
@@ -377,7 +425,7 @@ public class UserInterface {
 		// System.out.println(techProductByName.getSize());
 	}
 
-	public void renderCustomerMenu(Customer customer, BST<TechProduct> name, BST<TechProduct> modelNum, File pFile, File cFile, UserInterface ui){
+	public void renderCustomerMenu(Customer customer, BST<TechProduct> name, BST<TechProduct> modelNum, File pFile, File cFile, UserInterface ui, Heap<Order> o){
 		boolean done = false;
 		CustomerInterface ci = new CustomerInterface(customer);
 		while(done != true){
@@ -394,7 +442,7 @@ public class UserInterface {
 					break;
 				case "C":
 				case "c":
-					ci.placeOrder();
+					ci.placeOrder(name, customer, o);
 					break;
 				case "D":
 				case "d":
@@ -419,7 +467,7 @@ public class UserInterface {
 		}
 	}
 
-	public void renderEmployeeMenu(Employee e, BST<TechProduct> name, BST<TechProduct> modelNum, HashTable<Customer> c, File pFile, File cFile, UserInterface ui){
+	public void renderEmployeeMenu(Employee e, BST<TechProduct> name, BST<TechProduct> modelNum, HashTable<Customer> c, File pFile, File cFile, UserInterface ui, Heap<Order> o){
 		boolean done = false;
 		EmployeeInterface ei = new EmployeeInterface(e);
 		while(done != true){
@@ -436,9 +484,11 @@ public class UserInterface {
 					break;
 				case "C":
 				case "c":
+					ei.viewOrdersByPriority(o);
 					break;
 				case "D":
 				case "d":
+					ei.shipOrder(o, c);
 					break;
 				case "E":
 				case "e":
@@ -466,8 +516,9 @@ public class UserInterface {
 	}
 
 	public void quit(File cFile, File pFile, UserInterface ui){ //Takes care of writing to files
-		// Creates a FileOutputStream
+		
 		try{
+			// Creates a FileOutputStream
 			FileOutputStream file = new FileOutputStream(pFile);
 			// Creates a PrintStream
 			PrintStream output = new PrintStream(file);
@@ -476,7 +527,7 @@ public class UserInterface {
 			e.printStackTrace();
 		}
 		try{
-		// Creates a FileOutputStream
+			// Creates a FileOutputStream
 			FileOutputStream file1 = new FileOutputStream(cFile);
 			// Creates a PrintStream
 			PrintStream output1 = new PrintStream(file1);
@@ -515,13 +566,13 @@ public class UserInterface {
 			customer = ui.customerLogin();
 			if(customer != null) {
 				//CustomerInteface ci = new CustomerInterface(customer);
-				ui.renderCustomerMenu(customer, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), productFile, customerFile, ui);
+				ui.renderCustomerMenu(customer, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), productFile, customerFile, ui, ui.getOrders());
 			}
 		}
 		else if(userType.equalsIgnoreCase("E")) {
 			employee = ui.employeeLogin();
 			if(employee != null) {
-				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable(), productFile, customerFile, ui);
+				ui.renderEmployeeMenu(employee, ui.getProductBST_Name(), ui.getProductBST_ModelNum(), ui.getCustomerTable(), productFile, customerFile, ui, ui.getOrders());
 				// EmployeeInterface ei = new EmployeeInterface(employee);
 			}
 		}

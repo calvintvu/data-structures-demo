@@ -119,6 +119,13 @@ public class Customer extends User{
     //     return password;
     // }
 
+    public int getNumShippedOrders(){
+        return numOfShippedOrders;
+    }
+    public int getNumUnshippedOrders(){
+        return numOfUnshippedOrders;
+    }
+
 
 
     public List<Order> getShippedOrders(){
@@ -168,16 +175,20 @@ public class Customer extends User{
     // }
 
     public void incrementNumShippedOrders(){
-        this.numOfShippedOrders =  this.numOfShippedOrders++;
+        int temp = this.numOfShippedOrders+1;
+        this.numOfShippedOrders =  temp;
     }
     public void decrementNumShippedOrders(){
-        this.numOfShippedOrders =  this.numOfShippedOrders--;
+        int temp = this.numOfShippedOrders-1;
+        this.numOfShippedOrders =  temp;
     }
     public void incrementNumUnshippedOrders(){
-        this.numOfUnshippedOrders =  this.numOfUnshippedOrders++;
+        int temp = this.numOfUnshippedOrders+1;
+        this.numOfUnshippedOrders =  temp;
     }
     public void decrementNumUnshippedOrders(){
-        this.numOfUnshippedOrders =  this.numOfUnshippedOrders--;
+        int temp = this.numOfUnshippedOrders-1;
+        this.numOfUnshippedOrders =  temp;
     }
 
     public void addOrder(Order order) {
@@ -191,6 +202,27 @@ public class Customer extends User{
     public void setNumUnShippedOrders(int x){
         this.numOfUnshippedOrders = x;
     }
+
+    public void addUnshippedOrder(Order order) {
+    	unshippedOrders.addLast(order);
+    }
+    
+    public void addShippedOrder(Order order) {
+    	shippedOrders.addLast(order);
+    }
+    
+    public boolean removeOrder(Order order) {
+    	boolean success = false;
+    	int found = unshippedOrders.linearSearch(order);
+    	if(found != -1) {
+    		unshippedOrders.placeIterator();
+    		unshippedOrders.iteratorToIndex(found);
+    		unshippedOrders.removeIterator();
+    		success = true;
+    	}
+    	return success;
+    }
+
 
 
     /** ADDITIONAL OPERATIONS */
@@ -298,7 +330,16 @@ public class Customer extends User{
             return false;
         } else {
             Customer temp = (Customer) o;
-            return ((this.login.equals(temp.login) && this.password.equals(temp.password)) || (this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name)));
+            if(this.login.equals(temp.login) && this.password.equals(temp.password)){
+                return true;
+            }
+            if(this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name)){
+                return true;
+            }
+            // return ((this.login.equals(temp.login) && this.password.equals(temp.password)) || (this.first_name.equals(temp.first_name) && this.last_name.equals(temp.last_name)));
+            else{
+                return false;
+            }
         }
     }
 
