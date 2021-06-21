@@ -176,10 +176,10 @@ public class EmployeeInterface extends UserInterface {
 	public void viewOrdersByPriority(Heap<Order> o) {
 
 		if(o.getHeapSize() > 0){
-		System.out.println("\nHere is the list of orders by priority: ");
-		//System.out.println(o);
-		o.sort();
-		System.out.println(o.toString());
+		System.out.println("\n\nHere is the list of orders by priority: ");
+			//System.out.println(o);
+			o.sort();
+			System.out.println(o.toString());
 		}
 		else{
 			System.out.println("\nCurrently have no orders.");

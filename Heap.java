@@ -139,10 +139,10 @@ public class Heap<T extends Comparable<T>> {
         int left = get_left(index);
         int right = get_right(index);
 
-        if(left <= getHeapSize() && comparator.compare(getElement(left), getElement(index)) > 0){
+        if(left <= getHeapSize() && comparator.compare(getElement(left), getElement(index)) < 0){
             maxIndex = left;
         }
-        if(right <= getHeapSize() && comparator.compare(getElement(right), getElement(maxIndex)) > 0){
+        if(right <= getHeapSize() && comparator.compare(getElement(right), getElement(maxIndex)) < 0){
             maxIndex = right;
         }
         if(index != maxIndex){
@@ -246,7 +246,6 @@ public class Heap<T extends Comparable<T>> {
             tempHeap.set(i, temp);
             heapify(1);
         }
-
         return tempHeap;
     }
     

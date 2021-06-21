@@ -331,7 +331,6 @@ public class BST<T> {
 			return;
 		} else {
 			//System.out.print(node.data + " ");
-
 			TechProduct temp = (TechProduct) node.data;
 			ps.print(temp.toString2());
 			write(node.left, ps);
