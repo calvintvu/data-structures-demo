@@ -166,8 +166,6 @@ public class UserInterface {
 		System.out.println("\nWelcome " + employee.getFirstName() + "!");
 
 		return employee;
-
-		// TODO: it's possible to get stuck in an infinite loop here, so i should give
 		// the employee the option to quit
 	}
 
@@ -342,7 +340,6 @@ public class UserInterface {
 					unshippedOrders = new List<>();
 					//int numOfItems = Integer.parseInt(fileInput.nextLine());
 				}
-
 				// else{
 				// orderunShipped = new List<Order>();
 				// numUnshipped = 0;
@@ -354,7 +351,6 @@ public class UserInterface {
 				// System.out.println(new Customer(firstName, lastName, login, password,
 				// address, city, state, zip, orderShipped, orderunShipped, numShipped,
 				// numUnshipped));
-
 			}
 			fileInput.close();
 		} catch (IOException e) {
@@ -418,7 +414,6 @@ public class UserInterface {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-
 		//techProductByModelNum.inOrderPrint();
 		//techProductByName.preOrderPrint();
 		//System.out.println(techProductByName.getRoot());
@@ -453,6 +448,7 @@ public class UserInterface {
 							return;
 						}
 						customer = createCustomerAccount();
+						ci = new CustomerInterface(customer);
 					}
 					ci.placeOrder(name, customer, o);
 					break;

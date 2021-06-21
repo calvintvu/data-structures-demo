@@ -184,4 +184,8 @@ public class EmployeeInterface extends UserInterface {
 		}
 	}
 
+	public Employee getEmployee(){
+		return employee;
+	}
+
 }

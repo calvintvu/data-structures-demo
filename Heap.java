@@ -3,8 +3,6 @@
  * Final Project
  */
 
-// TODO: change Heap to a min heap instead of a max heap
-
 import java.util.Comparator;
 import java.util.ArrayList;
 public class Heap<T extends Comparable<T>> {
