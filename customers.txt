@@ -1,0 +1,140 @@
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+1
+1
+1
+iPhone SE
+Apple
+A2275
+399.99
+2020
+Smartphone
+2021-06-20 23:27:45
+2
+220210620232745
+0
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+123
+0
+0
+Calvin
+Vu
+asdf
+asdf
+asdf
+asdf
+asdf
+123
+0
+1
+1
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
+2021-06-20 23:51:26
+1
+120210620235126
+bruh
+bruh
+bruh
+bruh
+bruh
+bruh
+ca
+95122
+0
+1
+1
+iPad Pro
+Apple
+A2378
+799.99
+2021
+Tablet
+2021-06-20 23:50:31
+3
+320210620235031
+Lisa
+Su
+lisasu@amd.com
+intelsux
+1 AMD Pl
+Sunnyvale
+CA 
+94085
+1
+1
+iPhone SE
+Apple
+A2275
+399.99
+2020
+Smartphone
+2021-06-20 23:46:54
+1
+120210620234654
+0
+Tim
+Cook
+timcook@apple.com
+applerox123
+1 Apple Park Way
+Cupertino
+CA
+95014
+1
+1
+iPhone 12
+Apple
+A2342
+999.99
+2020
+Smartphone
+2021-06-20 23:22:46
+1
+120210620232246
+0
+Sundar
+Pichai
+sundarpichai@google.com
+alphabet
+1600 Amphitheatre Pkwy
+Mountain View
+CA
+94043
+0
+0
+Mark
+Zuckerberg
+markzucc@facebook.com
+noprivacy
+1 Hacker Way
+Menlo Park
+CA
+94025
+0
+0
+Jensen
+Huang
+jensenhuang@nvidia.com
+RTXrules
+2788 San Tomas Expy
+Santa Clara
+CA
+95051
+0
+0
