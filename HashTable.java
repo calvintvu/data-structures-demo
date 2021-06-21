@@ -10,8 +10,6 @@ public class HashTable<T> {
 	private int numElements;
 	private ArrayList<List<T>> Table;
 
-	/*** CONSTRUCTORS ***/
-	
 	/**
 	 * Constructor for the hash table. Initializes the Table to be sized according
 	 * to value passed in as a parameter Inserts size empty Lists into the table.
@@ -27,7 +25,7 @@ public class HashTable<T> {
 		numElements = 0;
 	}
 
-	/*** ACCESSORS ***/
+	/** Accessors */
 
 	/**
 	 * returns the hash value in the Table for a given Object
@@ -39,6 +37,7 @@ public class HashTable<T> {
 		int code = t.hashCode();
 		return code % Table.size();
 	}
+
 
 	/**
 	 * counts the number of elements at this index
@@ -104,7 +103,8 @@ public class HashTable<T> {
 		 }
 		 return null;
 	}
-	
+
+
 	/**
 	 * Determines whether a specified key is in the Table
 	 * 
@@ -131,15 +131,9 @@ public class HashTable<T> {
 			}
 		}
 		return false;
-
-//        //iterator methods
-//        //Table.get(bucket)
-//       if(L.getIterator() != null) {return true;}
-//       else {return false;}
-//        //return false; //something != null
 	}
 
-	/*** MUTATORS ***/
+	/** Mutators */
 
 	/**
 	 * Inserts a new element in the Table at the end of the chain in the bucket
@@ -198,7 +192,7 @@ public class HashTable<T> {
 
 	}
 
-	/** ADDITIONAL OPERATIONS */
+	/** Additional Methods */
 
 	/**
 	 * Prints all the keys at a specified bucket in the Table. Tach key displayed on
@@ -220,18 +214,14 @@ public class HashTable<T> {
 	 * empty." followed by two blank lines
 	 */
 	public void printTable() {
-
 		for (int i = 0; i < this.Table.size(); i++) {
-
 			System.out.println("Bucket: " + i);
-
 			if (Table.get(i).getLength() == 0) {
 				System.out.println("This bucket is empty.\n\n");
 			} else {
 				System.out.println(Table.get(i).getFirst());
 				System.out.println("+" + (countBucket(i) - 1) + " More at this bucket.\n\n");
 			}
-
 		}
 	}
 
@@ -242,19 +232,12 @@ public class HashTable<T> {
 	@Override
 	public String toString() {
 		String result = "";
-
 		for (int i = 0; i < this.Table.size(); i++) {
 			result += Table.get(i).toString();
-//			if (!(Table.get(i).isEmpty())) {
-//				// Only print new line if there is data in the index
-//				result += "\n";
-//			}
-//		// result += "\n";
 		}
-
 		return result;
 	}
-		
+
 	public void write(PrintStream ps){
 		for (int i = 0; i < this.Table.size(); i++) {
 			if (Table.get(i).getLength() != 0) {
@@ -264,11 +247,7 @@ public class HashTable<T> {
 					ps.print(temp.fileToString());
 					Table.get(i).advanceIterator();
 				}
-				// Customer temp = (Customer) Table.get(i).getFirst();
-				// ps.print(temp.fileToString());
-				//System.out.println(temp.fileToString());
 			}
 		}
 	}
-
 }

@@ -7,7 +7,37 @@ Sunnyvale
 CA 
 94085
 0
-0
+3
+1
+iPhone SE
+Apple
+A2275
+399.99
+2020
+Smartphone
+2021-06-20 17:41:31
+3
+320210620174131
+1
+iPhone 12
+Apple
+A2342
+999.99
+2020
+Smartphone
+2021-06-20 17:41:40
+2
+220210620174140
+1
+iPad Pro
+Apple
+A2378
+799.99
+2021
+Tablet
+2021-06-20 17:41:47
+1
+120210620174147
 Tim
 Cook
 timcook@apple.com
@@ -16,56 +46,8 @@ applerox123
 Cupertino
 CA
 95014
-2
-2
-iPhone 12
-Apple
-A2342
-999.99
-2020
-Smartphone
-Macbook Pro 13
-Apple
-MC373
-1299.99
-2021
-Laptop
-10000
-10000
-10000
-1
-Macbook Air
-Apple
-MGN63
-999.99
-2020
-Laptop
-10000
-10000
-10000
-1
-3
-ENVY Desktop
-HP
-TE01-1154
-949.99
-2019
-Desktop
-iPhone SE
-Apple
-A2275
-399.99
-2020
-Smartphone
-Galaxy S21 
-Samsung
-SM-G998UZKAXAA
-1199.99
-2021
-Smartphone
-100000
-100000
-100000
+0
+0
 Sundar
 Pichai
 sundarpichai@google.com

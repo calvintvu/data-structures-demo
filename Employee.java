@@ -1,7 +1,5 @@
 public class Employee extends User{
 
-	/** CONSTRUCTORS */
-	
 	public Employee() {
 		this.login = "";
 		this.password = "";
@@ -23,7 +21,7 @@ public class Employee extends User{
 
     @Override
     public String toString() {
-        String result = first_name + "\n" + last_name + "\n";
+        String result = "";
         return result;
     }
 

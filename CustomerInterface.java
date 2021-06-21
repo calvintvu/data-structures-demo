@@ -49,7 +49,7 @@ public class CustomerInterface extends UserInterface {
 	 * Adds an order to List of orders for Customer
 	 * Adds order to Heap
 	 */
-	public void placeOrder(BST<TechProduct> name, Customer c) {
+	public void placeOrder(BST<TechProduct> name, Customer c, Heap<Order> o) {
 		DateTimeFormatter formatter;
 		int shippingSpeed;
 		LocalDateTime dateTime;
@@ -66,7 +66,7 @@ public class CustomerInterface extends UserInterface {
 			System.out.println("Would you like to create a new account?");
 			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
 			choice = userInput.nextLine();
-			if(choice.equals("N")) {
+			if(choice.equalsIgnoreCase("N")) {
 				return;
 			}
 			super.createCustomerAccount();
@@ -86,23 +86,26 @@ public class CustomerInterface extends UserInterface {
 			}
 			productList.addLast(product);
 			
-			System.out.println("\nWhat shipping speed would you like?");
-			System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
-			System.out.print("Enter your choice (1, 2, or 3): ");
-			shippingSpeed = Integer.parseInt(userInput.nextLine());
-			
 			System.out.println("Would you like to add another product?");
-			System.out.print("Enter \'Y\' for Yes or \'N\' for No");
+			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
 			anotherProduct = userInput.nextLine();
-		} while (anotherProduct.equals("Y"));
+		} while (anotherProduct.equalsIgnoreCase("Y"));
+
+		System.out.println("\nWhat shipping speed would you like?");
+		System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
+		System.out.print("Enter your choice (1, 2, or 3): ");
+		shippingSpeed = Integer.parseInt(userInput.nextLine());
 		
 		dateTime = LocalDateTime.now();
 		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		date = formatter.format(dateTime);
 		priority = calculatePriority(shippingSpeed, date);
 		
-		Order order = new Order(customer, date, productList, shippingSpeed, priority);
+		Order order = new Order(date, productList, shippingSpeed, priority);
 		c.addUnshippedOrder(order);
+		c.incrementNumUnshippedOrders();
+		System.out.println("Here is the order you placed: \n");
+		System.out.println(order);
 	}
 	
 	/**
@@ -111,7 +114,6 @@ public class CustomerInterface extends UserInterface {
 	public void searchProduct(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		String choice;
 		TechProduct product = null;
-		
 		System.out.println("Search Product By: ");
 		System.out.println("\n1. Name\n2. Model Number\n");
 		System.out.print("Enter your choice (1 or 2): ");

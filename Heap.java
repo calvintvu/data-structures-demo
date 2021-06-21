@@ -3,8 +3,6 @@
  * Final Project
  */
 
-// TODO: change Heap to a min heap instead of a max heap
-
 import java.util.Comparator;
 import java.util.ArrayList;
 public class Heap<T extends Comparable<T>> {
@@ -70,7 +68,7 @@ public class Heap<T extends Comparable<T>> {
      * @throws IndexOutOfBoundsException
      */
     public int get_left(int index) throws IndexOutOfBoundsException {
-    	if(index < 1 || index > heapSize) {
+    	if(index < 1 || index > heapSize+1) {
     		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
     	}
         return index * 2;
@@ -85,8 +83,8 @@ public class Heap<T extends Comparable<T>> {
      * @throws IndexOutOfBoundsException
      */
     public int get_right(int index) throws IndexOutOfBoundsException {
-    	if(index < 1 || index > heapSize) {
-    		throw new IndexOutOfBoundsException("get_left: index is out of bounds");
+    	if(index < 1 || index > heapSize+1) {
+    		throw new IndexOutOfBoundsException("get_right: index is out of bounds");
     	}
         return index * 2 + 1;
     } 
@@ -136,10 +134,10 @@ public class Heap<T extends Comparable<T>> {
         int left = get_left(index);
         int right = get_right(index);
 
-        if(left < getHeapSize() && comparator.compare(getElement(1), getElement(index)) > 0){
+        if(left <= getHeapSize() && comparator.compare(getElement(left), getElement(index)) > 0){
             maxIndex = left;
         }
-        if(right < getHeapSize() && comparator.compare(getElement(right), getElement(maxIndex)) > 0){
+        if(right <= getHeapSize() && comparator.compare(getElement(right), getElement(maxIndex)) > 0){
             maxIndex = right;
         }
         if(index != maxIndex){
@@ -169,16 +167,9 @@ public class Heap<T extends Comparable<T>> {
      * @param key the data
      */
     private void heapIncreaseKey(int index, T key){
-    	while(index > 1) {
-    		System.out.println(getParent(index));
-    		System.out.println(heap.get(getParent(index)) + "\n");
-    		System.out.println(index);
-    		System.out.println(heap.get(index) + "\n");
-    		System.out.println(heap);
-    		while(heap.get(getParent(index)).compareTo(heap.get(index)) < 0) {
-	    		swap(index, getParent(index));
-	    		index = getParent(index);
-    		}
+    	while((index > 1) && (comparator.compare(heap.get(getParent(index)), heap.get(index)) < 0)) {
+            swap(index, getParent(index));
+            index = getParent(index);
     	}
     }
     
@@ -192,6 +183,7 @@ public class Heap<T extends Comparable<T>> {
     	if(heapSize == 0) {
     		return null;
     	}
+
     	T root = heap.get(1);
     	
     	swap(1, heapSize);

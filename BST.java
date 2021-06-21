@@ -1,4 +1,3 @@
-
 /**
 * BST.java
 */
@@ -18,6 +17,7 @@ public class BST<T> {
 			left = null;
 			right = null;
 		}
+
 	}
 
 	private Node root;
@@ -203,6 +203,7 @@ public class BST<T> {
 	 */
 	public T search(T data, Comparator<T> c) {
 		if (root == null) {
+			//System.out.println(this.root.data);
 			return null;
 		} else {
 			return search(data, root, c);
@@ -224,11 +225,13 @@ public class BST<T> {
 		// else if(((Comparable<T>) data).compareTo(node.data) < 0) {
 		else if (c.compare(data, node.data) < 0) {
 			if (node.left == null) {
+				//System.out.println(node.data);
 				return null;
 			}
 			return search(data, node.left, c);
 		} else {
 			if (node.right == null) {
+				//System.out.println(node.data);
 				return null;
 			}
 			return search(data, node.right, c);
@@ -294,24 +297,21 @@ public class BST<T> {
 	 * @return an updated reference variable
 	 */
 	private Node remove(T data, Node node, Comparator<T> c) {
-		if(node == null) {
+		if (node == null) {
 			return node;
-		} else if(c.compare(data, node.data) <= -1) {
+		} else if (c.compare(data, node.data) <= -1) {
 			node.left = remove(data, node.left, c);
-		} else if(c.compare(data, node.data) >= 1) {
+		} else if (c.compare(data, node.data) >= 1) {
 			node.right = remove(data, node.right, c);
 		} else {
-			if(node.left == null && node.right == null) { //EZ case
+			if (node.left == null && node.right == null) { // EZ case
 				node = null;
-			}
-			else if (node.left != null && node.right == null) { //Medium case 1
+			} else if (node.left != null && node.right == null) { // Medium case 1
 				node = node.left;
-			}
-			else if (node.left == null && node.right != null) { //Medium case 2
+			} else if (node.left == null && node.right != null) { // Medium case 2
 				node = node.right;
-			}
-			else { //Hard case
-//				T minVal = findMin(node.right);
+			} else { // Hard case
+				// T minVal = findMin(node.right);
 				node.data = findMin(node.right);
 				node.right = remove(node.data, node.right, c);
 			}
@@ -324,7 +324,7 @@ public class BST<T> {
 	public void write(PrintStream ps) {
 		write(root, ps);
 	}
-	
+
 	private void write(Node node, PrintStream ps) {
 		if (node == null) {
 			return;
@@ -337,7 +337,8 @@ public class BST<T> {
 			write(node.right, ps);
 		}
 	}
-	
+
+
 	/**
 	 * Prints the data in pre order to the console followed by a new line
 	 */
@@ -354,7 +355,7 @@ public class BST<T> {
 		if (node == null) {
 			return;
 		} else {
-			System.out.print(node.data + " ");
+			System.out.print(node.data);
 			preOrderPrint(node.left);
 			preOrderPrint(node.right);
 		}
@@ -400,7 +401,7 @@ public class BST<T> {
 		} else {
 			postOrderPrint(node.left);
 			postOrderPrint(node.right);
-			System.out.print(node.data + " ");
+			System.out.print(node.data);
 		}
 	}
 }
