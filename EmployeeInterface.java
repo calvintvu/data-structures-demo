@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class EmployeeInterface extends UserInterface {
 	private Employee employee;
@@ -135,7 +137,6 @@ public class EmployeeInterface extends UserInterface {
 		// display the order that is about to be shipped to let the employee know
 		// remove order from heap
 		System.out.println("\nHere is your order to be shipped: \n");
-		//order = o.poll();
 		if(order == null){
 			System.out.println("There is nothing to ship.");
 			return;
@@ -171,10 +172,19 @@ public class EmployeeInterface extends UserInterface {
 	}
 
 	public void viewOrdersByPriority(Heap<Order> o) {
-
+		ArrayList<Order> orders = new ArrayList<>();
+		
 		if(o.getHeapSize() > 0){
-		System.out.println("\nHere is the list of orders by priority: ");
-		o.sort();
+			System.out.println("\nHere is the list of orders by priority: ");
+			// o.sort();
+			// System.out.println(o.toString());
+			for(int i = 0; i < o.getHeapSize(); i++) {
+				orders.add(o.getElement(i+1));
+			}
+			Collections.sort(orders, Collections.reverseOrder());
+			for (Order order : orders) {
+				System.out.println(order + "\n");
+			}
 		}
 		else{
 			System.out.println("\nCurrently have no orders.");
