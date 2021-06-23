@@ -131,7 +131,7 @@ public class EmployeeInterface extends UserInterface {
 			return;
 		}
 
-		order = o.getElement(1);
+		order = o.getMax();
 		o.remove(1);
 
 		// display the order that is about to be shipped to let the employee know
@@ -172,21 +172,32 @@ public class EmployeeInterface extends UserInterface {
 	}
 
 	public void viewOrdersByPriority(Heap<Order> o) {
-		ArrayList<Order> orders = new ArrayList<>();
+//		ArrayList<Order> orders = new ArrayList<>();
+//		
+//		if(o.getHeapSize() > 0){
+//			System.out.println("\nHere is the list of orders by priority: ");
+//			for(int i = 0; i < o.getHeapSize(); i++) {
+//				orders.add(o.getElement(i+1));
+//			}
+//			Collections.sort(orders, Collections.reverseOrder());
+//			for (Order order : orders) {
+//				System.out.println(order + "\n");
+//			}
+//		}
+//		else{
+//			System.out.println("\nCurrently have no orders.");
+//		}
+		ArrayList<Order> orders = o.sort(); // Returns list of elements sorted in ascending order of shipping priority (lowest to highest)
 		
-		if(o.getHeapSize() > 0){
+		if (orders.size() > 0) {
 			System.out.println("\nHere is the list of orders by priority: ");
-			// o.sort();
-			// System.out.println(o.toString());
-			for(int i = 0; i < o.getHeapSize(); i++) {
-				orders.add(o.getElement(i+1));
-			}
-			Collections.sort(orders, Collections.reverseOrder());
-			for (Order order : orders) {
-				System.out.println(order + "\n");
+
+			// Iterate over the list in descending order i.e. from highest shipping priority to lowest shipping priority
+			for (int i = orders.size() - 1; i >= 0 ; i--) {
+				System.out.println(orders.get(i) + "\n");
 			}
 		}
-		else{
+		else {
 			System.out.println("\nCurrently have no orders.");
 		}
 	}

@@ -153,7 +153,7 @@ Laptop
 2021-06-22
 1
 19:05:48
-1
+5
 2
 iMac 24"
 Apple
@@ -170,6 +170,46 @@ Smartphone
 2021-06-22
 2
 19:05:21
+1
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
+2021-06-23
+1
+15:59:50
+1
+Macbook Pro 13
+Apple
+MC373
+1299.99
+2021
+Laptop
+2021-06-23
+2
+16:00:07
+1
+Macbook Air
+Apple
+MGN63
+999.99
+2020
+Laptop
+2021-06-23
+3
+16:00:23
+1
+Galaxy S21 
+Samsung
+SM-G998UZKAXAA
+1199.99
+2021
+Smartphone
+2021-06-23
+1
+16:00:45
 Sundar
 Pichai
 sundarpichai@google.com
