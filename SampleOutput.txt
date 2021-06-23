@@ -1,0 +1,255 @@
+Welcome to the 22C Tech Store!
+
+Are you a customer or employee?
+Enter 'C' for Customer or 'E' for Employee: E
+
+Please enter your login: amey@gmail.com
+Please enter your password: amey123
+
+Welcome Amey!
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: c
+
+Here is the list of orders by priority: 
+Number of Items: 1
+1. Galaxy S21 
+2021-06-22
+1
+21:27:27
+
+Number of Items: 2
+1. iMac 24"
+2. iPhone 12
+2021-06-22
+2
+19:05:21
+
+Number of Items: 1
+1. X950H Series 75" Class Tv
+2021-06-22
+2
+21:06:45
+
+Number of Items: 1
+1. iPhone 12
+2021-06-22
+2
+21:26:15
+
+Number of Items: 1
+1. iPad Pro
+2021-06-20
+3
+23:50:31
+
+Number of Items: 1
+1. ENVY Desktop
+2021-06-22
+3
+21:27:45
+
+Number of Items: 1
+1. Macbook Air
+2021-06-22
+3
+21:27:58
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 1
+1. Galaxy S21 
+2021-06-22
+1
+21:27:27
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 2
+1. iMac 24"
+2. iPhone 12
+2021-06-22
+2
+19:05:21
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 1
+1. X950H Series 75" Class Tv
+2021-06-22
+2
+21:06:45
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 1
+1. iPhone 12
+2021-06-22
+2
+21:26:15
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 1
+1. iPad Pro
+2021-06-20
+3
+23:50:31
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 1
+1. ENVY Desktop
+2021-06-22
+3
+21:27:45
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+
+Here is your order to be shipped: 
+
+Number of Items: 1
+1. Macbook Air
+2021-06-22
+3
+21:27:58
+
+The order has been shipped.
+
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: d
+There are no orders to ship.
+
+What would you like to do?
+A: Search for a Customer
+B: Display All Customers
+C: View All Orders by Priority
+D: Ship an Order
+E: List All Products
+F: Add a Product
+G: Remove a Product
+H: Quit
+
+Enter Your Choice: h
+
+Goodbye! Thank you for visiting!
