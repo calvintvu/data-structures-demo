@@ -145,7 +145,7 @@ public class List<T> {
 	 * Creates a new last element
 	 * 
 	 * @param data the data to insert at the end of the list
-	 * @postcondition creates and adds node to last position in list
+	 * @postcondition creates a new last element
 	 */
 	public void addLast(T data) {
 		if (first == null) {
@@ -153,6 +153,7 @@ public class List<T> {
 		} else {
 			Node N = new Node(data);
 			last.next = N;
+			N.prev = last;
 			last = N;
 		}
 		length++;

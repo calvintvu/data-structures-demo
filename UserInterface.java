@@ -3,8 +3,9 @@
 * UserInterface.java
 */
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class UserInterface {
 
@@ -22,7 +23,8 @@ public class UserInterface {
 		employees = new HashTable<>(NUM_EMPLOYEES);
 		techProductByName = new BST<>();
 		techProductByModelNum = new BST<>();
-		orders = new Heap<>(new OrderComparator());
+		ArrayList data = new ArrayList<Order>();
+		orders = new Heap<Order>(data, new OrderComparator());
 		userInput = new Scanner(System.in);
 	}
 
@@ -50,29 +52,24 @@ public class UserInterface {
 		return orders;
 	}
 
-	/**
-	 * Calculates the priority of an Order based on shipping speed and date
-	 * Helper method to placeOrder
-	 * @param shippingSpeed the speed of the Order
-	 * @param date the date the Order was placed
-	 * @return priority the priority of the Order to add
-	 */
-	public long calculatePriority(int shippingSpeed, String date) {
-		long priority = 0;
-		String s1, s2;
-		
-		s1 = "" + shippingSpeed;
-		s2 = date.replaceAll("\\s", "");
-		s2 = s2.replaceAll("\\D", "");
-		s1 = s1 + s2;
-		
-		//System.out.println(s1);
-		//System.out.println(s2);
-		
-		priority = Long.parseLong(s1);
-		
-		return priority;
-	}
+//	/**
+//	 * Calculates the priority of an Order based on shipping speed and date
+//	 * Helper method to placeOrder
+//	 * @param shippingSpeed the speed of the Order
+//	 * @param date the date the Order was placed
+//	 * @return priority the priority of the Order to add
+//	 */
+//	public long calculatePriority(String date) {
+//		long priority = 0;
+//		String s;
+//		
+//		s = date.replaceAll("\\s", "");
+//		s = s.replaceAll("\\D", "");
+//		
+//		priority = Long.parseLong(s);
+//		
+//		return priority;
+//	}
 	
 
 	/**
@@ -274,10 +271,11 @@ public class UserInterface {
 						String date = fileInput.nextLine();
 						// fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
-						long priority = Long.parseLong(fileInput.nextLine());
+						// long priority = Long.parseLong(fileInput.nextLine());
+						String time = fileInput.nextLine();
 						Order shippedOrder = new Order(
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
-								shippedProductsInOrder, shippingSpeed, priority);
+								shippedProductsInOrder, shippingSpeed, time);
 						orderShipped.addLast(shippedOrder);
 						shippedProductsInOrder = new List<>();
 						// System.out.println(shippedOrder);
@@ -322,10 +320,11 @@ public class UserInterface {
 						}
 						String date = fileInput.nextLine();
 						int shippingSpeed = Integer.parseInt(fileInput.nextLine());
-						long priority = Long.parseLong(fileInput.nextLine());
+						// long priority = Long.parseLong(fileInput.nextLine());
+						String time = fileInput.nextLine();
 						Order unshippedOrder = new Order(
 								new Customer(firstName, lastName, login, password, address, city, state, zip), date,
-								unshippedOrders, shippingSpeed, priority);
+								unshippedOrders, shippingSpeed, time);
 						orderunShipped.addLast(unshippedOrder);
 						orders.insert(unshippedOrder);
 						unshippedOrders = new List<>();

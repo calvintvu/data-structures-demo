@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -50,13 +52,14 @@ public class CustomerInterface extends UserInterface {
 	 * Adds order to Heap
 	 */
 	public void placeOrder(BST<TechProduct> name, Customer c, Heap<Order> o) {
-		DateTimeFormatter formatter;
+		DateTimeFormatter dFormatter, tFormatter;
 		int shippingSpeed;
-		LocalDateTime dateTime;
-		long priority;
+		LocalDate dateNow;
+		LocalTime timeNow;
+		// long priority;
 		List<TechProduct> productList = new List<>();
 		String productName, anotherProduct = "N";
-		String date;
+		String date, time;
 		TechProduct product;
 		
 		// if(c.getFirstName().equals("Guest")) {
@@ -87,11 +90,6 @@ public class CustomerInterface extends UserInterface {
 			}
 			productList.addLast(product);
 			
-			// System.out.println("\nWhat shipping speed would you like?");
-			// System.out.println("\n1. Overnight Shipping\n2. Night Shipping\n3. Standard Shipping");
-			// System.out.print("Enter your choice (1, 2, or 3): ");
-			// shippingSpeed = Integer.parseInt(userInput.nextLine());
-			
 			System.out.println("Would you like to add another product?");
 			System.out.print("Enter \'Y\' for Yes or \'N\' for No: ");
 			anotherProduct = userInput.nextLine();
@@ -102,12 +100,16 @@ public class CustomerInterface extends UserInterface {
 		System.out.print("Enter your choice (1, 2, or 3): ");
 		shippingSpeed = Integer.parseInt(userInput.nextLine());
 		
-		dateTime = LocalDateTime.now();
-		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		date = formatter.format(dateTime);
-		priority = calculatePriority(shippingSpeed, date);
+		dateNow = LocalDate.now();
+		timeNow = LocalTime.now();
+		// formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		dFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		tFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		date = dFormatter.format(dateNow);
+		time = tFormatter.format(timeNow);
+		// priority = calculatePriority(date);
 		
-		Order order = new Order(date, productList, shippingSpeed, priority);
+		Order order = new Order(date, productList, shippingSpeed, time);
 		c.addUnshippedOrder(order);
 		c.incrementNumUnshippedOrders();
 		//System.out.println(c.getNumUnshippedOrders());

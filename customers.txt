@@ -1,3 +1,43 @@
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+1
+1
+1
+iPhone SE
+Apple
+A2275
+399.99
+2020
+Smartphone
+2021-06-20
+2
+23:27:45
+0
+bruh
+bruh
+bruh
+bruh
+bruh
+bruh
+ca
+95122
+0
+1
+1
+iPad Pro
+Apple
+A2378
+799.99
+2021
+Tablet
+2021-06-20
+3
+23:50:31
 Lisa
 Su
 lisasu@amd.com
@@ -6,7 +46,6 @@ intelsux
 Sunnyvale
 CA 
 94085
-0
 3
 1
 iPhone SE
@@ -15,19 +54,9 @@ A2275
 399.99
 2020
 Smartphone
-2021-06-20 17:41:31
-3
-320210620174131
+2021-06-20
 1
-iPhone 12
-Apple
-A2342
-999.99
-2020
-Smartphone
-2021-06-20 17:41:40
-2
-220210620174140
+23:46:54
 1
 iPad Pro
 Apple
@@ -35,9 +64,66 @@ A2378
 799.99
 2021
 Tablet
-2021-06-20 17:41:47
+2021-06-22
 1
-120210620174147
+21:26:27
+2
+iPhone SE
+Apple
+A2275
+399.99
+2020
+Smartphone
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
+2021-06-22
+1
+21:26:45
+4
+1
+iPhone 12
+Apple
+A2342
+999.99
+2020
+Smartphone
+2021-06-22
+2
+21:26:15
+1
+Galaxy S21 
+Samsung
+SM-G998UZKAXAA
+1199.99
+2021
+Smartphone
+2021-06-22
+1
+21:27:27
+1
+ENVY Desktop
+HP
+TE01-1154
+949.99
+2019
+Desktop
+2021-06-22
+3
+21:27:45
+1
+Macbook Air
+Apple
+MGN63
+999.99
+2020
+Laptop
+2021-06-22
+3
+21:27:58
 Tim
 Cook
 timcook@apple.com
@@ -46,8 +132,44 @@ applerox123
 Cupertino
 CA
 95014
-0
-0
+2
+1
+iPhone 12
+Apple
+A2342
+999.99
+2020
+Smartphone
+2021-06-20
+1
+23:22:46
+1
+Surface 7 Pro
+Microsoft
+QWV-00007
+1329.99
+2021
+Laptop
+2021-06-22
+1
+19:05:48
+1
+2
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
+iPhone 12
+Apple
+A2342
+999.99
+2020
+Smartphone
+2021-06-22
+2
+19:05:21
 Sundar
 Pichai
 sundarpichai@google.com
@@ -58,6 +180,26 @@ CA
 94043
 0
 0
+Calvin
+Vu
+cvu
+lesgo
+asdf
+asdf
+asdf
+123
+1
+1
+iMac 24"
+Apple
+MGPC3
+1299.99
+2021
+Desktop
+2021-06-20
+1
+23:51:26
+0
 Mark
 Zuckerberg
 markzucc@facebook.com
@@ -66,8 +208,38 @@ noprivacy
 Menlo Park
 CA
 94025
-0
-0
+2
+1
+Macbook Air
+Apple
+MGN63
+999.99
+2020
+Laptop
+2021-06-22
+1
+21:07:10
+1
+Galaxy Watch
+Samsung
+SM-R500NZDAXAR
+139.99
+2020
+Wearables
+2021-06-22
+1
+21:07:29
+1
+1
+X950H Series 75" Class Tv
+Sony
+XBR75X950H
+1999.99
+2020
+TV
+2021-06-22
+2
+21:06:45
 Jensen
 Huang
 jensenhuang@nvidia.com

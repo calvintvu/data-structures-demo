@@ -6,24 +6,23 @@ public class Order implements Comparable<Order>{
     private String date;
     private List<TechProduct> orderContents;
     private int shippingSpeed;
-    private long priority;
-
-    // getters, setters, constructors go here
-    Order(Customer customer, String date, List<TechProduct> orderContents, int shippingSpeed, long priority) {
+    private String time;
+    
+    Order(Customer customer, String date, List<TechProduct> orderContents, int shippingSpeed, String time) {
         this.customer = customer;
+    	this.date = date;
+        this.orderContents = new List<>(orderContents);
+        this.shippingSpeed = shippingSpeed;
+        this.time = time;
+    }
+    
+    Order(String date, List<TechProduct> orderContents, int shippingSpeed, String time) {
         this.date = date;
         this.orderContents = new List<>(orderContents);
         this.shippingSpeed = shippingSpeed;
-        this.priority = priority;
+        this.time = time;
     }
-
-    Order(String date, List<TechProduct> orderContents, int shippingSpeed, long priority) {
-        this.date = date;
-        this.orderContents = new List<>(orderContents);
-        this.shippingSpeed = shippingSpeed;
-        this.priority = priority;
-    }
-
+    
     public List<TechProduct> getOrderContents() {
         return orderContents;
     }
@@ -32,9 +31,21 @@ public class Order implements Comparable<Order>{
         return customer;
     }
 
-    public long getPriority() {
-    	return priority;
+    public String getDate() {
+    	return date;
     }
+    
+    public int getShippingSpeed() {
+    	return shippingSpeed;
+    }
+    
+    public String getTime() {
+    	return time;
+    }
+    
+//    public long getPriority() {
+//    	return priority;
+//    }
     
 
     public String toString() {
@@ -54,9 +65,12 @@ public class Order implements Comparable<Order>{
             result += orderContents.getIterator().getDeviceName() + "\n";
             orderContents.advanceIterator();
         }
+//        result += date + "\n";
+//        result += shippingSpeed + "\n";
+//        result += priority;
         result += date + "\n";
         result += shippingSpeed + "\n";
-        result += priority;
+        result += time;
         return result;
     }
 
@@ -79,7 +93,10 @@ public class Order implements Comparable<Order>{
         }
         result += date + "\n";
         result += shippingSpeed + "\n";
-        result += priority + "\n";
+        result += time + "\n";
+//        result += date + "\n";
+//        result += shippingSpeed + "\n";
+//        result += priority + "\n";
 
         // result += orderContents.getLength() + "\n";
         // for(int i = 0; i < orderContents.getLength(); i++){
@@ -101,8 +118,25 @@ public class Order implements Comparable<Order>{
 
     @Override
     public int compareTo(Order o) {
-        long difference = this.priority - o.getPriority();
-        return (int) difference / 1000000000;
+    	if(this.getShippingSpeed() > o.getShippingSpeed()) {
+    		return -1;
+    	} else if(this.getShippingSpeed() < o.getShippingSpeed()) {
+    		return 1;
+    	}
+    	
+    	if(this.getDate().compareTo(o.getDate()) > 0) {
+    		return -1;
+    	} else if(this.getDate().compareTo(o.getDate()) < 0) {
+    		return 1;
+    	}
+    	
+    	if(this.getTime().compareTo(o.getTime()) > 0) {
+    		return -1;
+    	} else if(this.getTime().compareTo(o.getTime()) < 0) {
+    		return 1;
+    	}
+    	
+    	return 0;
     }
 
 }
@@ -111,6 +145,24 @@ public class Order implements Comparable<Order>{
 class OrderComparator implements Comparator<Order> {
     @Override
     public int compare(Order o1, Order o2) {
-        return Long.compare(o2.getPriority(), o1.getPriority());
+    	if(o1.getShippingSpeed() > o2.getShippingSpeed()) {
+    		return -1;
+    	} else if(o1.getShippingSpeed() < o2.getShippingSpeed()) {
+    		return 1;
+    	}
+    	
+    	if(o1.getDate().compareTo(o2.getDate()) > 0) {
+    		return -1;
+    	} else if(o1.getDate().compareTo(o2.getDate()) < 0) {
+    		return 1;
+    	}
+    	
+    	if(o1.getTime().compareTo(o2.getTime()) > 0) {
+    		return -1;
+    	} else if(o1.getTime().compareTo(o2.getTime()) < 0) {
+    		return 1;
+    	}
+    	
+    	return 0;
     }
 }
