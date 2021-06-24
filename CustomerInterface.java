@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -56,7 +55,6 @@ public class CustomerInterface extends UserInterface {
 		int shippingSpeed;
 		LocalDate dateNow;
 		LocalTime timeNow;
-		// long priority;
 		List<TechProduct> productList = new List<>();
 		String productName, anotherProduct = "N";
 		String date, time;
@@ -102,21 +100,16 @@ public class CustomerInterface extends UserInterface {
 		
 		dateNow = LocalDate.now();
 		timeNow = LocalTime.now();
-		// formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		dFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		tFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		date = dFormatter.format(dateNow);
 		time = tFormatter.format(timeNow);
-		// priority = calculatePriority(date);
 		
 		Order order = new Order(date, productList, shippingSpeed, time);
 		c.addUnshippedOrder(order);
 		c.incrementNumUnshippedOrders();
-		//System.out.println(c.getNumUnshippedOrders());
 		System.out.println("Here is the order you placed: \n");
 		System.out.println(order);
-		//o.insert(order);
-
 	}
 	
 	/**

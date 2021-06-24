@@ -5,7 +5,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class UserInterface {
 
@@ -51,26 +50,6 @@ public class UserInterface {
 	public Heap<Order> getOrders() {
 		return orders;
 	}
-
-//	/**
-//	 * Calculates the priority of an Order based on shipping speed and date
-//	 * Helper method to placeOrder
-//	 * @param shippingSpeed the speed of the Order
-//	 * @param date the date the Order was placed
-//	 * @return priority the priority of the Order to add
-//	 */
-//	public long calculatePriority(String date) {
-//		long priority = 0;
-//		String s;
-//		
-//		s = date.replaceAll("\\s", "");
-//		s = s.replaceAll("\\D", "");
-//		
-//		priority = Long.parseLong(s);
-//		
-//		return priority;
-//	}
-	
 
 	/**
 	 * Creates a new account for the user

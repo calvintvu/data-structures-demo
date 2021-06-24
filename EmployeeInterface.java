@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class EmployeeInterface extends UserInterface {
 	private Employee employee;
@@ -47,14 +46,6 @@ public class EmployeeInterface extends UserInterface {
 		System.out.println();
 		System.out.println(c);
 	}
-
-	// public void listProductsByName(){
-	// techProductByName.inOrderPrint();
-	// }
-
-	// public void listProductsByModelNum(){
-	// techProductByModelNum.inOrderPrint();
-	// }
 
 	public void listProducts(BST<TechProduct> name, BST<TechProduct> modelNum) {
 		String choice;
