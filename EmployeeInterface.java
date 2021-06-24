@@ -129,10 +129,13 @@ public class EmployeeInterface extends UserInterface {
 			return;
 		}
 
+		order = o.getElement(1);
+		o.remove(1);
+
 		// display the order that is about to be shipped to let the employee know
 		// remove order from heap
 		System.out.println("\nHere is your order to be shipped: \n");
-		order = o.poll();
+		//order = o.poll();
 		if(order == null){
 			System.out.println("There is nothing to ship.");
 			return;
@@ -176,10 +179,10 @@ public class EmployeeInterface extends UserInterface {
 	public void viewOrdersByPriority(Heap<Order> o) {
 
 		if(o.getHeapSize() > 0){
-		System.out.println("\n\nHere is the list of orders by priority: ");
-			//System.out.println(o);
-			o.sort();
-			System.out.println(o.toString());
+		System.out.println("\nHere is the list of orders by priority: ");
+		//System.out.println(o);
+		o.sort();
+		System.out.println(o.toString());
 		}
 		else{
 			System.out.println("\nCurrently have no orders.");

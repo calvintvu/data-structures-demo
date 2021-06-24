@@ -111,6 +111,6 @@ public class Order implements Comparable<Order>{
 class OrderComparator implements Comparator<Order> {
     @Override
     public int compare(Order o1, Order o2) {
-        return Long.compare(o1.getPriority(), o2.getPriority());
+        return Long.compare(o2.getPriority(), o1.getPriority());
     }
 }

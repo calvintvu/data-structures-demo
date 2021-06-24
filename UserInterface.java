@@ -3,6 +3,7 @@
 * UserInterface.java
 */
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 //import java.util.ArrayList;
 
@@ -22,7 +23,8 @@ public class UserInterface {
 		employees = new HashTable<>(NUM_EMPLOYEES);
 		techProductByName = new BST<>();
 		techProductByModelNum = new BST<>();
-		orders = new Heap<>(new OrderComparator());
+		ArrayList data = new ArrayList<Order>();
+		orders = new Heap<Order>(data, new OrderComparator());
 		userInput = new Scanner(System.in);
 	}
 
