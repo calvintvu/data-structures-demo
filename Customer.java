@@ -1,4 +1,6 @@
 /**
+* @author Phong Le
+* @author Calvin Vu
 * Customer.java
 */
 

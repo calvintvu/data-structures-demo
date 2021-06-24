@@ -1,7 +1,10 @@
 
 /**
+ * @author Phong Le
+ * @author Calvin Vu
  * HashTable.java
  */
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 

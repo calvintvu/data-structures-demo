@@ -1,3 +1,10 @@
+/**
+ * @author Amey Kapare
+ * @author Timothy Nguyen
+ * @author Calvin Vu
+ * EmployeeInterface.java
+ */
+
 import java.util.Scanner;
 import java.util.ArrayList;
 

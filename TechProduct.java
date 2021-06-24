@@ -1,3 +1,8 @@
+/**
+ * @author Ryan Puah Zhi Yuan
+ * @author Calvin Vu
+ */
+
 import java.util.Comparator;
 
 public class TechProduct {

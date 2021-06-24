@@ -3,8 +3,6 @@
  * CIS 22C, Final Project
  */
 
-// Check with teacher if test classes should be uploaded.
-
 import java.util.Comparator;
 import java.util.ArrayList;
 public class Heap<T> {

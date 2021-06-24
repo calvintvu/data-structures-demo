@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Phong Le
+ * User.java
+ */
+
 abstract class User{
     
     protected String first_name;

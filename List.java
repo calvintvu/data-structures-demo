@@ -1,5 +1,6 @@
 
 /**
+* @author Phong Le
 * List.java
 * Defines a doubly-linked list class
 */

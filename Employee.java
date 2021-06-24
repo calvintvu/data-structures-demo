@@ -1,3 +1,7 @@
+/**
+ * @author Phong Le
+ */
+
 public class Employee extends User{
 
 	public Employee() {

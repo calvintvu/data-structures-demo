@@ -1,3 +1,9 @@
+/**
+ * @author Amey Kapare
+ * @author Timothy Nguyen
+ * @author Calvin Vu
+ */
+
 import java.util.Comparator;
 
 public class Order implements Comparable<Order>{
