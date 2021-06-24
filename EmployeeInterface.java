@@ -172,21 +172,6 @@ public class EmployeeInterface extends UserInterface {
 	}
 
 	public void viewOrdersByPriority(Heap<Order> o) {
-//		ArrayList<Order> orders = new ArrayList<>();
-//		
-//		if(o.getHeapSize() > 0){
-//			System.out.println("\nHere is the list of orders by priority: ");
-//			for(int i = 0; i < o.getHeapSize(); i++) {
-//				orders.add(o.getElement(i+1));
-//			}
-//			Collections.sort(orders, Collections.reverseOrder());
-//			for (Order order : orders) {
-//				System.out.println(order + "\n");
-//			}
-//		}
-//		else{
-//			System.out.println("\nCurrently have no orders.");
-//		}
 		ArrayList<Order> orders = o.sort(); // Returns list of elements sorted in ascending order of shipping priority (lowest to highest)
 		
 		if (orders.size() > 0) {
