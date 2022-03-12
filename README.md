@@ -1,2 +1,6 @@
 # 22C-Course-Project
-Final Project
+Modeling a store to demonstrate a variety of data structures.
+- Binary Search Trees
+- Tables
+- Heaps
+- Lists
